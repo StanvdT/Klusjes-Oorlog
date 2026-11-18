@@ -1,1 +1,69 @@
-
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8fc" />
+  <title>Klusjes-Oorlog | Dashboard</title>
+  <style>
+    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#172033;background:#f7f8fc;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,input,select{font:inherit}button{cursor:pointer}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #c6d4ff;outline-offset:2px}.wrap{max-width:1020px;margin:auto;padding:35px 22px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:32px}.brand{display:flex;align-items:center;gap:12px}.logo{width:45px;height:45px;display:grid;place-items:center;border-radius:14px;background:#4f63dc;color:white;font-size:23px;box-shadow:0 8px 20px #4f63dc33}.brand h1{font-size:20px;margin:0;letter-spacing:-.5px}.brand small,.muted{color:#8790a1}.brand small{font-size:12px}.tag{background:#e9edff;color:#5361b8;border-radius:100px;padding:8px 12px;font-size:12px;font-weight:700}.intro{margin-bottom:25px}.intro h2{font-size:28px;letter-spacing:-.9px;margin:0 0 6px}.intro p{color:#7c8799;margin:0}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.card{background:white;border:1px solid #e9ebf2;border-radius:19px;padding:22px;box-shadow:0 5px 20px #27314c07}.player{position:relative;overflow:hidden}.player:before{content:"";position:absolute;right:-35px;top:-45px;width:125px;height:125px;border-radius:50%;background:#edf0ff}.player.partner:before{background:#fff0f5}.person{display:flex;align-items:center;gap:10px;position:relative}.avatar{display:grid;place-items:center;background:#e9edff;color:#5764d9;font-weight:800;width:41px;height:41px;border-radius:13px}.partner .avatar{background:#ffebf2;color:#d5548d}.person strong{font-size:14px}.points{font-size:39px;font-weight:800;letter-spacing:-1.5px;margin-top:22px}.unit{font-size:13px;color:#939bad;margin-left:4px;font-weight:500}.progress{background:#eef0f5;border-radius:99px;height:8px;overflow:hidden;margin-top:13px}.progress > span{display:block;height:100%;background:#5868df;border-radius:99px;transition:width .3s}.partner .progress>span{background:#de6b99}.tiny{font-size:12px;color:#929aaa;margin-top:9px}.section{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:30px 0 14px}.section h3{font-size:18px;margin:0;letter-spacing:-.4px}.section p{font-size:12px;color:#929aaa;margin:5px 0 0}.select{background:white;border:1px solid #e5e8f0;color:#293247;padding:10px;border-radius:11px;max-width:100%}.tasks{display:grid;grid-template-columns:1fr 1fr;gap:12px}.task{display:flex;align-items:center;gap:12px;background:white;border:1px solid #e9ebf2;padding:16px;border-radius:14px}.task-icon{flex:0 0 39px;height:39px;border-radius:12px;display:grid;place-items:center;background:#f0f2ff;font-size:20px}.task-copy{flex:1;min-width:0}.task-copy strong{display:block;font-size:13px}.task-copy small{display:block;color:#9aa1b0;margin-top:4px}.do{background:#edf0ff;color:#4d5bd5;border:0;border-radius:10px;padding:9px 12px;font-size:12px;font-weight:800;white-space:nowrap}.do:hover{background:#e0e5ff}.bottom{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin-top:20px}.history{list-style:none;padding:0;margin:14px 0 0}.history li{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid #f0f1f5;font-size:13px}.history small{display:block;color:#969eac;margin-top:4px}.plus{font-weight:750;color:#3e9b76}.secondary{border:1px solid #e5e8f0;background:white;border-radius:10px;padding:9px 13px;color:#6c7588;font-size:12px;font-weight:700}.note{font-size:12px;line-height:1.65;color:#818b9b}.footer{margin-top:24px;text-align:center;font-size:11px;color:#a0a7b4}.empty{color:#9aa1b0;font-size:13px;margin:20px 0}.notice{background:#fff9e8;border:1px solid #f5e6b2;border-radius:13px;color:#8a702c;padding:13px 16px;font-size:12px;line-height:1.6;margin-top:18px}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);padding:12px 20px;color:white;background:#222c42;border-radius:12px;box-shadow:0 12px 30px #0002;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}@media(max-width:660px){.wrap{padding:24px 15px 45px}.intro h2{font-size:25px}.grid{gap:10px}.card{padding:17px}.points{font-size:33px}.tasks,.bottom{grid-template-columns:1fr}.top{margin-bottom:27px}.brand h1{font-size:17px}.section{align-items:flex-start}.tag{font-size:11px}.task{padding:13px}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="top"><div class="brand"><div class="logo">⚔</div><div><h1>Klusjes-Oorlog</h1><small>Een schoon huis. Een felle strijd.</small></div></div><span class="tag">✦ Dashboard</span></header>
+    <section class="intro"><h2>Wie wint de klusjesstrijd? 👋</h2><p>Verdien punten, voltooi klusjes en pak de eerste plaats.</p></section>
+    <section class="grid" aria-label="Scores">
+      <article class="card player"><div class="person"><span class="avatar">S</span><strong>Stan</strong></div><div class="points"><span id="score-stan">0</span><span class="unit">punten</span></div><div class="progress"><span id="bar-stan" style="width:0%"></span></div><div class="tiny" id="status-stan">Klaar voor de strijd</div></article>
+      <article class="card player partner"><div class="person"><span class="avatar">❤</span><strong>Vriendin</strong></div><div class="points"><span id="score-partner">0</span><span class="unit">punten</span></div><div class="progress"><span id="bar-partner" style="width:0%"></span></div><div class="tiny" id="status-partner">Klaar voor de strijd</div></article>
+    </section>
+    <section class="section"><div><h3>Beschikbare klusjes</h3><p>Kies voor wie je punten wilt verdienen</p></div><select id="player-select" class="select" aria-label="Wie heeft het klusje gedaan?"><option value="stan">Stan</option><option value="partner">Vriendin</option></select></section>
+    <section class="tasks" id="tasks" aria-label="Klusjes"></section>
+    <section class="bottom">
+      <article class="card"><div class="section" style="margin:0"><div><h3>Recente activiteit</h3><p>Dit hebben jullie gedaan</p></div></div><ul id="history" class="history"></ul></article>
+      <article class="card"><h3 style="margin:0 0 12px;font-size:18px">🏆 De tussenstand</h3><p id="leader" style="font-size:14px;line-height:1.6;margin:0"></p><p class="note">Elk voltooid klusje levert punten op. Je kunt een klusje meerdere keren uitvoeren.</p><button id="reset" class="secondary">Scores opnieuw beginnen</button></article>
+    </section>
+    <p class="notice">⚠ Dit is versie 1: scores worden alleen opgeslagen in deze browser. Op jullie twee telefoons verschijnen nog <strong>niet</strong> dezelfde punten. Daarvoor koppelen we hierna een online database.</p>
+    <p class="footer">Met een beetje competitie wordt het huis vanzelf schoner ✨</p>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script>
+    const chores=[{name:'Vaatwasser uitruimen',points:10,icon:'🍽️'},{name:'Stofzuigen',points:25,icon:'🧹'},{name:'Badkamer schoonmaken',points:40,icon:'🛁'},{name:'Was opvouwen',points:15,icon:'👕'},{name:'Koken',points:30,icon:'🍳'},{name:'Afval wegbrengen',points:10,icon:'♻️'},{name:'Dweilen',points:30,icon:'🫧'},{name:'Boodschappen doen',points:20,icon:'🛒'}];
+    const storageKey='klusjes-oorlog-v1';
+    let state;
+    try { const saved=JSON.parse(localStorage.getItem(storageKey)); state=(saved && Array.isArray(saved.history))?saved:{history:[]}; }catch{state={history:[]}}
+    const $=id=>document.getElementById(id);
+    function score(player){return state.history.filter(x=>x.player===player).reduce((sum,x)=>sum+x.points,0)}
+    function store(){try{localStorage.setItem(storageKey,JSON.stringify(state))}catch{showToast('Opslaan in deze browser is niet beschikbaar')}}
+    let toastTimer;
+    function showToast(msg){$('toast').textContent=msg;$('toast').classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>$('toast').classList.remove('show'),2200)}
+    function render(){
+      const a=score('stan'),b=score('partner'),max=Math.max(a,b,1);
+      $('score-stan').textContent=a;$('score-partner').textContent=b;
+      $('bar-stan').style.width=(a/max*100)+'%';$('bar-partner').style.width=(b/max*100)+'%';
+      $('status-stan').textContent=a>b?'🏆 Aan de leiding':a===b?'Gelijke stand':'De achtervolging is begonnen';
+      $('status-partner').textContent=b>a?'🏆 Aan de leiding':a===b?'Gelijke stand':'De achtervolging is begonnen';
+      $('leader').textContent=a===b?'Het is gelijkspel! Wie pakt de voorsprong?':a>b?`Stan staat ${a-b} punten voor. Kan zijn vriendin hem nog inhalen?`:`Je vriendin staat ${b-a} punten voor. Tijd voor een comeback, Stan!`;
+      const history=$('history');history.replaceChildren();
+      if(!state.history.length){const p=document.createElement('p');p.className='empty';p.textContent='Nog geen klusjes voltooid. Tijd om te beginnen!';history.append(p)}
+      state.history.slice(0,7).forEach(item=>{
+        const li=document.createElement('li'),left=document.createElement('div'),name=document.createElement('strong'),meta=document.createElement('small'),plus=document.createElement('span');
+        name.textContent=item.name;meta.textContent=(item.player==='stan'?'Stan':'Vriendin')+' · '+new Date(item.date).toLocaleString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'});
+        plus.className='plus';plus.textContent='+'+item.points;left.append(name,meta);li.append(left,plus);history.append(li);
+      });
+    }
+    chores.forEach(chore=>{
+      const card=document.createElement('div');card.className='task';
+      const icon=document.createElement('span');icon.className='task-icon';icon.textContent=chore.icon;
+      const copy=document.createElement('div');copy.className='task-copy';
+      const title=document.createElement('strong');title.textContent=chore.name;
+      const detail=document.createElement('small');detail.textContent='+'+chore.points+' punten';copy.append(title,detail);
+      const button=document.createElement('button');button.className='do';button.textContent='Voltooid ✓';button.setAttribute('aria-label',chore.name+' voltooien');
+      button.addEventListener('click',()=>{const player=$('player-select').value;state.history.unshift({name:chore.name,points:chore.points,player,date:new Date().toISOString()});store();render();showToast('+'+chore.points+' punten voor '+(player==='stan'?'Stan':'Vriendin')+'! 🎉')});
+      card.append(icon,copy,button);$('tasks').append(card);
+    });
+    $('reset').addEventListener('click',()=>{if(window.confirm('Weet je zeker dat je alle punten en geschiedenis in deze browser wilt wissen?')){state={history:[]};store();render();showToast('Scores zijn gereset')}});
+    render();
+  </script>
+</body>
+</html>
