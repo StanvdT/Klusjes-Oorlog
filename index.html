@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.6.0-alpha</title>
+<title>Klusjes-Oorlog | v0.6.1-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -72,7 +72,7 @@
 .floating-notice{position:fixed!important;z-index:9999;top:18px;right:18px;left:auto!important;width:min(390px,calc(100vw - 36px));box-shadow:0 12px 36px rgba(29,42,75,.18);border-radius:12px;pointer-events:none;margin:0!important}
 @media(max-width:620px){.system-reset-item{align-items:flex-start;gap:8px}.floating-notice{right:12px;top:12px;width:calc(100vw - 24px)}}
 
-/* v0.6.0-alpha — navigatie, account, responsieve thema's */
+/* v0.6.1-alpha — navigatie, account, responsieve thema's */
 :root{color-scheme:light}
 body{min-height:100vh}
 .wrap{padding-bottom:105px}
@@ -135,6 +135,142 @@ html[data-theme="dark"] .leaderboard-sort,html[data-theme="dark"] .leaderboard-u
 html[data-theme="dark"] .leaderboard-mobile-card,html[data-theme="dark"] .leaderboard-mobile-stat{background:#202e42;border-color:#40516c;color:#ecf1fc}
 html[data-theme="dark"] .leaderboard-mobile-stat.active{background:#303e65;border-color:#8492ff}
 
+
+/* v0.6.1-alpha — contrastverbetering donkere modus. Houd lichte modus onveranderd. */
+html[data-theme="dark"]{
+  --dark-bg:#101824;
+  --dark-panel:#1d2a3b;
+  --dark-subpanel:#27364a;
+  --dark-border:#41536c;
+  --dark-text:#edf3ff;
+  --dark-muted:#c1cee0;
+  --dark-accent:#acb9ff;
+  --dark-positive:#8ee4b7;
+  --dark-negative:#ffb2aa;
+}
+html[data-theme="dark"] .nav-item{color:var(--dark-muted)}
+html[data-theme="dark"] .nav-item.active{color:#f1f3ff;background:#394878}
+html[data-theme="dark"] .nav-item:hover:not(.active){background:#2b3a50;color:#f5f8ff}
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .history-group,
+html[data-theme="dark"] .history-group-content>.card,
+html[data-theme="dark"] .app-nav,
+html[data-theme="dark"] .admin-competition,
+html[data-theme="dark"] .achievement-item,
+html[data-theme="dark"] .leaderboard-mobile-card{background:var(--dark-panel);border-color:var(--dark-border);color:var(--dark-text)}
+html[data-theme="dark"] .account-identity,
+html[data-theme="dark"] .vs,
+html[data-theme="dark"] .empty,
+html[data-theme="dark"] .admin-competition-players,
+html[data-theme="dark"] .admin-summary span,
+html[data-theme="dark"] .task-picker,
+html[data-theme="dark"] .admin-chores-details,
+html[data-theme="dark"] .admin-record-list,
+html[data-theme="dark"] .system-reset-item,
+html[data-theme="dark"] .countdown-box,
+html[data-theme="dark"] .leaderboard-sum,
+html[data-theme="dark"] .achievement-overview,
+html[data-theme="dark"] .leaderboard-mobile-stat,
+html[data-theme="dark"] .leaderboard-table th,
+html[data-theme="dark"] .tabs{background:var(--dark-subpanel);border-color:var(--dark-border);color:var(--dark-text)}
+html[data-theme="dark"] .admin-chores-details>summary{color:var(--dark-text)}
+html[data-theme="dark"] .admin-chores-details>summary:hover,
+html[data-theme="dark"] .leaderboard-table tbody tr:hover,
+html[data-theme="dark"] .leaderboard-table .leaderboard-sort:hover,
+html[data-theme="dark"] .history-group>summary:hover,
+html[data-theme="dark"] .player-option:hover,
+html[data-theme="dark"] .player-option.active{background:#344661;color:#fff}
+html[data-theme="dark"] .player-suggestions{background:var(--dark-panel);border-color:var(--dark-border);box-shadow:0 12px 32px #050b1799}
+html[data-theme="dark"] .player-option{background:var(--dark-panel);color:var(--dark-text);border-color:var(--dark-border)}
+html[data-theme="dark"] .player-avatar,
+html[data-theme="dark"] .round,
+html[data-theme="dark"] .leaderboard-mobile-rank,
+html[data-theme="dark"] .account-avatar{background:#374870;color:#e3e9ff}
+html[data-theme="dark"] .tabs button{color:var(--dark-muted)}
+html[data-theme="dark"] .tabs button.active{background:#405181;color:#fff}
+html[data-theme="dark"] .muted,
+html[data-theme="dark"] small,
+html[data-theme="dark"] .subtitle,
+html[data-theme="dark"] .hint,
+html[data-theme="dark"] .notice,
+html[data-theme="dark"] .loading,
+html[data-theme="dark"] .empty,
+html[data-theme="dark"] .footer,
+html[data-theme="dark"] .row p,
+html[data-theme="dark"] .vs span,
+html[data-theme="dark"] .history-meta,
+html[data-theme="dark"] .history-group-meta,
+html[data-theme="dark"] .history-group-right,
+html[data-theme="dark"] .admin-competition-meta,
+html[data-theme="dark"] .settings-changelog p,
+html[data-theme="dark"] .rematch-state,
+html[data-theme="dark"] .profile-summary,
+html[data-theme="dark"] .task-picker .task-points,
+html[data-theme="dark"] .admin-table th,
+html[data-theme="dark"] .countdown-label,
+html[data-theme="dark"] .countdown-unit span,
+html[data-theme="dark"] .achievement-intro,
+html[data-theme="dark"] .achievement-item p,
+html[data-theme="dark"] .achievement-status,
+html[data-theme="dark"] .leaderboard-hint,
+html[data-theme="dark"] .leaderboard-mobile-stat span,
+html[data-theme="dark"] .leaderboard-mobile-stat small,
+html[data-theme="dark"] .leaderboard-table .leaderboard-sub,
+html[data-theme="dark"] .leaderboard-table .leaderboard-unranked,
+html[data-theme="dark"] .leaderboard-mobile-sort label,
+html[data-theme="dark"] .player-list-message{color:var(--dark-muted)}
+html[data-theme="dark"] .field label{color:#d8e2f2}
+html[data-theme="dark"] .points,
+html[data-theme="dark"] .leaderboard-table .leaderboard-value,
+html[data-theme="dark"] .leaderboard-mobile-stat strong,
+html[data-theme="dark"] .leaderboard-mobile-name,
+html[data-theme="dark"] .achievement-overview strong,
+html[data-theme="dark"] .achievement-item h4,
+html[data-theme="dark"] .achievement-group h3{color:var(--dark-text)}
+html[data-theme="dark"] .leaderboard-mobile-stat.highlight,
+html[data-theme="dark"] .leaderboard-mobile-stat.active{background:#3a497a;border-color:#a6b3ff}
+html[data-theme="dark"] .leaderboard-mobile-stat.highlight strong,
+html[data-theme="dark"] .leaderboard-mobile-stat .sort-indicator,
+html[data-theme="dark"] .leaderboard-table th[aria-sort="ascending"],
+html[data-theme="dark"] .leaderboard-table th[aria-sort="descending"]{color:#e9ecff}
+html[data-theme="dark"] .leaderboard-table th[aria-sort="ascending"],
+html[data-theme="dark"] .leaderboard-table th[aria-sort="descending"]{background:#384873}
+html[data-theme="dark"] .leaderboard-table th[aria-sort="ascending"] .leaderboard-sort,
+html[data-theme="dark"] .leaderboard-table th[aria-sort="descending"] .leaderboard-sort{color:#f0f2ff}
+html[data-theme="dark"] .leaderboard-table-wrap,
+html[data-theme="dark"] .system-reset-layout{border-color:var(--dark-border)}
+html[data-theme="dark"] .leaderboard-table td,
+html[data-theme="dark"] .leaderboard-table th,
+html[data-theme="dark"] .admin-table td,
+html[data-theme="dark"] .admin-table th,
+html[data-theme="dark"] .settings-changelog li,
+html[data-theme="dark"] .account-group,
+html[data-theme="dark"] .row,
+html[data-theme="dark"] .system-reset-item,
+html[data-theme="dark"] .admin-chores-details[open]>summary{border-color:var(--dark-border)}
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea{background:#162337;border:1px solid #6a7d99;color:#f4f7ff;opacity:1}
+html[data-theme="dark"] input::placeholder,
+html[data-theme="dark"] textarea::placeholder{color:#a7b9d1;opacity:1}
+html[data-theme="dark"] option{background:#162337;color:#f4f7ff}
+html[data-theme="dark"] button:disabled{opacity:.62;cursor:not-allowed}
+html[data-theme="dark"] .btn.secondary{background:#344463;color:#f1f5ff}
+html[data-theme="dark"] .btn.secondary:hover:not(:disabled){background:#455a7f}
+html[data-theme="dark"] .btn:not(.secondary):not(.danger){color:#fff}
+html[data-theme="dark"] .cooldown-note{color:#c4d3ea}
+html[data-theme="dark"] .cooldown-note.waiting{color:#ffcb8d}
+html[data-theme="dark"] .history-win,
+html[data-theme="dark"] .system-keep,
+html[data-theme="dark"] .achievement-item.unlocked .achievement-status{color:var(--dark-positive)}
+html[data-theme="dark"] .history-loss,
+html[data-theme="dark"] .system-clear{color:var(--dark-negative)}
+html[data-theme="dark"] .cancelled-tag{color:#ffca96}
+html[data-theme="dark"] .achievement-item.unlocked{background:#1c3835;border-color:#39816a}
+html[data-theme="dark"] .achievement-item.unlocked .achievement-symbol{background:#2b5850}
+html[data-theme="dark"] .end-banner{background:#1d493d;color:#dcffec}
+html[data-theme="dark"] :is(button,input,select,textarea,summary,a):focus-visible{outline:3px solid #b5bfff;outline-offset:2px}
+
 </style>
 </head>
 <body>
@@ -147,7 +283,7 @@ html[data-theme="dark"] .leaderboard-mobile-stat.active{background:#303e65;borde
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.0-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.1-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
@@ -173,14 +309,19 @@ html[data-theme="dark"] .leaderboard-mobile-stat.active{background:#303e65;borde
 </section>
 <div id="loading" class="loading">Verbinding maken...</div>
 <section id="auth" class="auth card hidden"><h2 class="title">Welkom terug 👋</h2><p class="subtitle">Speel tegen vrienden en verdien punten.</p><div class="tabs"><button id="tab-login" class="active" type="button">Inloggen</button><button id="tab-register" type="button">Registreren</button></div><form id="auth-form"><div id="username-field" class="field hidden"><label for="username">Gebruikersnaam</label><input id="username" disabled autocomplete="username" minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]{3,20}" placeholder="Bijv. stan123"><span class="hint">3–20 tekens: letters, cijfers of _</span></div><div class="field"><label for="email">E-mailadres</label><input id="email" type="email" autocomplete="email" required placeholder="jij@voorbeeld.nl"></div><div class="field"><label for="password">Wachtwoord</label><input id="password" type="password" minlength="6" autocomplete="current-password" required placeholder="Minimaal 6 tekens"></div><button id="auth-submit" class="btn" type="submit" style="width:100%">Inloggen</button></form><p class="hint" id="auth-hint" style="margin:15px 0 0">Nog geen account? Kies Registreren.</p></section>
-<main id="app" class="hidden"><section id="admin-panel" class="card hidden" style="margin-bottom:24px"><div class="space" style="margin-bottom:18px"><div><h2 class="section-title" style="margin:0 0 4px">⚙ Klusjesbeheer</h2><span class="hint">Wijzigingen gelden voor toekomstige competities. Lopende competities behouden hun vastgelegde punten en wachttijden.</span></div><button id="admin-refresh" class="btn secondary small" type="button">Vernieuwen</button></div><div class="admin-tabs" role="tablist" aria-label="Adminonderdelen"><button type="button" id="admin-tab-chores" class="btn small active" aria-selected="true">Klusjesbeheer</button><button type="button" id="admin-tab-competitions" class="btn secondary small" aria-selected="false">Competitiebeheer</button><button type="button" id="admin-tab-system" class="btn secondary small" aria-selected="false">Systeembeheer</button></div><div id="admin-chores-view"><div class="admin-scroll"><table class="admin-table"><thead><tr><th>Klusje</th><th>Punten</th><th>Wachttijd</th><th>Status</th><th></th></tr></thead><tbody id="admin-list"><tr><td colspan="5">Laden...</td></tr></tbody></table></div><div class="divider"></div><h3 class="section-title" id="admin-form-title">Nieuw klusje</h3><form id="admin-form"><div class="admin-form-grid"><div class="field"><label for="admin-name">Naam</label><input id="admin-name" maxlength="100" required placeholder="Bijv. Ramen wassen"></div><div class="field"><label for="admin-points">Punten</label><input id="admin-points" type="number" min="1" step="1" max="100000" value="10" required></div><div class="field"><label for="admin-cooldown">Wachttijd (uren)</label><input id="admin-cooldown" type="number" min="0" step="1" max="100000" value="24" required></div></div><div class="field"><label for="admin-active">Beschikbaarheid</label><select id="admin-active"><option value="true">Actief — spelers kunnen dit klusje uitvoeren</option><option value="false">Uitgeschakeld — verborgen voor spelers</option></select></div><div class="admin-actions"><button id="admin-save" class="btn" type="submit">Klusje toevoegen</button><button id="admin-cancel" class="btn secondary hidden" type="button">Bewerken annuleren</button></div></form></div><div id="admin-competitions-view" class="hidden"><div class="space" style="flex-wrap:wrap"><div><h3 class="section-title" style="margin:0 0 4px">🏆 Competitiebeheer</h3><p class="hint" style="margin:0">Alle competities. Je kunt actieve competities verlengen, verkorten of direct beëindigen.</p></div><select id="admin-competition-filter" class="admin-filter" aria-label="Filter competities"><option value="alle">Alle competities</option><option value="actief">Actief</option><option value="uitnodiging">Uitnodigingen</option><option value="afgelopen">Afgelopen</option></select></div><div id="admin-competition-summary" class="admin-summary"></div><div id="admin-competition-list"><div class="empty">Kies Competitiebeheer om de competities op te halen.</div></div></div><div id="admin-system-view" class="hidden"><h3 class="section-title">🛡️ Systeembeheer</h3><p class="hint">Voorbereiding op de officiële release. Er worden nu geen gegevens gewijzigd of verwijderd.</p><div class="system-reset-layout"><div class="system-reset-item"><span>Gebruikersaccounts en gebruikersnamen</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Administratorrechten</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Klusjes, punteninstellingen en wachttijden</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Competities en uitnodigingen</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Uitgevoerde klusjes, punten en geschiedenis</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Leaderboardresultaten en behaalde achievements</span><strong class="system-clear">Resetten</strong></div></div><p class="notice" style="margin:18px 0">Bij de officiële release maken we eerst een gecontroleerde back-up en voegen we een extra bevestiging toe. De reset wordt dan een afzonderlijk, beveiligd beheerproces.</p><button class="btn danger" type="button" disabled title="Beschikbaar bij voorbereiding van de officiële release">🔒 Reset alle voortgang — nog niet beschikbaar</button><p class="hint">Let op: dit is uitsluitend een voorbereidend overzicht, er is geen resetfunctie gekoppeld.</p></div></section><div id="home-content"><h2 class="title" id="welcome">Jouw dashboard</h2><p class="subtitle">Strijd met vrienden om de meeste punten.</p><p id="sync-status" class="hint" role="status" aria-live="polite" style="margin:-11px 0 18px">● Automatisch verversen wordt gestart...</p><div class="grid"><section class="card"><h3 class="section-title">⚔ Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input id="challenge-name" placeholder="Zoek een speler..." maxlength="20" required autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="challenge-suggestions" aria-haspopup="listbox"><div id="challenge-suggestions" class="player-suggestions hidden" role="listbox" aria-label="Beschikbare spelers"></div><span id="challenge-search-help" class="hint">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option value="7" selected>7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div id="challenge-custom" class="hidden"><div class="selection-tools"><button type="button" class="btn secondary small" id="challenge-all">Alles selecteren</button><button type="button" class="btn secondary small" id="challenge-none">Alles wissen</button><span id="challenge-count" class="hint">0 geselecteerd</span></div><div id="challenge-task-list" class="task-picker" aria-label="Klusjes voor nieuwe competitie"></div></div><p id="challenge-profile-summary" class="profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section><section class="card"><h3 class="section-title">📩 Uitnodigingen</h3><div id="invitations" class="empty">Nog geen uitnodigingen</div></section></div><section class="section-space"><h3 class="section-title">🏆 Jouw competities</h3><div id="competitions" class="grid"><div class="empty">Nog geen competities. Daag een vriend uit!</div></div></section><section class="section-space" id="history-section"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">📜 Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div id="history" class="grid"><div class="empty">Nog geen afgelopen competities.</div></div></section><section id="selected-area" class="section-space hidden"><div class="space" style="margin-bottom:15px"><h3 id="selected-title" class="section-title" style="margin:0">Competitie</h3><span id="selected-status" class="pill">Live score</span></div><div id="competition-clock" class="countdown-box" role="timer" aria-label="Resterende competitietijd"></div><div id="competition-result" class="end-banner hidden"></div><div class="grid"><section class="card"><h3 class="section-title">Scorebord</h3><div id="scoreboard" class="empty">Laden...</div><p class="notice">Punten tellen afzonderlijk per competitie.</p></section><section class="card"><h3 class="section-title">Klusje uitvoeren</h3><div class="choose"><select id="chore-select" aria-label="Selecteer een klusje"><option value="">Selecteer een klusje</option></select><button id="complete-chore" class="btn">Voltooien</button></div><p id="chore-cooldown" class="cooldown-note" aria-live="polite">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space"><h3 class="section-title">🕒 Laatste activiteiten</h3><div id="activity" class="empty">Nog geen activiteiten</div></div></section></div></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.0-alpha</span></footer>
+<main id="app" class="hidden"><section id="admin-panel" class="card hidden" style="margin-bottom:24px"><div class="space" style="margin-bottom:18px"><div><h2 class="section-title" style="margin:0 0 4px">⚙ Klusjesbeheer</h2><span class="hint">Wijzigingen gelden voor toekomstige competities. Lopende competities behouden hun vastgelegde punten en wachttijden.</span></div><button id="admin-refresh" class="btn secondary small" type="button">Vernieuwen</button></div><div class="admin-tabs" role="tablist" aria-label="Adminonderdelen"><button type="button" id="admin-tab-chores" class="btn small active" aria-selected="true">Klusjesbeheer</button><button type="button" id="admin-tab-competitions" class="btn secondary small" aria-selected="false">Competitiebeheer</button><button type="button" id="admin-tab-system" class="btn secondary small" aria-selected="false">Systeembeheer</button></div><div id="admin-chores-view"><div class="admin-scroll"><table class="admin-table"><thead><tr><th>Klusje</th><th>Punten</th><th>Wachttijd</th><th>Status</th><th></th></tr></thead><tbody id="admin-list"><tr><td colspan="5">Laden...</td></tr></tbody></table></div><div class="divider"></div><h3 class="section-title" id="admin-form-title">Nieuw klusje</h3><form id="admin-form"><div class="admin-form-grid"><div class="field"><label for="admin-name">Naam</label><input id="admin-name" maxlength="100" required placeholder="Bijv. Ramen wassen"></div><div class="field"><label for="admin-points">Punten</label><input id="admin-points" type="number" min="1" step="1" max="100000" value="10" required></div><div class="field"><label for="admin-cooldown">Wachttijd (uren)</label><input id="admin-cooldown" type="number" min="0" step="1" max="100000" value="24" required></div></div><div class="field"><label for="admin-active">Beschikbaarheid</label><select id="admin-active"><option value="true">Actief — spelers kunnen dit klusje uitvoeren</option><option value="false">Uitgeschakeld — verborgen voor spelers</option></select></div><div class="admin-actions"><button id="admin-save" class="btn" type="submit">Klusje toevoegen</button><button id="admin-cancel" class="btn secondary hidden" type="button">Bewerken annuleren</button></div></form></div><div id="admin-competitions-view" class="hidden"><div class="space" style="flex-wrap:wrap"><div><h3 class="section-title" style="margin:0 0 4px">🏆 Competitiebeheer</h3><p class="hint" style="margin:0">Alle competities. Je kunt actieve competities verlengen, verkorten of direct beëindigen.</p></div><select id="admin-competition-filter" class="admin-filter" aria-label="Filter competities"><option value="alle">Alle competities</option><option value="actief">Actief</option><option value="uitnodiging">Uitnodigingen</option><option value="afgelopen">Afgelopen</option></select></div><div id="admin-competition-summary" class="admin-summary"></div><div id="admin-competition-list"><div class="empty">Kies Competitiebeheer om de competities op te halen.</div></div></div><div id="admin-system-view" class="hidden"><h3 class="section-title">🛡️ Systeembeheer</h3><p class="hint">Voorbereiding op de officiële release. Er worden nu geen gegevens gewijzigd of verwijderd.</p><div class="system-reset-layout"><div class="system-reset-item"><span>Gebruikersaccounts en gebruikersnamen</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Administratorrechten</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Klusjes, punteninstellingen en wachttijden</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Competities en uitnodigingen</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Uitgevoerde klusjes, punten en geschiedenis</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Leaderboardresultaten en behaalde achievements</span><strong class="system-clear">Resetten</strong></div></div><p class="notice" style="margin:18px 0">Bij de officiële release maken we eerst een gecontroleerde back-up en voegen we een extra bevestiging toe. De reset wordt dan een afzonderlijk, beveiligd beheerproces.</p><button class="btn danger" type="button" disabled title="Beschikbaar bij voorbereiding van de officiële release">🔒 Reset alle voortgang — nog niet beschikbaar</button><p class="hint">Let op: dit is uitsluitend een voorbereidend overzicht, er is geen resetfunctie gekoppeld.</p></div></section><div id="home-content"><h2 class="title" id="welcome">Jouw dashboard</h2><p class="subtitle">Strijd met vrienden om de meeste punten.</p><p id="sync-status" class="hint" role="status" aria-live="polite" style="margin:-11px 0 18px">● Automatisch verversen wordt gestart...</p><div class="grid"><section class="card"><h3 class="section-title">⚔ Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input id="challenge-name" placeholder="Zoek een speler..." maxlength="20" required autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="challenge-suggestions" aria-haspopup="listbox"><div id="challenge-suggestions" class="player-suggestions hidden" role="listbox" aria-label="Beschikbare spelers"></div><span id="challenge-search-help" class="hint">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option value="7" selected>7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div id="challenge-custom" class="hidden"><div class="selection-tools"><button type="button" class="btn secondary small" id="challenge-all">Alles selecteren</button><button type="button" class="btn secondary small" id="challenge-none">Alles wissen</button><span id="challenge-count" class="hint">0 geselecteerd</span></div><div id="challenge-task-list" class="task-picker" aria-label="Klusjes voor nieuwe competitie"></div></div><p id="challenge-profile-summary" class="profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section><section class="card"><h3 class="section-title">📩 Uitnodigingen</h3><div id="invitations" class="empty">Nog geen uitnodigingen</div></section></div><section class="section-space"><h3 class="section-title">🏆 Jouw competities</h3><div id="competitions" class="grid"><div class="empty">Nog geen competities. Daag een vriend uit!</div></div></section><section class="section-space" id="history-section"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">📜 Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div id="history" class="grid"><div class="empty">Nog geen afgelopen competities.</div></div></section><section id="selected-area" class="section-space hidden"><div class="space" style="margin-bottom:15px"><h3 id="selected-title" class="section-title" style="margin:0">Competitie</h3><span id="selected-status" class="pill">Live score</span></div><div id="competition-clock" class="countdown-box" role="timer" aria-label="Resterende competitietijd"></div><div id="competition-result" class="end-banner hidden"></div><div class="grid"><section class="card"><h3 class="section-title">Scorebord</h3><div id="scoreboard" class="empty">Laden...</div><p class="notice">Punten tellen afzonderlijk per competitie.</p></section><section class="card"><h3 class="section-title">Klusje uitvoeren</h3><div class="choose"><select id="chore-select" aria-label="Selecteer een klusje"><option value="">Selecteer een klusje</option></select><button id="complete-chore" class="btn">Voltooien</button></div><p id="chore-cooldown" class="cooldown-note" aria-live="polite">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space"><h3 class="section-title">🕒 Laatste activiteiten</h3><div id="activity" class="empty">Nog geen activiteiten</div></div></section></div></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.1-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.6.0-alpha';
+const APP_VERSION='v0.6.1-alpha';
 const CHANGELOG=[
-  {version:'v0.6.0-alpha',date:'19 november 2026',changes:[
+  {version:'v0.6.1-alpha',date:'19 november 2026',changes:[
+    'Verbeterd contrast en leesbaarheid van de donkere modus in alle schermen.',
+    'Leesbare spelerslijsten, leaderboardcijfers, competitiegeschiedenis, achievements en adminpanelen.',
+    'Verbeterde focusmarkeringen en invoervelden voor donkere modus.'
+  ]},
+  {version:'v0.6.1-alpha',date:'19 november 2026',changes:[
     'Nieuwe navigatie: Home, Ranglijst, Badges en Account, met vaste onderbalk op mobiel.',
     'Lichte, donkere en automatische modus. Je voorkeur wordt onthouden op dit apparaat.',
     'Admin Mode, Instellingen en de openbare changelog zijn bereikbaar via Account.',
