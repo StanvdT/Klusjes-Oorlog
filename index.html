@@ -1,150 +1,527 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
+<title>Klusjes-Oorlog | v0.4.0-alpha</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#202b43;background:#f6f8fc}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}a{color:#5668d6}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #a6b6ff;outline-offset:2px}.wrap{max-width:1060px;margin:0 auto;padding:26px 18px 66px}.top{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:30px;flex-wrap:wrap}.brand{display:flex;align-items:center;gap:11px}.logo{background:#5667d9;color:#fff;font-weight:800;width:44px;height:44px;border-radius:14px;display:grid;place-items:center;box-shadow:0 6px 22px #5667d933}.brand h1{font-size:20px;letter-spacing:-.5px;margin:0}.muted,small{color:#8792a5}.brand small{font-size:12px}.badge{padding:7px 12px;background:#e9edff;color:#5667c9;border-radius:20px;font-size:12px;font-weight:750}.btn{border:0;border-radius:11px;padding:11px 16px;background:#5667d9;color:white;font-weight:700;transition:.15s}.btn:hover:not(:disabled){background:#4354c4}.btn.secondary{background:#f0f2fb;color:#445171}.btn.secondary:hover:not(:disabled){background:#e4e8f5}.btn.danger{background:#fff0f0;color:#b93e4a}.btn.small{padding:8px 12px;font-size:13px}.card{background:white;border:1px solid #e7ebf2;border-radius:19px;padding:23px;box-shadow:0 5px 24px #222b4106}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.stack{display:grid;gap:17px}.space{display:flex;align-items:center;justify-content:space-between;gap:12px}.title{font-size:28px;letter-spacing:-1px;margin:0 0 5px}.subtitle{margin:0 0 23px;color:#8390a3}.section-title{font-size:17px;font-weight:800;margin:0 0 15px}.field{display:grid;gap:6px;margin-bottom:14px}.field label{font-size:13px;font-weight:700;color:#58647b}.field input,.field select{border:1px solid #dfe4ef;border-radius:11px;padding:12px 13px;width:100%;background:#fff;color:#253047}.field input:focus,.field select:focus{border-color:#5667d9;outline:none;box-shadow:0 0 0 3px #5667d91d}.hint{font-size:12px;color:#8894a5;line-height:1.6}.auth{max-width:460px;margin:36px auto}.tabs{display:flex;background:#eff2fa;padding:5px;gap:5px;border-radius:12px;margin-bottom:22px}.tabs button{flex:1;padding:10px;border:0;border-radius:9px;background:transparent;color:#79859a;font-weight:700}.tabs button.active{background:white;color:#4454c9;box-shadow:0 2px 9px #242b3910}.message{display:none;margin-bottom:18px;padding:12px 14px;border-radius:12px;background:#fff4e5;color:#875416;font-size:14px;line-height:1.5}.message.error{background:#fff0f0;color:#9d2b41}.message.success{background:#eaf8f0;color:#20674c}.message.show{display:block}.vs{border-radius:15px;background:#f7f8fc;padding:19px;display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center}.vs strong{display:block;font-size:29px;letter-spacing:-1px}.vs span{color:#8894a6;font-size:12px}.vs b{color:#a5aec0}.row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid #eef0f5;gap:12px}.row:last-child{border-bottom:0;padding-bottom:0}.row:first-child{padding-top:0}.row p{margin:4px 0 0;font-size:12px;color:#909bad}.points{color:#5667d9;font-weight:800;white-space:nowrap}.actions{display:flex;gap:8px;flex-wrap:wrap}.empty{padding:25px 15px;background:#f8f9fc;border-radius:12px;text-align:center;color:#8993a5;line-height:1.6;font-size:14px}.round{width:39px;height:39px;border-radius:12px;background:#edf0ff;color:#5565cf;font-weight:800;display:grid;place-items:center;flex-shrink:0}.profile{display:flex;align-items:center;gap:10px}.profile strong{font-size:14px}.loading{margin:30px 0;text-align:center;color:#8893a7}.hidden{display:none!important}.pill{font-size:11px;background:#f0f2f8;color:#627089;padding:5px 8px;border-radius:99px;font-weight:700}.section-space{margin-top:25px}.footer{text-align:center;margin-top:35px;color:#9aa4b4;font-size:12px}.choose{display:flex;gap:8px;align-items:center;flex-wrap:wrap}select{padding:11px 12px;border:1px solid #dfe4ef;border-radius:11px;background:white;color:#253047;max-width:100%;flex:1;min-width:160px}.notice{font-size:13px;color:#8290a3;line-height:1.6}.divider{height:1px;background:#eff1f6;margin:17px 0}@media(max-width:690px){.wrap{padding:19px 13px 40px}.grid{grid-template-columns:1fr}.card{padding:18px}.title{font-size:23px}.top{margin-bottom:23px}.vs strong{font-size:24px}.btn{padding:10px 12px}.actions{justify-content:flex-end}}
 
-create or replace function public.leaderboard_competities(
-  p_periode text default 'maand'
-)
-returns table (
-  gebruikersnaam text,
-  competities_gespeeld bigint,
-  gewonnen bigint,
-  verloren bigint,
-  gelijkspel bigint,
-  winpercentage numeric
-)
-language plpgsql
-stable
-security definer
-set search_path = ''
-as $$
-declare
-  v_start timestamptz;
-  v_einde timestamptz;
-begin
-  if p_periode is null
-     or p_periode not in ('maand', 'overall') then
-    raise exception 'Ongeldige periode';
-  end if;
+.admin-table{width:100%;border-collapse:collapse}.admin-table th{text-align:left;font-size:12px;color:#8290a4;padding:12px 9px;border-bottom:1px solid #e6ebf3}.admin-table td{padding:12px 9px;border-bottom:1px solid #eef1f6;font-size:13px}.admin-table tr:last-child td{border-bottom:0}.admin-table .btn{white-space:nowrap}.admin-form-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px}.admin-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.admin-status{font-size:12px;padding:4px 7px;border-radius:8px;background:#e8f6ee;color:#20764b;font-weight:700}.admin-status.off{background:#fff0e8;color:#95512c}.admin-scroll{overflow:auto}@media(max-width:690px){.admin-form-grid{grid-template-columns:1fr}.admin-table th,.admin-table td{padding:9px 6px}}
 
-  if p_periode = 'maand' then
-    v_start := (
-      date_trunc(
-        'month',
-        now() at time zone 'Europe/Amsterdam'
-      ) at time zone 'Europe/Amsterdam'
-    );
+.countdown-box{border-radius:14px;background:#f0f3ff;padding:16px;margin-bottom:16px;text-align:center}.countdown-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:12px auto;max-width:430px}.countdown-unit{background:white;border-radius:10px;padding:10px 4px}.countdown-unit strong{display:block;font-size:clamp(19px,4vw,29px);font-variant-numeric:tabular-nums;color:#4454be}.countdown-unit span{font-size:11px;color:#7f8ba3}.countdown-label{color:#65738c;font-size:12px;font-weight:750}.cooldown-note{margin-top:12px;font-size:13px;color:#64738d}.cooldown-note.waiting{color:#9a6330}.end-banner{background:#eaf8f0;color:#1d674a;border-radius:12px;padding:15px;margin:12px 0;font-weight:750}.expired .countdown-box{background:#f2f3f6}.expired .countdown-unit strong{color:#68758b}.history-details{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin:12px 0}.history-points{font-weight:750;font-size:13px}.history-meta{font-size:12px;color:#7f8ba3;margin:8px 0}.history-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.history-actions select{flex:none;min-width:105px}.history-win{color:#20764b}.history-loss{color:#ae5b46}
+.history-grouped{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px}.history-group{background:#fff;border:1px solid #e2e7f1;border-radius:16px;overflow:hidden;min-width:0}.history-group>summary{cursor:pointer;list-style:none;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}.history-group>summary::-webkit-details-marker{display:none}.history-group>summary:hover{background:#f8faff}.history-group>summary:focus-visible{outline:3px solid #a6b6ff;outline-offset:-3px}.history-group-label{display:flex;flex-direction:column;gap:4px;min-width:0}.history-group-meta{font-size:12px;color:#7f8ba3}.history-group-right{display:flex;align-items:center;gap:10px;flex:none;color:#69778e;font-size:13px}.history-group-right .chevron{font-size:18px;transition:transform .15s}.history-group[open] .chevron{transform:rotate(180deg)}.history-group-content{padding:0 14px 14px;display:grid;gap:12px}.history-group-content>.card{box-shadow:none;border:1px solid #e7ebf3;padding:17px}.history-group[open]>summary{border-bottom:1px solid #edf0f7;margin-bottom:12px}
 
-    v_einde := (
-      (
-        date_trunc(
-          'month',
-          now() at time zone 'Europe/Amsterdam'
-        ) + interval '1 month'
-      ) at time zone 'Europe/Amsterdam'
-    );
-  end if;
+.task-picker{display:grid;gap:8px;max-height:245px;overflow:auto;padding:12px;border:1px solid #e2e7f1;border-radius:12px;background:#f9faff}.task-picker label{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px;border-radius:8px}.task-picker label:hover{background:#eff2fc}.task-picker input{accent-color:#5667d9;width:17px;height:17px;flex:none}.task-picker .task-name{flex:1;font-size:13px}.task-picker .task-points{font-size:12px;color:#69758d}.selection-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:9px 0}.profile-summary{margin-top:9px;font-size:12px;color:#64738d}.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 18px}.admin-tabs .active{background:#5667d9;color:#fff}.admin-competition{border:1px solid #e6ebf3;border-radius:14px;padding:17px;margin:12px 0;background:#fff}.admin-competition-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.admin-competition h4{font-size:15px;margin:0}.admin-competition-meta{margin:9px 0;color:#728199;font-size:12px;line-height:1.6}.admin-competition-players{background:#f7f8fc;border-radius:11px;padding:8px 13px;margin:11px 0}.admin-competition-players .row{padding:8px 0}.admin-competition-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:flex-end}.admin-competition-actions .field{min-width:240px;flex:1;margin:0}.admin-competition-actions input{min-width:0}.admin-summary{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.admin-summary span{padding:7px 11px;background:#f2f4fb;border-radius:9px;font-size:12px;font-weight:700}.admin-filter{min-width:150px;flex:0 1 220px}
 
-  return query
-  with afgeronde_competities as (
-    select c.id
-    from public.competities c
-    join public.competitie_deelnemers d
-      on d.competitie_id = c.id
-    where c.start_op is not null
-      and c.eindigt_op is not null
-      and (
-        c.status = 'afgelopen'
-        or c.eindigt_op <= now()
-      )
-      and (
-        p_periode = 'overall'
-        or (
-          c.eindigt_op >= v_start
-          and c.eindigt_op < v_einde
-        )
-      )
-    group by c.id
-    having count(*) = 2
-       and count(*) filter (
-         where d.status = 'geaccepteerd'
-       ) = 2
-  ),
-  scores as (
-    select
-      a.id as competitie_id,
-      d.gebruiker_id,
-      coalesce(
-        sum(v.punten_verdiend) filter (
-          where v.geannuleerd_op is null
-        ), 0
-      ) as punten
-    from afgeronde_competities a
-    join public.competitie_deelnemers d
-      on d.competitie_id = a.id
-    left join public.voltooide_klusjes v
-      on v.competitie_id = a.id
-      and v.gebruiker_id = d.gebruiker_id
-    group by a.id, d.gebruiker_id
-  ),
-  uitslagen as (
-    select
-      competitie_id,
-      gebruiker_id,
-      punten,
-      max(punten) over (
-        partition by competitie_id
-      ) as hoogste_score,
-      min(punten) over (
-        partition by competitie_id
-      ) as laagste_score
-    from scores
-  ),
-  statistieken as (
-    select
-      gebruiker_id,
-      count(*) as gespeeld,
-      count(*) filter (
-        where punten = hoogste_score
-          and hoogste_score > laagste_score
-      ) as winst,
-      count(*) filter (
-        where punten = laagste_score
-          and hoogste_score > laagste_score
-      ) as verlies,
-      count(*) filter (
-        where hoogste_score = laagste_score
-      ) as gelijk
-    from uitslagen
-    group by gebruiker_id
-  )
-  select
-    p.gebruikersnaam,
-    coalesce(s.gespeeld, 0)::bigint,
-    coalesce(s.winst, 0)::bigint,
-    coalesce(s.verlies, 0)::bigint,
-    coalesce(s.gelijk, 0)::bigint,
-    case
-      when coalesce(s.winst, 0)
-         + coalesce(s.verlies, 0) = 0
-      then null
-      else round(
-        100.0 * s.winst /
-        (s.winst + s.verlies), 1
-      )
-    end
-  from public.profiles p
-  left join statistieken s
-    on s.gebruiker_id = p.id
-  where p.gebruikersnaam is not null
-  order by
-    coalesce(s.winst, 0) desc,
-    p.gebruikersnaam asc;
-end;
-$$;
+.settings-panel{margin-bottom:22px;max-width:700px}.settings-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.settings-changelog{padding:0;margin:15px 0 0;list-style:none}.settings-changelog li{padding:12px 0;border-bottom:1px solid #eef1f6}.settings-changelog li:last-child{border-bottom:0}.settings-changelog p{font-size:13px;color:#69778e;line-height:1.55;margin:5px 0 0}.version-text{font-variant-numeric:tabular-nums}.rematch-state{font-size:13px;color:#5f6e84;font-weight:650}.settings-tabs{display:flex;gap:8px;margin-top:18px}
+.admin-chores-details{margin:12px 0;border:1px solid #e6ebf3;border-radius:11px;background:#f9faff;overflow:hidden}.admin-chores-details>summary{cursor:pointer;padding:12px 14px;font-size:13px;font-weight:700;color:#445171;list-style-position:inside}.admin-chores-details>summary:hover{background:#f0f3fd}.admin-chores-details[open]>summary{border-bottom:1px solid #e6ebf3}.admin-chores-content{padding:8px 14px}.admin-chores-content .row{font-size:13px}.admin-chores-content .row>span:last-child{text-align:right;white-space:nowrap}.admin-chores-content small{display:block;font-size:11px;margin-top:3px}
 
--- De functie publiek beschikbaar maken
-revoke all on function
-public.leaderboard_competities(text)
-from public;
+.player-suggestions{border:1px solid #dfe4ef;border-radius:11px;background:#fff;box-shadow:0 9px 22px #24304b13;overflow:auto;max-height:260px;margin-top:3px}.player-option{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;border:0;background:#fff;color:#253047;text-align:left;font-weight:650;cursor:pointer}.player-option:hover,.player-option.active{background:#eef1ff}.player-avatar{display:grid;place-items:center;flex:none;width:30px;height:30px;border-radius:10px;background:#eef1ff;color:#5264c9;font-weight:800}.player-option small{margin-left:auto}.player-list-message{padding:13px;color:#77859b;font-size:13px}.player-option:focus-visible{outline:2px solid #5667d9;outline-offset:-2px}
+.cancelled-chore{opacity:.65}.cancelled-tag{font-size:12px;color:#935c34;font-weight:700}.undo-btn{white-space:nowrap}.admin-record-list{padding:10px 13px;background:#f8f9fc;border-radius:10px;margin:10px 0}.admin-record-list .row{align-items:center}.admin-record-list .hint{max-width:100%}
 
-grant execute on function
-public.leaderboard_competities(text)
-to anon, authenticated;
+.leaderboard-panel{margin-bottom:22px}.leaderboard-filters{display:grid;grid-template-columns:1fr 1fr;gap:13px}.leaderboard-entry{display:flex;align-items:center;gap:12px;padding:13px 3px;border-bottom:1px solid #eef0f5}.leaderboard-entry:last-child{border-bottom:0}.leaderboard-rank{width:40px;flex:none;text-align:center;font-weight:800;color:#65718c}.leaderboard-user{flex:1;min-width:0;overflow-wrap:anywhere;font-weight:750}.leaderboard-stat{text-align:right;font-variant-numeric:tabular-nums;font-weight:800;color:#4b5ed0}.leaderboard-sub{font-size:11px;color:#8591a4;font-weight:500}.leaderboard-unranked{opacity:.75}.leaderboard-sum{background:#f7f8fc;border-radius:10px;padding:11px 14px;margin-bottom:8px;color:#58657c;font-size:13px}@media(max-width:550px){.leaderboard-filters{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><div class="brand"><div class="logo">⚔</div><div><h1>Klusjes-Oorlog</h1><small>Maak van klusjes een competitie</small></div></div><div class="space"><span id="logged-name" class="badge hidden"></span><button id="leaderboard-toggle" type="button" class="btn secondary small" aria-expanded="false" aria-controls="leaderboard-panel">🏆 Leaderboard</button><button id="settings-toggle" type="button" class="btn secondary small" aria-expanded="false" aria-controls="settings-panel">⚙ Instellingen</button><button id="admin-toggle" type="button" class="btn secondary small hidden">⚙ Admin Mode</button><button id="logout" class="btn secondary small hidden">Uitloggen</button></div></header>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.4.0-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="leaderboard-panel" class="card leaderboard-panel hidden" aria-label="Openbaar leaderboard">
+  <div class="space" style="margin-bottom:15px"><div><h2 class="section-title" style="margin:0 0 4px">🏆 Openbaar leaderboard</h2><p class="hint" style="margin:0">Vergelijk alle spelers. Alleen gebruikersnamen en spelstatistieken worden getoond.</p></div><button id="leaderboard-close" class="btn secondary small" type="button">Sluiten</button></div>
+  <div class="leaderboard-filters"><div class="field"><label for="leaderboard-period">Periode</label><select id="leaderboard-period"><option value="maand">Deze maand</option><option value="overall">Overall</option></select></div><div class="field"><label for="leaderboard-category">Rangschikken op</label><select id="leaderboard-category"><option value="punten">Punten</option><option value="klusjes_voltooid">Klusjes voltooid</option><option value="competities_gespeeld">Competities gespeeld</option><option value="winpercentage">Winpercentage</option></select></div></div>
+  <p id="leaderboard-period-info" class="hint" style="margin:0 0 13px"></p>
+  <div id="leaderboard-results" aria-live="polite"><div class="empty">Open het leaderboard om de scores te laden.</div></div>
+  <p class="hint" style="margin:14px 0 0">Maandelijkse klusjes tellen op uitvoerdatum; wedstrijden op einddatum. Winpercentage = winst ÷ (winst + verlies). Voor een officiële winpercentage-rangplaats zijn minimaal 5 besliste wedstrijden nodig.</p>
+</section>
+<div id="loading" class="loading">Verbinding maken...</div>
+<section id="auth" class="auth card hidden"><h2 class="title">Welkom terug 👋</h2><p class="subtitle">Speel tegen vrienden en verdien punten.</p><div class="tabs"><button id="tab-login" class="active" type="button">Inloggen</button><button id="tab-register" type="button">Registreren</button></div><form id="auth-form"><div id="username-field" class="field hidden"><label for="username">Gebruikersnaam</label><input id="username" disabled autocomplete="username" minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]{3,20}" placeholder="Bijv. stan123"><span class="hint">3–20 tekens: letters, cijfers of _</span></div><div class="field"><label for="email">E-mailadres</label><input id="email" type="email" autocomplete="email" required placeholder="jij@voorbeeld.nl"></div><div class="field"><label for="password">Wachtwoord</label><input id="password" type="password" minlength="6" autocomplete="current-password" required placeholder="Minimaal 6 tekens"></div><button id="auth-submit" class="btn" type="submit" style="width:100%">Inloggen</button></form><p class="hint" id="auth-hint" style="margin:15px 0 0">Nog geen account? Kies Registreren.</p></section>
+<main id="app" class="hidden"><section id="admin-panel" class="card hidden" style="margin-bottom:24px"><div class="space" style="margin-bottom:18px"><div><h2 class="section-title" style="margin:0 0 4px">⚙ Klusjesbeheer</h2><span class="hint">Wijzigingen gelden voor toekomstige competities. Lopende competities behouden hun vastgelegde punten en wachttijden.</span></div><button id="admin-refresh" class="btn secondary small" type="button">Vernieuwen</button></div><div class="admin-tabs" role="tablist" aria-label="Adminonderdelen"><button type="button" id="admin-tab-chores" class="btn small active" aria-selected="true">Klusjesbeheer</button><button type="button" id="admin-tab-competitions" class="btn secondary small" aria-selected="false">Competitiebeheer</button></div><div id="admin-chores-view"><div class="admin-scroll"><table class="admin-table"><thead><tr><th>Klusje</th><th>Punten</th><th>Wachttijd</th><th>Status</th><th></th></tr></thead><tbody id="admin-list"><tr><td colspan="5">Laden...</td></tr></tbody></table></div><div class="divider"></div><h3 class="section-title" id="admin-form-title">Nieuw klusje</h3><form id="admin-form"><div class="admin-form-grid"><div class="field"><label for="admin-name">Naam</label><input id="admin-name" maxlength="100" required placeholder="Bijv. Ramen wassen"></div><div class="field"><label for="admin-points">Punten</label><input id="admin-points" type="number" min="1" step="1" max="100000" value="10" required></div><div class="field"><label for="admin-cooldown">Wachttijd (uren)</label><input id="admin-cooldown" type="number" min="0" step="1" max="100000" value="24" required></div></div><div class="field"><label for="admin-active">Beschikbaarheid</label><select id="admin-active"><option value="true">Actief — spelers kunnen dit klusje uitvoeren</option><option value="false">Uitgeschakeld — verborgen voor spelers</option></select></div><div class="admin-actions"><button id="admin-save" class="btn" type="submit">Klusje toevoegen</button><button id="admin-cancel" class="btn secondary hidden" type="button">Bewerken annuleren</button></div></form></div><div id="admin-competitions-view" class="hidden"><div class="space" style="flex-wrap:wrap"><div><h3 class="section-title" style="margin:0 0 4px">🏆 Competitiebeheer</h3><p class="hint" style="margin:0">Alle competities. Je kunt actieve competities verlengen, verkorten of direct beëindigen.</p></div><select id="admin-competition-filter" class="admin-filter" aria-label="Filter competities"><option value="alle">Alle competities</option><option value="actief">Actief</option><option value="uitnodiging">Uitnodigingen</option><option value="afgelopen">Afgelopen</option></select></div><div id="admin-competition-summary" class="admin-summary"></div><div id="admin-competition-list"><div class="empty">Kies Competitiebeheer om de competities op te halen.</div></div></div></section><h2 class="title" id="welcome">Jouw dashboard</h2><p class="subtitle">Strijd met vrienden om de meeste punten.</p><p id="sync-status" class="hint" role="status" aria-live="polite" style="margin:-11px 0 18px">● Automatisch verversen wordt gestart...</p><div class="grid"><section class="card"><h3 class="section-title">⚔ Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input id="challenge-name" placeholder="Zoek een speler..." maxlength="20" required autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="challenge-suggestions" aria-haspopup="listbox"><div id="challenge-suggestions" class="player-suggestions hidden" role="listbox" aria-label="Beschikbare spelers"></div><span id="challenge-search-help" class="hint">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option value="7" selected>7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div id="challenge-custom" class="hidden"><div class="selection-tools"><button type="button" class="btn secondary small" id="challenge-all">Alles selecteren</button><button type="button" class="btn secondary small" id="challenge-none">Alles wissen</button><span id="challenge-count" class="hint">0 geselecteerd</span></div><div id="challenge-task-list" class="task-picker" aria-label="Klusjes voor nieuwe competitie"></div></div><p id="challenge-profile-summary" class="profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section><section class="card"><h3 class="section-title">📩 Uitnodigingen</h3><div id="invitations" class="empty">Nog geen uitnodigingen</div></section></div><section class="section-space"><h3 class="section-title">🏆 Jouw competities</h3><div id="competitions" class="grid"><div class="empty">Nog geen competities. Daag een vriend uit!</div></div></section><section class="section-space" id="history-section"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">📜 Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div id="history" class="grid"><div class="empty">Nog geen afgelopen competities.</div></div></section><section id="selected-area" class="section-space hidden"><div class="space" style="margin-bottom:15px"><h3 id="selected-title" class="section-title" style="margin:0">Competitie</h3><span id="selected-status" class="pill">Live score</span></div><div id="competition-clock" class="countdown-box" role="timer" aria-label="Resterende competitietijd"></div><div id="competition-result" class="end-banner hidden"></div><div class="grid"><section class="card"><h3 class="section-title">Scorebord</h3><div id="scoreboard" class="empty">Laden...</div><p class="notice">Punten tellen afzonderlijk per competitie.</p></section><section class="card"><h3 class="section-title">Klusje uitvoeren</h3><div class="choose"><select id="chore-select" aria-label="Selecteer een klusje"><option value="">Selecteer een klusje</option></select><button id="complete-chore" class="btn">Voltooien</button></div><p id="chore-cooldown" class="cooldown-note" aria-live="polite">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space"><h3 class="section-title">🕒 Laatste activiteiten</h3><div id="activity" class="empty">Nog geen activiteiten</div></div></section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.4.0-alpha</span></footer>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+'use strict';
+const APP_VERSION='v0.4.0-alpha';
+const CHANGELOG=[
+  {version:'v0.4.0-alpha',date:'19 november 2026',changes:[
+    'Openbaar leaderboard voor alle spelers, ook zichtbaar zonder inloggen.',
+    'Maandelijkse en algemene ranglijsten voor punten, voltooide klusjes, gespeelde competities en winpercentage.',
+    'Geannuleerde klusjes tellen niet mee; winpercentage-ranking vanaf vijf besliste competities.'
+  ]},
+  {version:'v0.4.0-alpha',date:'19 november 2026',changes:[
+    'Ongedaan maken verschijnt nu ook wanneer de apparaatklok iets achterloopt op Supabase.',
+    'De bestaande annuleertermijn van vijf minuten blijft in Supabase beveiligd.'
+  ]},
+  {version:'v0.3.1-alpha',date:'19 november 2026',changes:[
+    'Eigen uitgevoerde klusjes binnen vijf minuten ongedaan maken.',
+    'Admin Mode: registraties van alle competities bekijken en corrigeren.',
+    'Geannuleerde activiteiten blijven zichtbaar, maar tellen niet mee voor punten en wachttijden.'
+  ]},
+  {version:'v0.3.0-alpha',date:'19 november 2026',changes:[
+    'Scores, uitnodigingen en competitiestatussen worden automatisch elke 15 seconden gecontroleerd.',
+    'De app laadt alleen bijgewerkte gegevens als iets is veranderd; formulieren blijven zoveel mogelijk intact.',
+    'Bij inactiviteit of een verborgen tabblad worden controles gepauzeerd en na terugkomst hervat.'
+  ]},
+  {version:'v0.2.3-alpha',date:'19 november 2026',changes:[
+    'Competitiegeschiedenis is nu per tegenstander gegroepeerd in een uitklapbare lijst.',
+    'De uitslagen en rematchopties verschijnen alleen wanneer je een tegenstander uitklapt.',
+    'Opengeklapte groepen blijven zichtbaar wanneer de geschiedenis opnieuw geladen wordt.'
+  ]},
+  {version:'v0.2.2-alpha',date:'19 november 2026',changes:[
+    'Bij Vriend uitdagen kun je nu door beschikbare gebruikersnamen zoeken.',
+    'Maximaal tien spelers per zoekopdracht, zonder je eigen account of e-mailadressen.',
+    'Selecteer een speler direct uit de lijst; bestaande uitnodigingen blijven hetzelfde werken.'
+  ]},
+  {version:'v0.2.1-alpha',date:'19 november 2026',changes:[
+    'Admin Mode: bekijk per competitie de geselecteerde klusjes via een ingeklapte dropdown.',
+    'Toont de vastgelegde punten en wachttijd per klusje, ook voor afgelopen competities.',
+    'Klusjes worden pas opgehaald wanneer een administrator het overzicht opent.'
+  ]},
+  {version:'v0.2.0-alpha',date:'19 november 2026',changes:[
+    'Kies bij het uitdagen tussen een standaardklusjeslijst en een gepersonaliseerde selectie.',
+    'Per competitie worden geselecteerde klusjes, punten en wachttijden vastgelegd.',
+    'Rematches kunnen eerdere klusjes overnemen of een nieuwe lijst gebruiken.',
+    'Uitnodigingen tonen het gekozen klusjesprofiel.'
+  ]},
+  {version:'v0.1.0-alpha',date:'19 november 2026',changes:[
+    'Rematch-uitnodigingen gekoppeld aan de oorspronkelijke competitie; dubbele directe rematches worden geblokkeerd.',
+    'Status van rematches zichtbaar in de competitiegeschiedenis.',
+    'Instellingen met een changelog die voor iedereen toegankelijk is.',
+    'Versienummer zichtbaar in de browsertab, bij Instellingen en onderaan de website.',
+    'Correctie: het verborgen gebruikersnaamveld blokkeert inloggen niet meer.'
+  ]}
+];
+const SUPABASE_URL='https://yhevmkrgstgdhbzcynmt.supabase.co';
+const SUPABASE_KEY='sb_publishable_IA-6Nn2Gl7Sq1bEcloMBbg_K0h6jbfd';
+const el=id=>document.getElementById(id);
+const show=(id,yes)=>el(id).classList.toggle('hidden',!yes);
+const expandedHistoryOpponents=new Set();
+const state={user:null,profile:null,competitions:[],selected:null,chores:[],competitionChores:[],records:[],isAdmin:false,adminChores:[],editingChore:null,adminCompetitions:[],adminTab:"chores",scoreboard:[],history:[],historyLoading:false,lastTimerSecond:-1,legacyRematches:new Map()};
+let client;
+let authMode='login';
+let leaderboardRequest=0;let leaderboardShown=false;
+const AUTO_REFRESH_MS=15000;
+let syncInProgress=false;
+let syncToken=0;
+function syncStatus(message,healthy=true){const node=el('sync-status');if(node){node.textContent=(healthy?'● ':'○ ')+message;node.style.color=healthy?'#3a806c':'#ab713b';}}
+const msg=(message,type='error')=>{const a=el('alert');a.textContent=message;a.className='message show '+type;window.scrollTo({top:0,behavior:'smooth'});};
+const clearMsg=()=>el('alert').className='message';
+const safe=val=>String(val??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const errorText=error=>{let s=error?.message||String(error);if(/duplicate key.*gebruikersnaam|gebruikersnaam_uniek/i.test(s))return 'Deze gebruikersnaam is al bezet. Kies een andere.';if(/Invalid login credentials/i.test(s))return 'E-mailadres of wachtwoord is niet juist.';if(/Email not confirmed/i.test(s))return 'Bevestig eerst je e-mailadres via de link in je mailbox.';if(/User already registered/i.test(s))return 'Dit e-mailadres is al geregistreerd.';return s;};
+function setAuthMode(mode){authMode=mode;el('tab-login').classList.toggle('active',mode==='login');el('tab-register').classList.toggle('active',mode==='register');show('username-field',mode==='register');el('username').required=mode==='register';el('username').disabled=mode!=='register';el('password').autocomplete=mode==='register'?'new-password':'current-password';el('auth-submit').textContent=mode==='register'?'Account aanmaken':'Inloggen';el('auth-hint').textContent=mode==='register'?'Na registratie ontvang je mogelijk een bevestigingsmail.':'Nog geen account? Kies Registreren.';clearMsg();}
+async function withButton(button,job){button.disabled=true;try{await job();}catch(e){msg(errorText(e));}finally{button.disabled=false;if(button.id==='complete-chore')updateChoreAvailability();}}
+function initSettings(){
+  el('footer-version').textContent=APP_VERSION;
+  el('settings-version').textContent=APP_VERSION;
+  document.title='Klusjes-Oorlog | '+APP_VERSION;
+  el('changelog-list').innerHTML=CHANGELOG.map(item=>`<li><strong>${safe(item.version)}</strong> <span class="hint">· ${safe(item.date)}</span><ul>${item.changes.map(x=>`<li>${safe(x)}</li>`).join('')}</ul></li>`).join('');
+  const toggle=()=>{const opening=el('settings-panel').classList.contains('hidden');show('settings-panel',opening);el('settings-toggle').setAttribute('aria-expanded',String(opening));if(opening)el('settings-panel').scrollIntoView({behavior:'smooth',block:'start'});};
+  el('settings-toggle').addEventListener('click',toggle);
+  el('settings-close').addEventListener('click',()=>{show('settings-panel',false);el('settings-toggle').setAttribute('aria-expanded','false');});
+}
+initSettings();
+// Openbaar leaderboard: uitsluitend de twee toegestane Supabase RPC-functies.
+function toggleLeaderboard(open){
+  leaderboardShown=open;
+  if(!open)leaderboardRequest++;
+  show('leaderboard-panel',open);
+  el('leaderboard-toggle').setAttribute('aria-expanded',String(open));
+  if(open){refreshLeaderboard();el('leaderboard-panel').scrollIntoView({behavior:'smooth',block:'start'});}
+}
+function nlLeaderboardNumber(value){return Number(value||0).toLocaleString('nl-NL');}
+function leaderboardMonthLabel(){return new Intl.DateTimeFormat('nl-NL',{month:'long',year:'numeric',timeZone:'Europe/Amsterdam'}).format(new Date());}
+async function refreshLeaderboard(){
+  if(!leaderboardShown||!client)return;
+  const request=++leaderboardRequest;
+  const period=el('leaderboard-period').value;
+  const category=el('leaderboard-category').value;
+  const results=el('leaderboard-results');
+  results.innerHTML='<div class="loading">Ranglijst laden...</div>';
+  el('leaderboard-period-info').textContent=period==='maand'?`Periode: ${leaderboardMonthLabel()}`:'Periode: alle beschikbare gegevens';
+  try{
+    const [choresResult,competitionsResult]=await Promise.all([
+      client.rpc('leaderboard_klusjes',{p_periode:period}),
+      client.rpc('leaderboard_competities',{p_periode:period})
+    ]);
+    if(choresResult.error)throw choresResult.error;
+    if(competitionsResult.error)throw competitionsResult.error;
+    if(request!==leaderboardRequest||!leaderboardShown)return;
+    const players=new Map();
+    for(const row of (choresResult.data||[])){
+      const name=String(row.gebruikersnaam||'');if(!name)continue;
+      players.set(name,{name,punten:Number(row.punten||0),klusjes_voltooid:Number(row.klusjes_voltooid||0),competities_gespeeld:0,gewonnen:0,verloren:0,gelijkspel:0,winpercentage:null});
+    }
+    for(const row of (competitionsResult.data||[])){
+      const name=String(row.gebruikersnaam||'');if(!name)continue;
+      const p=players.get(name)||{name,punten:0,klusjes_voltooid:0};
+      Object.assign(p,{competities_gespeeld:Number(row.competities_gespeeld||0),gewonnen:Number(row.gewonnen||0),verloren:Number(row.verloren||0),gelijkspel:Number(row.gelijkspel||0),winpercentage:row.winpercentage===null?null:Number(row.winpercentage)});
+      players.set(name,p);
+    }
+    const list=[...players.values()];
+    const minGames=category==='winpercentage';
+    list.sort((a,b)=>{
+      const aEligible=!minGames||((a.gewonnen+a.verloren)>=5);
+      const bEligible=!minGames||((b.gewonnen+b.verloren)>=5);
+      if(aEligible!==bEligible)return aEligible?-1:1;
+      const difference=Number(b[category]??-1)-Number(a[category]??-1);
+      return difference||a.name.localeCompare(b.name,'nl');
+    });
+    if(!list.length){results.innerHTML='<div class="empty">Nog geen spelers gevonden.</div>';return;}
+    const labels={punten:'punten',klusjes_voltooid:'klusjes',competities_gespeeld:'competities',winpercentage:'winpercentage'};
+    let rank=0;
+    results.innerHTML='<div class="leaderboard-sum">'+list.length+' speler'+(list.length===1?'':'s')+' · Gesorteerd op '+labels[category]+'</div>'+list.map(p=>{
+      const eligible=!minGames||(p.gewonnen+p.verloren>=5);
+      if(eligible)rank++;
+      const position=eligible?(rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':'#'+rank):'—';
+      const value=category==='winpercentage'?(p.winpercentage===null?'—':p.winpercentage.toLocaleString('nl-NL',{maximumFractionDigits:1})+'%'):nlLeaderboardNumber(p[category]);
+      const detail=category==='winpercentage'?`${p.gewonnen}W · ${p.verloren}V · ${p.gelijkspel}G${eligible?'':' · minimaal 5 besliste wedstrijden'}`:category==='competities_gespeeld'?`${p.gewonnen} gewonnen · ${p.verloren} verloren · ${p.gelijkspel} gelijk` : '';
+      return `<div class="leaderboard-entry${eligible?'':' leaderboard-unranked'}"><div class="leaderboard-rank">${position}</div><div class="leaderboard-user">@${safe(p.name)}${detail?`<div class="leaderboard-sub">${safe(detail)}</div>`:''}</div><div class="leaderboard-stat">${safe(value)}<div class="leaderboard-sub">${labels[category]}</div></div></div>`;
+    }).join('');
+  }catch(err){if(request===leaderboardRequest)results.innerHTML='<div class="empty">Ranglijst laden mislukt: '+safe(errorText(err))+'</div>';}
+}
+el('leaderboard-toggle').addEventListener('click',()=>toggleLeaderboard(!leaderboardShown));
+el('leaderboard-close').addEventListener('click',()=>toggleLeaderboard(false));
+el('leaderboard-period').addEventListener('change',refreshLeaderboard);
+el('leaderboard-category').addEventListener('change',refreshLeaderboard);
+async function bootstrap(){if(!window.supabase){show('loading',false);msg('De Supabase-bibliotheek kon niet laden. Controleer je internetverbinding.');return;}client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});const {data,error}=await client.auth.getSession();if(error)throw error;await openUser(data.session?.user||null);client.auth.onAuthStateChange((_event,session)=>{const next=session?.user||null;if(next?.id!==state.user?.id){setTimeout(()=>openUser(next).catch(e=>msg(errorText(e))),0);}});}
+async function openUser(user){syncToken++;state.user=user;show('loading',false);show('auth',!user);show('app',!!user);show('logout',!!user);show('logged-name',!!user);if(!user){syncStatus('Automatisch verversen gepauzeerd');adminChoreCache.clear();state.adminCompetitions=[];state.adminTab='chores';el('admin-toggle').textContent='⚙ Admin Mode';state.isAdmin=false;show('admin-toggle',false);show('admin-panel',false);state.selected=null;state.profile=null;state.competitionChores=[];state.scoreboard=[];state.history=[];state.legacyRematches=new Map();return;}await refreshAll();syncStatus('Automatisch verversen actief · elke 15 sec');}
+async function refreshAll(){if(!state.user)return;const {data:profile,error:pe}=await client.from('profiles').select('id,gebruikersnaam,naam').eq('id',state.user.id).single();if(pe)throw pe;state.profile=profile;const {data:isAdmin,error:adminError}=await client.rpc('is_admin');if(adminError)throw adminError;state.isAdmin=isAdmin===true;show('admin-toggle',state.isAdmin);if(!state.isAdmin)show('admin-panel',false);el('logged-name').textContent='@'+(profile.gebruikersnaam||profile.naam);el('welcome').textContent='Hoi, '+(profile.gebruikersnaam||profile.naam)+' 👋';const [{data:members,error:me},{data:chores,error:ce}]=await Promise.all([client.from('competitie_deelnemers').select('competitie_id,gebruiker_id,status,competities(id,naam,status,aangemaakt_door,duur_dagen,start_op,eindigt_op,aangemaakt_op,rematch_van,klusjesprofiel)').eq('gebruiker_id',state.user.id),client.from('klusjes').select('id,naam,punten,wachttijd_uren,standaard').eq('actief',true).order('naam')]);if(me)throw me;if(ce)throw ce;state.chores=chores||[];renderChallengeTaskList();state.competitions=(members||[]).filter(x=>x.competities).map(x=>({id:x.competitie_id,myStatus:x.status,...x.competities})).sort((a,b)=>b.id-a.id);renderInvitations();renderCompetitions();renderChores();await loadHistory();if(state.selected&&state.competitions.some(c=>c.id===state.selected&&c.myStatus==='geaccepteerd'&&c.status!=='uitnodiging'))await selectCompetition(state.selected);else{state.selected=null;state.competitionChores=[];show('selected-area',false);}}
+function timeRemaining(iso){if(!iso)return 0;return Math.max(0,new Date(iso).getTime()-Date.now());}
+function durationParts(ms){let sec=Math.max(0,Math.ceil(ms/1000));const d=Math.floor(sec/86400);sec%=86400;const h=Math.floor(sec/3600);sec%=3600;const m=Math.floor(sec/60);return [d,h,m,sec%60];}
+function durationText(ms){const [d,h,m,sec]=durationParts(ms);return (d?d+'d ':'')+String(h).padStart(2,'0')+'u '+String(m).padStart(2,'0')+'m '+String(sec).padStart(2,'0')+'s';}
+function competitionFinished(c){return !!c&&(c.status==='afgelopen'||(!!c.eindigt_op&&timeRemaining(c.eindigt_op)===0));}
+function clockMarkup(ms){const labels=['Dagen','Uren','Minuten','Seconden'];return '<div class="countdown-label">COMPETITIE EINDIGT OVER</div><div class="countdown-grid">'+durationParts(ms).map((v,i)=>'<div class="countdown-unit"><strong>'+String(v).padStart(2,'0')+'</strong><span>'+labels[i]+'</span></div>').join('')+'</div>';}
+function pickerMarkup(chores,prefix,selectedIds){
+  return chores.map(c=>`<label><input type="checkbox" data-task-picker="${prefix}" value="${Number(c.id)}" ${selectedIds.has(Number(c.id))?'checked':''}><span class="task-name">${safe(c.naam)}</span><span class="task-points">+${Number(c.punten)} · ${safe(cooldownLabel(c.wachttijd_uren))}</span></label>`).join('')||'<p class="hint">Nog geen klusjes beschikbaar.</p>';
+}
+function selectedTaskIds(container){return [...container.querySelectorAll('input[data-task-picker]:checked')].map(x=>Number(x.value));}
+function renderChallengeTaskList(){
+  const panel=el('challenge-task-list');const old=new Set(selectedTaskIds(panel));
+  panel.innerHTML=pickerMarkup(state.chores,'challenge',old);
+  updateChallengeProfile();
+}
+function updateChallengeProfile(){
+  const custom=el('challenge-profile').value==='gepersonaliseerd';show('challenge-custom',custom);
+  const count=selectedTaskIds(el('challenge-task-list')).length;
+  el('challenge-count').textContent=count+' klusje'+(count===1?'':'s')+' geselecteerd';
+  const standard=state.chores.filter(c=>c.standaard).length;
+  el('challenge-profile-summary').textContent=custom?count+' klusjes geselecteerd voor deze competitie.':standard+' standaardklusjes worden automatisch toegevoegd.';
+}
+function setPickerChecks(panel,checked){panel.querySelectorAll('input[data-task-picker]').forEach(input=>input.checked=checked);}
+function renderRematchPicker(id){
+  const panel=el('rematch-tasks-'+id);if(!panel)return;
+  if(panel.dataset.ready!=='true'){
+    panel.innerHTML=pickerMarkup(state.chores,'rematch',new Set());panel.dataset.ready='true';
+  }
+  updateRematchProfile(id);
+}
+function updateRematchProfile(id){
+  const mode=el('rematch-profile-'+id)?.value;
+  show('rematch-custom-'+id,mode==='gepersonaliseerd');
+  const count=selectedTaskIds(el('rematch-tasks-'+id)).length;
+  if(el('rematch-count-'+id))el('rematch-count-'+id).textContent=count+' geselecteerd';
+}
+function renderInvitations(){const inv=state.competitions.filter(c=>c.myStatus==='uitgenodigd'&&c.status==='uitnodiging');const target=el('invitations');if(!inv.length){target.className='empty';target.textContent='Nog geen uitnodigingen';return;}target.className='';target.innerHTML=inv.map(c=>`<div class="row"><div><strong>${safe(c.naam)}</strong><p>${c.duur_dagen||7} dagen · ${c.klusjesprofiel==='gepersonaliseerd'?'Gepersonaliseerde klusjes':'Standaardklusjes'} · Wil tegen je strijden!</p></div><div class="actions"><button class="btn small" data-invite="${c.id}" data-accept="true">Accepteren</button><button class="btn secondary small" data-invite="${c.id}" data-accept="false">Weigeren</button></div></div>`).join('');}
+function renderCompetitions(){const target=el('competitions');const current=state.competitions.filter(c=>!competitionFinished(c));if(!current.length){target.innerHTML='<div class="empty">Geen actieve competities. Daag een vriend uit!</div>';return;}target.innerHTML=current.map(c=>{const invited=c.myStatus==='uitgenodigd';const label=c.status==='actief'?'Actief':invited?'Uitnodiging ontvangen':'Wacht op reactie';const open=c.myStatus==='geaccepteerd'&&c.status!=='uitnodiging';const note=c.status==='actief'&&c.eindigt_op?durationText(timeRemaining(c.eindigt_op))+' resterend':(c.duur_dagen||7)+' dagen na acceptatie';return `<div class="card"><div class="space"><strong>${safe(c.naam)}</strong><span class="pill">${label}</span></div><p class="notice" data-competition-remaining="${c.id}">${safe(note)}</p>${open?`<button class="btn secondary small" data-open="${c.id}">Bekijk competitie</button>`:''}</div>`;}).join('');}
+async function loadHistory(){const finished=state.competitions.filter(c=>competitionFinished(c)&&c.myStatus==='geaccepteerd'&&c.start_op);state.historyLoading=true;el('history').innerHTML=finished.length?'<div class="empty">Eindstanden laden...</div>':'<div class="empty">Nog geen afgelopen competities.</div>';if(!finished.length){state.history=[];state.historyLoading=false;return;}const history=[];for(let i=0;i<finished.length;i+=5){const batch=await Promise.all(finished.slice(i,i+5).map(async c=>{const [{data:participants,error:pe},records]=await Promise.all([client.from('competitie_deelnemers').select('gebruiker_id,status,profiles(gebruikersnaam,naam)').eq('competitie_id',c.id),fetchAllRecords(c.id)]);if(pe)throw pe;const players=(participants||[]).filter(p=>p.status==='geaccepteerd').map(p=>({id:p.gebruiker_id,name:p.profiles?.gebruikersnaam||p.profiles?.naam||'Speler',points:records.filter(r=>r.gebruiker_id===p.gebruiker_id&&!r.geannuleerd_op).reduce((sum,r)=>sum+r.punten_verdiend,0)})).sort((a,b)=>b.points-a.points);const opponent=players.find(p=>p.id!==state.user.id);return {...c,players,opponent};}));history.push(...batch);}state.history=history;state.legacyRematches=await findLegacyRematches(history);state.historyLoading=false;renderHistory();}
+async function findLegacyRematches(history){
+  // Older challenges had no rematch_van. Identify a later match only if the
+  // same two player IDs participate, without modifying historical data.
+  const result=new Map();
+  const pending=history.filter(old=>!state.competitions.some(c=>Number(c.rematch_van)===old.id));
+  const candidates=state.competitions.filter(c=>c.rematch_van==null&&pending.some(old=>c.id>old.id)&&c.status!=='afgelopen');
+  if(!candidates.length)return result;
+  const ids=candidates.map(c=>c.id);
+  const {data,error}=await client.from('competitie_deelnemers').select('competitie_id,gebruiker_id').in('competitie_id',ids);
+  if(error){console.warn('Bestaande rematches konden niet worden gekoppeld',error);return result;}
+  const membership=new Map();
+  for(const member of data||[]){if(!membership.has(member.competitie_id))membership.set(member.competitie_id,new Set());membership.get(member.competitie_id).add(member.gebruiker_id);}
+  for(const old of pending){
+    if(old.players.length!==2)continue;
+    const matches=candidates.filter(c=>c.id>old.id && new Date(c.aangemaakt_op).getTime()>=new Date(old.eindigt_op||0).getTime() && membership.get(c.id)?.size===2 && old.players.every(p=>membership.get(c.id).has(p.id)));
+    if(matches.length===1)result.set(old.id,matches[0]);
+  }
+  return result;
+}
+function rematchFor(competition){
+  return state.competitions.find(c=>Number(c.rematch_van)===competition.id)||state.legacyRematches.get(competition.id)||null;
+}
+function rematchActions(c){
+  const next=rematchFor(c);
+  if(next){
+    if(next.status==='uitnodiging')return `<span class="rematch-state">${next.myStatus==='uitgenodigd'?'📩 Uitnodiging ontvangen':'✉ Uitnodiging verstuurd'}</span>`;
+    if(next.status==='actief'&&!competitionFinished(next))return `<span class="rematch-state">⚔ Rematch actief</span><button type="button" class="btn secondary small" data-open="${next.id}">Bekijk rematch</button>`;
+    if(next.status==='afgelopen'||competitionFinished(next))return `<span class="rematch-state">✓ Rematch afgerond</span><button type="button" class="btn secondary small" data-open="${next.id}">Bekijk rematch</button>`;
+  }
+  if(!c.opponent)return '';
+  return `<div style="width:100%;display:grid;gap:9px"><div class="choose"><label class="hint" for="rematch-duration-${c.id}">Nieuwe duur</label><select id="rematch-duration-${c.id}" aria-label="Duur rematch">${[1,3,7,14,30].map(d=>`<option value="${d}" ${d===c.duur_dagen?'selected':''}>${d} ${d===1?'dag':'dagen'}</option>`).join('')}</select></div><div class="field" style="margin:0"><label for="rematch-profile-${c.id}">Klusjesprofiel rematch</label><select id="rematch-profile-${c.id}" data-rematch-profile="${c.id}"><option value="overnemen">Dezelfde klusjes en spelregels overnemen</option><option value="standaard">Nieuw standaardprofiel</option><option value="gepersonaliseerd">Nieuwe persoonlijke selectie</option></select></div><div id="rematch-custom-${c.id}" class="hidden"><div class="selection-tools"><button type="button" class="btn secondary small" data-rematch-all="${c.id}">Alles selecteren</button><button type="button" class="btn secondary small" data-rematch-none="${c.id}">Alles wissen</button><span class="hint" id="rematch-count-${c.id}">0 geselecteerd</span></div><div id="rematch-tasks-${c.id}" class="task-picker"></div></div><button class="btn small" data-rematch="${c.id}">Opnieuw uitdagen</button></div>`;
+}
+function historyCardMarkup(c){
+  const max=c.players[0]?.points??0;
+  const top=c.players.filter(p=>p.points===max);
+  const tie=top.length!==1;
+  const winner=tie?'🤝 Gelijkspel':`🏆 Winnaar: @${safe(top[0]?.name||'Speler')}`;
+  const end=c.eindigt_op?new Date(c.eindigt_op).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}):'Onbekend';
+  const result=c.players.map(p=>`<span class="history-points">@${safe(p.name)}: ${p.points} punten</span>`).join(' · ');
+  return `<div class="card"><div class="space"><strong>${safe(c.naam)}</strong><span class="pill">Afgelopen</span></div><p class="history-meta">Afgerond op ${safe(end)} · ${c.duur_dagen||7} dagen</p><div class="history-details"><span class="${tie?'':'history-win'}">${winner}</span></div><p class="notice">${result}</p><div class="history-actions"><button class="btn secondary small" data-open="${c.id}">Bekijk eindstand</button>${rematchActions(c)}</div></div>`;
+}
+function renderHistory(){
+  const target=el('history');
+  target.classList.add('history-grouped');
+  if(!state.history.length){target.innerHTML='<div class="empty">Nog geen afgelopen competities.</div>';return;}
+  // Groepeer op unieke account-ID, zodat een gewijzigde gebruikersnaam
+  // niet tot een tweede groep voor dezelfde tegenstander leidt.
+  const groups=new Map();
+  for(const c of state.history){
+    const key=c.opponent?.id||'onbekend-'+c.id;
+    if(!groups.has(key))groups.set(key,{key,name:c.opponent?.name||'Onbekende speler',items:[]});
+    groups.get(key).items.push(c);
+  }
+  target.innerHTML=[...groups.values()].map(group=>{
+    const last=group.items[0];
+    const lastDate=last.eindigt_op?new Date(last.eindigt_op).toLocaleDateString('nl-NL',{day:'numeric',month:'short',year:'numeric'}):'Onbekend';
+    const count=group.items.length;
+    return `<details class="history-group" data-history-opponent="${safe(group.key)}" ${expandedHistoryOpponents.has(group.key)?'open':''}><summary><span class="history-group-label"><strong>@${safe(group.name)}</strong><span class="history-group-meta">${count} ${count===1?'competitie':'competities'} · Laatste eindstand ${safe(lastDate)}</span></span><span class="history-group-right"><span>Bekijk geschiedenis</span><span class="chevron" aria-hidden="true">⌄</span></span></summary><div class="history-group-content">${group.items.map(historyCardMarkup).join('')}</div></details>`;
+  }).join('');
+}
+el('history').addEventListener('toggle',event=>{
+  const details=event.target;
+  if(!(details instanceof HTMLDetailsElement)||!details.matches('[data-history-opponent]'))return;
+  const key=details.dataset.historyOpponent;
+  if(details.open)expandedHistoryOpponents.add(key);
+  else expandedHistoryOpponents.delete(key);
+},true);
+function renderChores(){const old=el('chore-select').value;el('chore-select').innerHTML='<option value="">Selecteer een klusje</option>'+state.competitionChores.map(c=>`<option value="${c.id}">${safe(c.naam)} (+${c.punten} punten)</option>`).join('');if(state.competitionChores.some(c=>String(c.id)===old))el('chore-select').value=old;updateChoreAvailability();}
+function getChoreAvailability(){const c=state.competitions.find(x=>x.id===state.selected);if(!c||competitionFinished(c)||c.status!=='actief')return {enabled:false,text:'Deze competitie is afgelopen.'};const selected=state.competitionChores.find(x=>String(x.id)===el('chore-select').value);if(!selected)return {enabled:false,text:'Kies een klusje om de beschikbaarheid te bekijken.'};const last=state.records.filter(r=>!r.geannuleerd_op&&r.gebruiker_id===state.user.id&&Number(r.klusje_id)===Number(selected.id)).reduce((mx,r)=>Math.max(mx,new Date(r.voltooid_op).getTime()),0);const ms=Math.max(0,last+selected.wachttijd_uren*3600000-Date.now());return ms>0?{enabled:false,text:'Nog '+durationText(ms)+' wachttijd.',waiting:true}:{enabled:true,text:'Beschikbaar · '+selected.punten+' punten · wachttijd '+cooldownLabel(selected.wachttijd_uren)};}
+function updateChoreAvailability(){const c=state.competitions.find(x=>x.id===state.selected);if(!c)return;const status=getChoreAvailability();const button=el('complete-chore');button.disabled=!status.enabled;button.textContent=competitionFinished(c)?'Competitie afgelopen':status.waiting?'Nog in wachttijd':'Voltooien';el('chore-select').disabled=competitionFinished(c);el('chore-cooldown').textContent=status.text;el('chore-cooldown').classList.toggle('waiting',!!status.waiting);}
+function renderSelectedClock(){const c=state.competitions.find(x=>x.id===state.selected);if(!c)return;const finished=competitionFinished(c);el('selected-status').textContent=finished?'Afgelopen':'Live score';el('selected-area').classList.toggle('expired',finished);const clock=el('competition-clock');clock.innerHTML=finished?'<strong>⏱ De competitietijd is verstreken</strong>':c.eindigt_op?clockMarkup(timeRemaining(c.eindigt_op)):'Starttijd niet beschikbaar';const box=el('competition-result');show('competition-result',finished);if(finished){const leaders=state.scoreboard;const best=leaders[0]?.points??0;const winners=leaders.filter(x=>x.points===best);box.textContent=winners.length>1?'🤝 Gelijkspel! Beide spelers hebben '+best+' punten.':winners.length===1?'🏆 Winnaar: @'+winners[0].name+' met '+best+' punten!':'De competitie is afgelopen.';}updateChoreAvailability();}
+function tickCountdowns(){if(!state.user)return;const now=Math.floor(Date.now()/1000);if(now===state.lastTimerSecond)return;state.lastTimerSecond=now;for(const node of document.querySelectorAll('[data-competition-remaining]')){const c=state.competitions.find(x=>x.id===Number(node.dataset.competitionRemaining));if(!c)continue;node.textContent=c.status==='actief'&&c.eindigt_op?(competitionFinished(c)?'Tijd verstreken':durationText(timeRemaining(c.eindigt_op))+' resterend'):(c.duur_dagen||7)+' dagen na acceptatie';}if(state.selected){renderSelectedClock();for(const button of document.querySelectorAll('#activity [data-undo]')){const record=state.records.find(r=>Number(r.id)===Number(button.dataset.undo));if(!record||record.geannuleerd_op||Date.now()-new Date(record.voltooid_op).getTime()>300000)button.remove();}}if(!state.historyLoading&&state.competitions.some(c=>competitionFinished(c)&&c.myStatus==='geaccepteerd'&&c.start_op&&!state.history.some(h=>h.id===c.id))){renderCompetitions();loadHistory().catch(e=>msg(errorText(e)));}}
+async function fetchAllRecords(id){const all=[];for(let start=0;start<100000;start+=1000){const {data,error}=await client.from('voltooide_klusjes').select('id,gebruiker_id,klusje_id,punten_verdiend,voltooid_op,geannuleerd_op,klusjes(naam)').eq('competitie_id',id).order('voltooid_op',{ascending:false}).range(start,start+999);if(error)throw error;all.push(...(data||[]));if(!data||data.length<1000)break;}return all;}
+async function selectCompetition(id){let c=state.competitions.find(x=>x.id===id&&x.myStatus==='geaccepteerd'&&x.status!=='uitnodiging');if(!c)return;state.selected=id;show('selected-area',true);el('selected-title').textContent=c.naam;const [{data:participants,error:pe},records,{data:matched,error:ke}]=await Promise.all([client.from('competitie_deelnemers').select('gebruiker_id,status,profiles(gebruikersnaam,naam)').eq('competitie_id',id),fetchAllRecords(id),client.from('competitie_klusjes').select('klusje_id,punten,wachttijd_uren,klusjes(naam)').eq('competitie_id',id)]);if(pe)throw pe;if(ke)throw ke;state.competitionChores=(matched||[]).map(x=>({id:x.klusje_id,naam:x.klusjes?.naam||'Klusje #'+x.klusje_id,punten:x.punten,wachttijd_uren:x.wachttijd_uren})).sort((a,b)=>a.naam.localeCompare(b.naam,'nl'));renderChores();state.records=records||[];const accepted=(participants||[]).filter(x=>x.status==='geaccepteerd');let scoreboard=accepted.map(p=>({id:p.gebruiker_id,name:p.profiles?.gebruikersnaam||p.profiles?.naam||'Speler',points:records.filter(r=>r.gebruiker_id===p.gebruiker_id&&!r.geannuleerd_op).reduce((sum,r)=>sum+r.punten_verdiend,0)})).sort((a,b)=>b.points-a.points);state.scoreboard=scoreboard;const board=el('scoreboard');board.className='';board.innerHTML=scoreboard.map((p,i)=>`<div class="row"><div class="profile"><div class="round">${i===0&&p.points>0?'🏆':safe(p.name.slice(0,1).toUpperCase())}</div><div><strong>@${safe(p.name)}</strong><p>${p.id===state.user.id?'Jij':'Tegenstander'}</p></div></div><span class="points">${p.points} punten</span></div>`).join('')||'<div class="empty">Nog geen deelnemers</div>';const names=new Map(scoreboard.map(p=>[p.id,p.name]));const activity=el('activity');if(!records.length){activity.className='empty';activity.textContent='Nog geen activiteiten';}else{activity.className='';activity.innerHTML=records.slice(0,12).map(r=>{const cancelled=!!r.geannuleerd_op;const canUndo=!cancelled&&r.gebruiker_id===state.user.id&&Date.now()-new Date(r.voltooid_op).getTime()<=300000;return `<div class="row ${cancelled?'cancelled-chore':''}"><div><strong>@${safe(names.get(r.gebruiker_id)||'Speler')}</strong> · ${safe(r.klusjes?.naam||'Klusje')}<p>${safe(new Date(r.voltooid_op).toLocaleString('nl-NL',{dateStyle:'medium',timeStyle:'short'}))}${cancelled?' · Geannuleerd':''}</p></div><div class="actions">${cancelled?'<span class="cancelled-tag">Geannuleerd</span>':'<span class="points">+'+r.punten_verdiend+'</span>'}${canUndo?'<button type="button" class="btn secondary small undo-btn" data-undo="'+r.id+'">Ongedaan maken</button>':''}</div></div>`;}).join('');}renderSelectedClock();}
+
+
+// Lichtgewicht synchronisatie zonder realtime-replicatie of extra databasebeleid.
+// Vergelijk de actuele competitiegegevens eerst; herbouw de pagina alleen bij verandering.
+function competitionSignature(items){
+  return JSON.stringify(items.map(c=>[c.id,c.myStatus,c.naam,c.status,c.start_op,c.eindigt_op,c.duur_dagen,c.rematch_van,c.klusjesprofiel]).sort((a,b)=>Number(a[0])-Number(b[0])));
+}
+function recordSignature(records){
+  return JSON.stringify(records.map(r=>[r.id,r.gebruiker_id,r.klusje_id,r.punten_verdiend,r.voltooid_op,r.geannuleerd_op]));
+}
+async function syncUpdates(){
+  if(syncInProgress||!state.user||!client||document.hidden||!navigator.onLine)return;
+  syncInProgress=true;
+  const token=syncToken, uid=state.user.id;
+  try{
+    const {data:members,error}=await client.from('competitie_deelnemers')
+      .select('competitie_id,gebruiker_id,status,competities(id,naam,status,aangemaakt_door,duur_dagen,start_op,eindigt_op,aangemaakt_op,rematch_van,klusjesprofiel)')
+      .eq('gebruiker_id',uid);
+    if(error)throw error;
+    if(token!==syncToken||state.user?.id!==uid)return;
+    const fresh=(members||[]).filter(x=>x.competities).map(x=>({id:x.competitie_id,myStatus:x.status,...x.competities})).sort((a,b)=>b.id-a.id);
+    if(competitionSignature(fresh)!==competitionSignature(state.competitions)){
+      await refreshAll();
+      if(state.isAdmin&&!el('admin-panel').classList.contains('hidden')&&state.adminTab==='competitions')await loadAdminCompetitions();
+    }else if(state.selected){
+      const activeCompetition=state.selected;
+      const records=await fetchAllRecords(activeCompetition);
+      if(token!==syncToken||state.user?.id!==uid||state.selected!==activeCompetition)return;
+      if(recordSignature(records)!==recordSignature(state.records)){
+        await selectCompetition(activeCompetition);
+        if(state.isAdmin&&!el('admin-panel').classList.contains('hidden')&&state.adminTab==='competitions')await loadAdminCompetitions();
+      }
+    }
+    if(token===syncToken)syncStatus('Automatisch verversen actief · elke 15 sec');
+  }catch(err){
+    console.warn('Automatisch verversen mislukt:',err);
+    if(token===syncToken)syncStatus('Synchronisatie tijdelijk niet beschikbaar; opnieuw proberen',false);
+  }finally{syncInProgress=false;}
+}
+setInterval(syncUpdates,AUTO_REFRESH_MS);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)syncUpdates();});
+window.addEventListener('online',()=>syncUpdates());
+window.addEventListener('offline',()=>syncStatus('Offline · synchronisatie gepauzeerd',false));
+
+function cooldownLabel(hours){if(hours===0)return 'Geen';if(hours%24===0)return (hours/24)+' dag'+(hours===24?'':'en');return hours+' uur';}
+async function loadAdminChores(){if(!state.isAdmin)return;const {data,error}=await client.from('klusjes').select('id,naam,punten,wachttijd_uren,actief').order('naam');if(error)throw error;state.adminChores=data||[];renderAdminChores();}
+function renderAdminChores(){const list=el('admin-list');if(!state.adminChores.length){list.innerHTML='<tr><td colspan="5">Nog geen klusjes.</td></tr>';return;}list.innerHTML=state.adminChores.map(c=>`<tr><td><strong>${safe(c.naam)}</strong></td><td>${c.punten}</td><td>${safe(cooldownLabel(c.wachttijd_uren))}</td><td><span class="admin-status ${c.actief?'':'off'}">${c.actief?'Actief':'Uit'}</span></td><td><button type="button" class="btn secondary small" data-admin-edit="${c.id}">Bewerken</button></td></tr>`).join('');}
+
+function setAdminTab(tab){
+  state.adminTab=tab;
+  show('admin-chores-view',tab==='chores');show('admin-competitions-view',tab==='competitions');
+  for(const [name,id] of [['chores','admin-tab-chores'],['competitions','admin-tab-competitions']]){
+    const b=el(id),active=name===tab;b.classList.toggle('active',active);b.classList.toggle('secondary',!active);b.setAttribute('aria-selected',String(active));
+  }
+  const heading=el('admin-panel').querySelector('h2');heading.textContent=tab==='chores'?'⚙ Klusjesbeheer':'⚙ Admin Mode';
+}
+function adminStatus(c){
+  if(c.competitie_status==='uitnodiging')return 'Uitnodiging';
+  if(c.competitie_status==='afgelopen'||(c.eindigt_op&&new Date(c.eindigt_op)<=new Date()))return 'Afgelopen';
+  return 'Actief';
+}
+function adminDate(iso){return iso?new Date(iso).toLocaleString('nl-NL',{dateStyle:'medium',timeStyle:'short'}):'Nog niet gestart';}
+function adminDateInput(iso){if(!iso)return '';const d=new Date(iso);const local=new Date(d.getTime()-d.getTimezoneOffset()*60000);return local.toISOString().slice(0,16);}
+async function loadAdminCompetitions(){
+  if(!state.isAdmin)throw Error('Geen administratorrechten');
+  const {data,error}=await client.rpc('admin_competities_overzicht');if(error)throw error;
+  state.adminCompetitions=data||[];renderAdminCompetitions();
+}
+function renderAdminCompetitions(){
+  const all=state.adminCompetitions,counts={actief:0,uitnodiging:0,afgelopen:0};
+  for(const c of all){const k=adminStatus(c)==='Actief'?'actief':adminStatus(c)==='Uitnodiging'?'uitnodiging':'afgelopen';counts[k]++;}
+  el('admin-competition-summary').innerHTML=`<span>${all.length} totaal</span><span>${counts.actief} actief</span><span>${counts.uitnodiging} uitnodigingen</span><span>${counts.afgelopen} afgelopen</span>`;
+  const filter=el('admin-competition-filter').value;
+  const visible=all.filter(c=>filter==='alle'||adminStatus(c)==={'actief':'Actief','uitnodiging':'Uitnodiging','afgelopen':'Afgelopen'}[filter]);
+  const target=el('admin-competition-list');if(!visible.length){target.innerHTML='<div class="empty">Geen competities voor dit filter.</div>';return;}
+  target.innerHTML=visible.map(c=>{
+    const status=adminStatus(c),active=status==='Actief';
+    const players=Array.isArray(c.deelnemers)?c.deelnemers:[];
+    return `<article class="admin-competition"><div class="admin-competition-head"><h4>${safe(c.competitie_naam)} <span class="hint">#${c.competitie_id}</span></h4><span class="admin-status ${active?'':'off'}">${status}</span></div><div class="admin-competition-meta">Duur: ${c.duur_dagen} ${c.duur_dagen===1?'dag':'dagen'} · Start: ${safe(adminDate(c.start_op))} · Einde: ${safe(adminDate(c.eindigt_op))}</div><div class="admin-competition-players">${players.map(d=>`<div class="row"><span><strong>@${safe(d.gebruikersnaam||'Onbekend')}</strong> <small>(${safe(d.status||'')})</small></span><strong>${Number(d.punten)||0} punten</strong></div>`).join('')||'<div class="hint">Geen deelnemers</div>'}</div><details class="admin-chores-details" data-admin-chores="${c.competitie_id}"><summary>Geselecteerde klusjes bekijken</summary><div class="admin-chores-content" data-admin-chores-content="${c.competitie_id}"><p class="hint">Open om de geselecteerde klusjes te laden.</p></div></details><details class="admin-chores-details" data-admin-records="${c.competitie_id}"><summary>Registraties corrigeren</summary><div class="admin-chores-content" data-admin-records-content="${c.competitie_id}"><p class="hint">Open om uitvoeringen te bekijken.</p></div></details>${active?`<div class="admin-competition-actions"><div class="field"><label for="admin-end-${c.competitie_id}">Nieuwe einddatum en tijd</label><input type="datetime-local" id="admin-end-${c.competitie_id}" value="${adminDateInput(c.eindigt_op)}" required></div><button type="button" class="btn secondary small" data-admin-end="${c.competitie_id}">Einddatum opslaan</button><button type="button" class="btn danger small" data-admin-finish="${c.competitie_id}">Nu beëindigen</button></div>`:''}</article>`;
+  }).join('');
+}
+function resetAdminForm(){state.editingChore=null;el('admin-form').reset();el('admin-points').value='10';el('admin-cooldown').value='24';el('admin-active').value='true';el('admin-form-title').textContent='Nieuw klusje';el('admin-save').textContent='Klusje toevoegen';show('admin-cancel',false);}
+function editAdminChore(id){const c=state.adminChores.find(x=>x.id===id);if(!c)return;state.editingChore=id;el('admin-name').value=c.naam;el('admin-points').value=c.punten;el('admin-cooldown').value=c.wachttijd_uren;el('admin-active').value=String(c.actief);el('admin-form-title').textContent='Klusje bewerken';el('admin-save').textContent='Wijzigingen opslaan';show('admin-cancel',true);el('admin-form').scrollIntoView({behavior:'smooth',block:'center'});}
+
+el('admin-toggle').addEventListener('click',async()=>withButton(el('admin-toggle'),async()=>{if(!state.isAdmin)return;const willShow=el('admin-panel').classList.contains('hidden');show('admin-panel',willShow);el('admin-toggle').textContent=willShow?'✕ Admin sluiten':'⚙ Admin Mode';if(willShow){setAdminTab(state.adminTab);if(state.adminTab==='competitions')await loadAdminCompetitions();else await loadAdminChores();el('admin-panel').scrollIntoView({behavior:'smooth',block:'start'});}}));
+el('admin-refresh').addEventListener('click',()=>withButton(el('admin-refresh'),()=>state.adminTab==='competitions'?loadAdminCompetitions():loadAdminChores()));
+for(const [tab,id] of [['chores','admin-tab-chores'],['competitions','admin-tab-competitions']])el(id).addEventListener('click',async()=>withButton(el(id),async()=>{setAdminTab(tab);if(tab==='competitions')await loadAdminCompetitions();else await loadAdminChores();}));
+el('admin-competition-filter').addEventListener('change',renderAdminCompetitions);
+
+// Laad vastgelegde klusjes uitsluitend wanneer de admin de dropdown opent.
+const adminChoreCache=new Map();
+function formatCooldown(hours){
+  if(hours===0)return 'Geen wachttijd';
+  if(hours%24===0)return (hours/24)+' '+(hours===24?'dag':'dagen');
+  return hours+' uur';
+}
+el('admin-competition-list').addEventListener('toggle',async e=>{
+  const details=e.target;
+  if(!(details instanceof HTMLDetailsElement)||!details.matches('[data-admin-chores]')||!details.open)return;
+  const id=Number(details.dataset.adminChores);
+  const content=details.querySelector('[data-admin-chores-content]');
+  if(!state.isAdmin||!content||!Number.isSafeInteger(id))return;
+  if(!adminChoreCache.has(id)){
+    content.innerHTML='<p class="hint">Klusjes laden...</p>';
+    const {data,error}=await client.rpc('admin_competitie_klusjes',{p_competitie_id:id});
+    if(error){if(details.isConnected)content.textContent='Kon klusjes niet ophalen: '+errorText(error);return;}
+    adminChoreCache.set(id,data||[]);
+  }
+  if(!details.isConnected)return;
+  const tasks=adminChoreCache.get(id);
+  content.innerHTML=tasks.length?tasks.map(k=>`<div class="row"><strong>${safe(k.naam)}</strong><span><strong>+${Number(k.punten)} punten</strong><small>${safe(formatCooldown(Number(k.wachttijd_uren))) } wachttijd</small></span></div>`).join(''):'<p class="hint">Geen klusjes geselecteerd voor deze competitie.</p>';
+},{capture:true});
+
+el('admin-competition-list').addEventListener('click',async e=>{
+  const finish=e.target.closest('[data-admin-finish]'),end=e.target.closest('[data-admin-end]');if(!finish&&!end)return;
+  const button=finish||end,id=Number(finish?finish.dataset.adminFinish:end.dataset.adminEnd);
+  const c=state.adminCompetitions.find(x=>x.competitie_id===id);if(!c)return;
+  if(finish){if(!confirm(`Competitie "${c.competitie_naam}" nu definitief beëindigen? Spelers kunnen daarna geen punten meer verdienen.`))return;
+    await withButton(button,async()=>{const {error}=await client.rpc('admin_competitie_beeindigen',{p_competitie_id:id});if(error)throw error;await loadAdminCompetitions();await refreshAll();msg('Competitie beëindigd.','success');});
+  }else{
+    const input=el('admin-end-'+id),value=input.value;if(!value){msg('Vul een einddatum in.');return;}
+    const date=new Date(value);if(Number.isNaN(date.getTime())){msg('Ongeldige einddatum.');return;}
+    if(c.start_op&&date<=new Date(c.start_op)){msg('De einddatum moet na de startdatum liggen.');return;}
+    if(date<=new Date()){msg('Kies een toekomstige einddatum. Gebruik Nu beëindigen om de competitie te stoppen.');return;}
+    if(!confirm(`Einddatum van "${c.competitie_naam}" aanpassen naar ${adminDate(date.toISOString())}?`))return;
+    await withButton(button,async()=>{const {error}=await client.rpc('admin_competitie_einddatum',{p_competitie_id:id,p_eindigt_op:date.toISOString()});if(error)throw error;await loadAdminCompetitions();await refreshAll();msg('Einddatum aangepast.','success');});
+  }
+});
+async function loadAdminRecords(competitionId){
+  if(!state.isAdmin)throw Error('Geen administratorrechten');
+  const node=document.querySelector(`[data-admin-records-content="${competitionId}"]`);
+  if(!node)return;
+  node.innerHTML='<p class="hint">Registraties laden...</p>';
+  const {data,error}=await client.rpc('admin_klusjes_registraties',{p_competitie_id:competitionId});
+  if(error)throw error;
+  node.innerHTML=(data||[]).length?(data||[]).map(r=>`<div class="row ${r.geannuleerd_op?'cancelled-chore':''}"><div><strong>@${safe(r.gebruikersnaam)}</strong> · ${safe(r.klusje_naam)}<p>${safe(new Date(r.voltooid_op).toLocaleString('nl-NL',{dateStyle:'short',timeStyle:'short'}))} · ${r.punten_verdiend} punten${r.geannuleerd_op?' · Geannuleerd':''}</p></div>${r.geannuleerd_op?'<span class="cancelled-tag">Geannuleerd</span>':`<button class="btn secondary small" type="button" data-admin-undo="${r.registratie_id}" data-undo-competition="${competitionId}">Annuleren</button>`}</div>`).join(''):'<p class="hint">Nog geen uitvoeringen.</p>';
+}
+el('admin-competition-list').addEventListener('toggle',e=>{
+  const details=e.target;
+  if(!details.matches?.('[data-admin-records]')||!details.open)return;
+  loadAdminRecords(Number(details.dataset.adminRecords)).catch(err=>{
+    const node=details.querySelector('[data-admin-records-content]');
+    if(node)node.textContent='Registraties laden mislukt: '+errorText(err);
+  });
+},true);
+el('admin-competition-list').addEventListener('click',async e=>{
+  const button=e.target.closest('[data-admin-undo]');if(!button)return;
+  if(!confirm('Dit klusje annuleren? De punten en wachttijd worden teruggedraaid.'))return;
+  await withButton(button,async()=>{
+    const {error}=await client.rpc('klusje_annuleren',{p_resultaat_id:Number(button.dataset.adminUndo)});
+    if(error)throw error;
+    const id=Number(button.dataset.undoCompetition);
+    await loadAdminCompetitions();
+    const details=document.querySelector(`[data-admin-records="${id}"]`);if(details){details.open=true;await loadAdminRecords(id);}
+    if(state.selected===id)await selectCompetition(id);
+    await loadHistory();
+    msg('Registratie geannuleerd.','success');
+  });
+});
+el('activity').addEventListener('click',async e=>{
+  const button=e.target.closest('[data-undo]');if(!button)return;
+  if(!confirm('Klusje ongedaan maken? De punten worden teruggedraaid.'))return;
+  await withButton(button,async()=>{
+    const {error}=await client.rpc('klusje_annuleren',{p_resultaat_id:Number(button.dataset.undo)});
+    if(error)throw error;
+    await selectCompetition(state.selected);
+    await loadHistory();
+    msg('Klusje ongedaan gemaakt.','success');
+  });
+});
+el('admin-list').addEventListener('click',e=>{const b=e.target.closest('[data-admin-edit]');if(b)editAdminChore(Number(b.dataset.adminEdit));});
+el('admin-cancel').addEventListener('click',resetAdminForm);
+el('admin-form').addEventListener('submit',async e=>{e.preventDefault();await withButton(el('admin-save'),async()=>{if(!state.isAdmin)throw Error('Geen administratorrechten');const name=el('admin-name').value.trim();const points=Number(el('admin-points').value);const hours=Number(el('admin-cooldown').value);if(!name||name.length>100||!Number.isSafeInteger(points)||points<1||!Number.isSafeInteger(hours)||hours<0)throw Error('Controleer naam, punten en wachttijd.');const {error}=await client.rpc('admin_klusje_opslaan',{p_id:state.editingChore,p_naam:name,p_punten:points,p_wachttijd_uren:hours,p_actief:el('admin-active').value==='true'});if(error)throw error;resetAdminForm();await loadAdminChores();await refreshAll();msg('Klusje opgeslagen.','success');});});
+el('tab-login').addEventListener('click',()=>setAuthMode('login'));el('tab-register').addEventListener('click',()=>setAuthMode('register'));
+el('auth-form').addEventListener('submit',async e=>{e.preventDefault();clearMsg();const button=el('auth-submit');await withButton(button,async()=>{const email=el('email').value.trim(),password=el('password').value; if(authMode==='login'){const {error}=await client.auth.signInWithPassword({email,password});if(error)throw error;await openUser((await client.auth.getUser()).data.user);}else{const name=el('username').value.trim().toLowerCase();if(!/^[a-z0-9_]{3,20}$/.test(name))throw Error('Kies een gebruikersnaam van 3–20 letters, cijfers of underscores.');const {data,error}=await client.auth.signUp({email,password,options:{data:{gebruikersnaam:name,naam:name},emailRedirectTo:location.origin+location.pathname}});if(error)throw error;if(!data.session)msg('Account aangemaakt! Controleer je e-mail en klik op de bevestigingslink voordat je inlogt.','success');else await openUser(data.user);}});});
+el('logout').addEventListener('click',async()=>withButton(el('logout'),async()=>{const{error}=await client.auth.signOut();if(error)throw error;await openUser(null);clearMsg();}));
+// Doorzoekbare gebruikerslijst voor Vriend uitdagen.
+const playerInput=el('challenge-name');
+const playerSuggestions=el('challenge-suggestions');
+const playerHelp=el('challenge-search-help');
+let playerSearchTimer=null,playerSearchRequest=0,playerResults=[],playerActive=-1,selectedPlayer='';
+function closePlayerSuggestions(){playerSuggestions.classList.add('hidden');playerInput.setAttribute('aria-expanded','false');playerActive=-1;playerInput.removeAttribute('aria-activedescendant');}
+function renderPlayerSuggestions(message=''){
+  if(message){playerSuggestions.innerHTML='<div class="player-list-message">'+safe(message)+'</div>';}
+  else{playerSuggestions.innerHTML=playerResults.map((name,i)=>'<button class="player-option'+(i===playerActive?' active':'')+'" id="player-option-'+i+'" type="button" role="option" aria-selected="'+(i===playerActive)+'" data-player-index="'+i+'"><span class="player-avatar">'+safe(name.charAt(0).toUpperCase())+'</span><span>@'+safe(name)+'</span></button>').join('');}
+  playerSuggestions.classList.remove('hidden');playerInput.setAttribute('aria-expanded','true');
+  if(playerActive>=0)playerInput.setAttribute('aria-activedescendant','player-option-'+playerActive);
+  else playerInput.removeAttribute('aria-activedescendant');
+}
+function selectPlayer(name){selectedPlayer=name;playerInput.value=name;playerHelp.textContent='Geselecteerd: @'+name;closePlayerSuggestions();}
+async function searchPlayers(){
+  if(!state.user||!client){closePlayerSuggestions();return;}
+  const request=++playerSearchRequest;
+  const query=playerInput.value.trim().toLowerCase();
+  const {data,error}=await client.rpc('zoek_spelers',{p_zoekterm:query});
+  if(request!==playerSearchRequest||document.activeElement!==playerInput)return;
+  if(error){playerResults=[];renderPlayerSuggestions('Spelers ophalen mislukt. Controleer of de SQL-query is uitgevoerd.');return;}
+  playerResults=(data||[]).map(item=>item.gebruikersnaam).filter(Boolean);
+  playerActive=-1;
+  renderPlayerSuggestions(playerResults.length?'':'Geen gebruikers gevonden.');
+}
+function schedulePlayerSearch(){selectedPlayer='';playerHelp.textContent='Selecteer een gebruiker uit de lijst.';clearTimeout(playerSearchTimer);const request=++playerSearchRequest;playerSearchTimer=setTimeout(()=>{if(request===playerSearchRequest)searchPlayers().catch(()=>renderPlayerSuggestions('Spelers ophalen mislukt.'));},220);}
+playerInput.addEventListener('focus',schedulePlayerSearch);
+playerInput.addEventListener('input',schedulePlayerSearch);
+playerSuggestions.addEventListener('pointerdown',e=>{const b=e.target.closest('[data-player-index]');if(!b)return;e.preventDefault();const name=playerResults[Number(b.dataset.playerIndex)];if(name)selectPlayer(name);});
+playerInput.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){closePlayerSuggestions();return;}
+ if(playerSuggestions.classList.contains('hidden')||!playerResults.length)return;
+ if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();playerActive=e.key==='ArrowDown'?(playerActive+1)%playerResults.length:(playerActive-1+playerResults.length)%playerResults.length;renderPlayerSuggestions();}
+ if(e.key==='Enter'&&playerActive>=0){e.preventDefault();selectPlayer(playerResults[playerActive]);}
+});
+document.addEventListener('pointerdown',e=>{if(e.target!==playerInput&&!playerSuggestions.contains(e.target))closePlayerSuggestions();});
+el('challenge-form').addEventListener('submit',async e=>{e.preventDefault();await withButton(e.submitter,async()=>{const name=el('challenge-name').value.trim().toLowerCase();if(!name)throw Error('Vul een gebruikersnaam in.');const isCustom=el('challenge-profile').value==='gepersonaliseerd';const ids=isCustom?selectedTaskIds(el('challenge-task-list')):null;if(isCustom&&ids.length===0)throw Error('Selecteer minimaal één klusje.');const {error}=await client.rpc('vriend_uitdagen',{p_gebruikersnaam:name,p_duur_dagen:Number(el('challenge-duration').value),p_klusje_ids:ids});if(error)throw error;el('challenge-name').value='';selectedPlayer='';closePlayerSuggestions();playerHelp.textContent='Klik op het veld om beschikbare spelers te bekijken.';await refreshAll();msg('Uitnodiging verstuurd!','success');});});
+el('challenge-profile').addEventListener('change',updateChallengeProfile);
+el('challenge-task-list').addEventListener('change',updateChallengeProfile);
+el('challenge-all').addEventListener('click',()=>{setPickerChecks(el('challenge-task-list'),true);updateChallengeProfile();});
+el('challenge-none').addEventListener('click',()=>{setPickerChecks(el('challenge-task-list'),false);updateChallengeProfile();});
+el('history').addEventListener('change',e=>{const select=e.target.closest('[data-rematch-profile]');if(select){renderRematchPicker(Number(select.dataset.rematchProfile));return;}if(e.target.matches('input[data-task-picker="rematch"]')){const section=e.target.closest('[id^="rematch-custom-"]');if(section)updateRematchProfile(Number(section.id.replace('rematch-custom-','')));}});
+el('history').addEventListener('click',e=>{const all=e.target.closest('[data-rematch-all]'),none=e.target.closest('[data-rematch-none]');if(!all&&!none)return;const id=Number((all||none).dataset[all?'rematchAll':'rematchNone']);renderRematchPicker(id);setPickerChecks(el('rematch-tasks-'+id),!!all);updateRematchProfile(id);});
+el('invitations').addEventListener('click',async e=>{const b=e.target.closest('[data-invite]');if(!b)return;await withButton(b,async()=>{const {error}=await client.rpc('uitnodiging_beantwoorden',{p_competitie_id:Number(b.dataset.invite),p_accepteren:b.dataset.accept==='true'});if(error)throw error;await refreshAll();msg('Uitnodiging verwerkt.','success');});});
+el('history').addEventListener('click',async e=>{const rematch=e.target.closest('[data-rematch]');if(rematch){await withButton(rematch,async()=>{const c=state.history.find(x=>x.id===Number(rematch.dataset.rematch));if(!c?.opponent)throw Error('Tegenstander niet gevonden.');const duration=Number(el('rematch-duration-'+c.id).value);const choice=el('rematch-profile-'+c.id).value;const ids=choice==='gepersonaliseerd'?selectedTaskIds(el('rematch-tasks-'+c.id)):null;if(choice==='gepersonaliseerd'&&ids.length===0)throw Error('Selecteer minimaal één klusje voor de rematch.');const {error}=await client.rpc('rematch_uitdagen',{p_originele_competitie_id:c.id,p_duur_dagen:duration,p_keuze:choice,p_klusje_ids:ids});if(error)throw error;await refreshAll();msg('Rematch-uitnodiging verstuurd naar @'+c.opponent.name+'!','success');});return;}const open=e.target.closest('[data-open]');if(open){await withButton(open,async()=>{await selectCompetition(Number(open.dataset.open));el('selected-area').scrollIntoView({behavior:'smooth',block:'start'});});}});
+el('competitions').addEventListener('click',async e=>{const b=e.target.closest('[data-open]');if(!b)return;await withButton(b,async()=>{await selectCompetition(Number(b.dataset.open));el('selected-area').scrollIntoView({behavior:'smooth',block:'start'});});});
+el('chore-select').addEventListener('change',updateChoreAvailability);
+setInterval(tickCountdowns,1000);
+el('complete-chore').addEventListener('click',async()=>{await withButton(el('complete-chore'),async()=>{if(!state.selected)throw Error('Selecteer eerst een competitie.');if(!getChoreAvailability().enabled)throw Error(getChoreAvailability().text);const id=Number(el('chore-select').value);if(!id)throw Error('Selecteer eerst een klusje.');const {error}=await client.rpc('klusje_voltooien',{p_competitie_id:state.selected,p_klusje_id:id});if(error)throw error;await selectCompetition(state.selected);msg('Klusje voltooid! Je punten zijn toegevoegd.','success');});});
+bootstrap().catch(e=>{show('loading',false);msg(errorText(e));});
+</script>
+</body></html>
