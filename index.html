@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.7.6-alpha</title>
+<title>Klusjes-Oorlog | v0.7.7-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -673,7 +673,7 @@ html[data-theme="dark"] .xp-progress-card,html[data-theme="dark"] .xp-account-su
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.6-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.7-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
@@ -743,14 +743,20 @@ html[data-theme="dark"] .xp-progress-card,html[data-theme="dark"] .xp-account-su
 
 <section class="section-space home-social-area" id="hub-new-game" aria-label="Nieuwe match"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section></div></section><section class="section-space home-social-area" id="hub-invites" aria-label="Uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">JE UITNODIGINGEN</span><h3 class="section-title">Uitnodigingen beheren</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Ontvangen uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div><section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section></section>
 <section class="section-space home-history-area" id="hub-history"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.6-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.7-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.7.6-alpha';
+const APP_VERSION='v0.7.7-alpha';
 const CHANGELOG=[
-  {version:'v0.7.6-alpha',date:'20 november 2026',changes:[
+  {version:'v0.7.7-alpha',date:'20 november 2026',changes:[
+    'XP-balans herzien: kleinere beloningen (10–200 XP) en geleidelijke levelgrenzen tot 6.500 XP.',
+    '35 nieuwe achievements voor klusjes, punten, variatie en uitgespeelde competities (totaal circa 50).',
+    'Bestaande geinde badges behouden hun claimstatus; XP wordt via Supabase eenmalig herberekend.',
+    'Level 10 heet nu Goddelijke Zuiger; XP blijft alleen via handmatig innen verkrijgbaar.'
+  ]},
+  {version:'v0.7.7-alpha',date:'20 november 2026',changes:[
     'Opstartcrash opgelost: verouderde verwijzing naar verwijderde Achievements-sluitknop weggehaald.',
     'De volledige app laadt opnieuw; XP- en badgefunctionaliteit uit v0.7.5 blijft behouden.'
   ]},
@@ -1001,7 +1007,7 @@ const achievementGroups=[
   ['klusjes','🧹 Klusjes',['klusjes']],
   ['punten','⭐ Punten',['punten']],
   ['competities','⚔️ Competities',['winst','competities']],
-  ['bijzonder','✨ Bijzondere prestaties',['streak','uniek','maandwinst']]
+  ['bijzonder','✨ Bijzondere prestaties',['streak','uniek','maandwinst','bijzonder']]
 ];
 const achievementIcons={footprints:'👣',dumbbell:'💪',medal:'🥇',crown:'👑',zap:'⚡',flame:'🔥',gem:'💎',trophy:'🏆',flag:'🚩',shield:'🛡️',award:'🎖️','shield-check':'🏅','calendar-check':'📅',repeat:'🔁',target:'🎯'};
 let achievementOpen=false;
@@ -1021,9 +1027,9 @@ function achievementDate(value){
   const date=new Date(value);
   return Number.isNaN(date.getTime())?'':new Intl.DateTimeFormat('nl-NL',{dateStyle:'medium',timeZone:'Europe/Amsterdam'}).format(date);
 }
-const levelNames=['','Klusjes Noob','Stofjager','Schoonmaak Rookie','Poets Professional','Klusjes Kampioen','Klusjes Held','Meester Opruimer','Huishoud Legende','Koninklijke Poetser','Klusjes Koning'];
+const levelNames=['','Klusjes Noob','Stofjager','Schoonmaak Rookie','Poets Professional','Klusjes Kampioen','Klusjes Held','Meester Opruimer','Huishoud Legende','Koninklijke Poetser','Goddelijke Zuiger'];
 const levelEmojis=['','🧹','🪣','🧽','🧤','⚡','🛡️','🏅','💎','👑','👑'];
-const levelThresholds=[0,0,50,130,240,380,550,750,980,1240,1530];
+const levelThresholds=[0,0,100,250,500,900,1500,2300,3400,4800,6500];
 let rewardState=null;
 let rewardRequest=0;
 function setBadgeNotification(count){
@@ -1095,7 +1101,7 @@ async function loadAchievements(){
   if(!client||!state.user||!achievementOpen)return;
   el('achievement-results').innerHTML='<div class="loading">Achievements laden...</div>';
   try{await fetchBadgeRewards();}
-  catch(err){if(achievementOpen)el('achievement-results').innerHTML='<div class="empty">Badgebeloningen laden mislukt. Voer eerst de SQL-migratie v0.7.5 uit in Supabase.<p class="hint">'+safe(errorText(err))+'</p></div>';}
+  catch(err){if(achievementOpen)el('achievement-results').innerHTML='<div class="empty">Badgebeloningen laden mislukt. Voer eerst de SQL-migratie v0.7.7 uit in Supabase.<p class="hint">'+safe(errorText(err))+'</p></div>';}
 }
 function showLevelReward(result){
   const oldLevel=Number(result.old_level)||1,newLevel=Number(result.new_level)||1;

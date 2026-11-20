@@ -1,5 +1,5 @@
 // Klusjes-Oorlog: netwerk-eerst voor de huidige versie, cache voor offlinegebruik.
-const CACHE='klusjes-oorlog-v076-alpha';
+const CACHE='klusjes-oorlog-v077-alpha';
 const ASSETS=['./','./index.html','./favicon.svg','./icon-192.png','./icon-512.png','./manifest.webmanifest','./version.json'];
 self.addEventListener('install',event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)).then(()=>self.skipWaiting()));
