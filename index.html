@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.6.8-alpha</title>
+<title>Klusjes-Oorlog | v0.6.9-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -72,7 +72,7 @@
 .floating-notice{position:fixed!important;z-index:9999;top:18px;right:18px;left:auto!important;width:min(390px,calc(100vw - 36px));box-shadow:0 12px 36px rgba(29,42,75,.18);border-radius:12px;pointer-events:none;margin:0!important}
 @media(max-width:620px){.system-reset-item{align-items:flex-start;gap:8px}.floating-notice{right:12px;top:12px;width:calc(100vw - 24px)}}
 
-/* v0.6.8-alpha — navigatie, account, responsieve thema's */
+/* v0.6.9-alpha — navigatie, account, responsieve thema's */
 :root{color-scheme:light}
 body{min-height:100vh}
 .wrap{padding-bottom:105px}
@@ -136,7 +136,7 @@ html[data-theme="dark"] .leaderboard-mobile-card,html[data-theme="dark"] .leader
 html[data-theme="dark"] .leaderboard-mobile-stat.active{background:#303e65;border-color:#8492ff}
 
 
-/* v0.6.8-alpha — contrastverbetering donkere modus. Houd lichte modus onveranderd. */
+/* v0.6.9-alpha — contrastverbetering donkere modus. Houd lichte modus onveranderd. */
 html[data-theme="dark"]{
   --dark-bg:#101824;
   --dark-panel:#1d2a3b;
@@ -272,7 +272,7 @@ html[data-theme="dark"] .end-banner{background:#1d493d;color:#dcffec}
 html[data-theme="dark"] :is(button,input,select,textarea,summary,a):focus-visible{outline:3px solid #b5bfff;outline-offset:2px}
 
 
-/* v0.6.8-alpha — Home-dashboard redesign. CSS blijft beperkt tot Home. */
+/* v0.6.9-alpha — Home-dashboard redesign. CSS blijft beperkt tot Home. */
 #home-content{display:grid;gap:0;min-width:0}
 .home-hero{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:30px 32px;margin-bottom:16px;background:linear-gradient(115deg,#ecf0ff 0%,#f5f5ff 55%,#f9fbff 100%);border:1px solid #e1e7fa;border-radius:24px;overflow:hidden}
 .home-hero-copy{position:relative;z-index:1;flex:1;min-width:0}
@@ -349,7 +349,7 @@ html[data-theme="dark"] .home-match-details .countdown-unit{box-shadow:none}
 @media(prefers-reduced-motion:reduce){.home-competition-card{transition:none}.home-competition-card:hover{transform:none}}
 
 
-/* v0.6.8-alpha: aparte competitiehub en wedstrijdpreviews */
+/* v0.6.9-alpha: aparte competitiehub en wedstrijdpreviews */
 .app-nav{gap:5px}
 .nav-item{min-width:0}
 .competitions-hub{animation:hub-in .24s ease both}
@@ -406,7 +406,7 @@ html[data-theme="dark"] .home-cta p,html[data-theme="dark"] .score-ring-center s
 }
 @media(prefers-reduced-motion:reduce){.competitions-hub{animation:none}}
 
-/* v0.6.8-alpha: wedstrijdpreview en detail */
+/* v0.6.9-alpha: wedstrijdpreview en detail */
 .preview-rings{display:flex;align-items:flex-start;gap:13px;flex:none}
 .metric-ring-block{display:grid;justify-items:center;gap:6px;min-width:0}
 .metric-ring-label{font-size:11px;font-weight:800;color:#637592;letter-spacing:.3px}
@@ -496,7 +496,7 @@ html[data-theme="dark"] .leaderboard-table tr.leaderboard-me td{background:#303e
 html[data-theme="dark"] .leaderboard-mobile-card.leaderboard-me{background:linear-gradient(120deg,#2c3b61,#222e43);border-color:#90a1ff}
 @media(max-width:600px){.home-invitation-alert{padding:13px;gap:10px}.home-invitation-copy strong{font-size:13px}.competition-notification-badge{right:1px;top:0}}
 
-/* v0.6.8-alpha — rustige ringen en individuele percentages */
+/* v0.6.9-alpha — rustige ringen en individuele percentages */
 .score-ring-center .ring-symbol{font-size:22px!important;line-height:1;color:#5364c8;letter-spacing:0;white-space:nowrap}
 .score-ring-neutral .ring-symbol{color:#8995ad}
 .preview-percentages{display:none!important}
@@ -540,7 +540,7 @@ html[data-theme="dark"] .duel-tasks .duel-tasks-b b{background:#54402d;color:#ff
  .duel-tasks span{font-size:10px}
 }
 
-/* v0.6.8-alpha — speelse, toegankelijke klusjestegels */
+/* v0.6.9-alpha — speelse, toegankelijke klusjestegels */
 .task-toolbar{display:grid;gap:12px;margin:20px 0 16px}
 .task-filters{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:2px 1px 5px;scrollbar-width:thin}
 .task-filter{white-space:nowrap;border:1px solid #dbe2f1;border-radius:999px;background:#f6f8fe;color:#5d6b85;font-size:12px;font-weight:800;padding:10px 13px;transition:background .2s,border-color .2s,transform .2s}
@@ -594,6 +594,18 @@ html[data-theme="dark"] .task-tile-empty{background:#1d2b3f;border-color:#465a77
 @media(max-width:390px){.task-tile{padding:12px;min-height:166px}.task-tile-icon{width:49px;height:49px;font-size:26px}.task-tile-name{font-size:13px}}
 @media(prefers-reduced-motion:reduce){.task-tile,.task-filter{transition:none}}
 
+
+/* v0.6.9: geselecteerde tegel heeft de bevestiging direct eronder */
+.task-tile-wrap{min-width:0;display:flex;flex-direction:column;gap:8px}
+.task-tile-wrap>.task-tile{width:100%;height:100%;flex:1 1 auto}
+.task-tile-wrap:has(.task-inline-action)>.task-tile{flex:0 0 auto}
+.task-inline-action{display:flex;flex-direction:column;gap:8px;padding:11px;border:1.5px solid #6576df;border-radius:15px;background:linear-gradient(150deg,#eef1ff,#f9faff);box-shadow:0 5px 16px #4d61bc20;animation:task-action-appear .16s ease-out}
+.task-inline-label{font-size:12px;font-weight:800;text-align:center;color:#4256bd}
+.task-inline-button-slot .task-complete-button{width:100%;white-space:normal;min-height:43px;line-height:1.3;padding:9px 8px;font-size:12px;overflow-wrap:anywhere}
+html[data-theme="dark"] .task-inline-action{background:linear-gradient(145deg,#303e62,#25344d);border-color:#98a9ff}
+html[data-theme="dark"] .task-inline-label{color:#e0e6ff}
+@keyframes task-action-appear{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.task-inline-action{animation:none}}
 </style>
 </head>
 <body>
@@ -607,7 +619,7 @@ html[data-theme="dark"] .task-tile-empty{background:#1d2b3f;border-color:#465a77
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.8-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.9-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
@@ -664,19 +676,23 @@ html[data-theme="dark"] .task-tile-empty{background:#1d2b3f;border-color:#465a77
 </div>
 <div id="task-tiles" class="task-tiles" role="group" aria-label="Kies een klusje"><p class="hint">Klusjes laden…</p></div>
 <select id="chore-select" class="hidden" aria-label="Geselecteerd klusje" tabindex="-1"><option value="">Selecteer een klusje</option></select>
-<div class="task-selection" id="task-selection"><div class="task-selection-icon" id="task-selection-icon" aria-hidden="true">✨</div><div class="task-selection-info"><strong id="task-selection-name">Nog geen klusje gekozen</strong><span id="task-selection-detail">Tik op een tegel om te beginnen</span></div></div>
-<button class="btn task-complete-button" id="complete-chore" type="button" disabled>✨ Kies eerst een klusje</button><p aria-live="polite" class="cooldown-note" id="chore-cooldown">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space duel-feed"><h3 class="section-title">◷ Activiteiten</h3><div class="empty" id="activity">Nog geen activiteiten</div></div></section>
+<div id="task-action-parking" class="hidden"><div class="task-selection" id="task-selection"><div class="task-selection-icon" id="task-selection-icon" aria-hidden="true">✨</div><div class="task-selection-info"><strong id="task-selection-name">Nog geen klusje gekozen</strong><span id="task-selection-detail">Tik op een tegel om te beginnen</span></div></div><button class="btn task-complete-button" id="complete-chore" type="button" disabled>✨ Kies eerst een klusje</button><p aria-live="polite" class="cooldown-note" id="chore-cooldown">Kies een klusje om de beschikbaarheid te bekijken.</p></div><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space duel-feed"><h3 class="section-title">◷ Activiteiten</h3><div class="empty" id="activity">Nog geen activiteiten</div></div></section>
 <section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section>
 <section class="section-space home-social-area" aria-label="Uitdagingen en uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section><section class="card"><h3 class="section-title">Uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div></section>
 <section class="section-space home-history-area" id="history-section"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.8-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.9-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.6.8-alpha';
+const APP_VERSION='v0.6.9-alpha';
 const CHANGELOG=[
-  {version:'v0.6.8-alpha',date:'20 november 2026',changes:[
+  {version:'v0.6.9-alpha',date:'20 november 2026',changes:[
+    'De knop om een klusje te voltooien verschijnt direct onder de geselecteerde klusjestegel.',
+    'Je hoeft niet meer naar de onderkant van de klusjeslijst te scrollen om een klusje te bevestigen.',
+    'Dezelfde beveiligde voltooi-actie en wachttijdcontrole zijn behouden.'
+  ]},
+  {version:'v0.6.9-alpha',date:'20 november 2026',changes:[
     'Nieuwe klikbare klusjestegels met icoontjes, puntenbadges en een geselecteerde staat.',
     'Geblokkeerde klusjes tonen hun resterende wachttijd op de tegel.',
     'Filters voor beschikbaar en wachttijd, plus zoeken op klusjesnaam.',
@@ -1293,13 +1309,17 @@ function renderTaskTiles(){
   el('task-count-all').textContent=tasks.length;el('task-count-ready').textContent=ready.length;el('task-count-waiting').textContent=waiting.length;
   document.querySelectorAll('[data-task-filter]').forEach(b=>{const on=b.dataset.taskFilter===taskFilter;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
   const list=taskFilter==='ready'?ready:taskFilter==='waiting'?waiting:tasks;
-  if(!list.length){panel.innerHTML='<div class="task-tile-empty">'+(query?'Geen klusjes gevonden.':taskFilter==='waiting'?'Geen klusjes in wachttijd.':taskFilter==='ready'?'Geen beschikbare klusjes.':'Nog geen klusjes in deze competitie.')+'</div>';return;}
+  if(!list.length){panel.innerHTML='<div class="task-tile-empty">'+(query?'Geen klusjes gevonden.':taskFilter==='waiting'?'Geen klusjes in wachttijd.':taskFilter==='ready'?'Geen beschikbare klusjes.':'Nog geen klusjes in deze competitie.')+'</div>';el('task-action-parking').appendChild(el('complete-chore'));return;}
   const selected=el('chore-select').value;
   panel.innerHTML=list.map(t=>{
     const ms=taskCooldownMs(t),blocked=ended||ms>0,chosen=String(t.id)===selected&&!blocked;
     const status=ended?'Competitie voorbij':ms?'🔒 '+durationText(ms):'✓ Beschikbaar';
-    return `<button type="button" class="task-tile ${chosen?'selected':''}" data-chore-id="${Number(t.id)}" aria-pressed="${chosen}" ${blocked?'disabled':''} aria-label="${safe(t.naam)}, ${Number(t.punten)} punten, ${safe(status)}"><span class="task-tile-icon" aria-hidden="true">${taskIcon(t.naam)}</span><span class="task-tile-name">${safe(t.naam)}</span><span class="task-tile-bottom"><span class="task-tile-points">+${Number(t.punten)} pt</span><span class="task-tile-status" data-task-cooldown="${Number(t.id)}">${safe(status)}</span></span>${chosen?'<span class="task-tile-selectedmark" aria-hidden="true">✓</span>':blocked?'<span class="task-tile-lock" aria-hidden="true">🔒</span>':''}</button>`;
+    return `<div class="task-tile-wrap"><button type="button" class="task-tile ${chosen?'selected':''}" data-chore-id="${Number(t.id)}" aria-pressed="${chosen}" ${blocked?'disabled':''} aria-label="${safe(t.naam)}, ${Number(t.punten)} punten, ${safe(status)}"><span class="task-tile-icon" aria-hidden="true">${taskIcon(t.naam)}</span><span class="task-tile-name">${safe(t.naam)}</span><span class="task-tile-bottom"><span class="task-tile-points">+${Number(t.punten)} pt</span><span class="task-tile-status" data-task-cooldown="${Number(t.id)}">${safe(status)}</span></span>${chosen?'<span class="task-tile-selectedmark" aria-hidden="true">✓</span>':blocked?'<span class="task-tile-lock" aria-hidden="true">🔒</span>':''}</button>${chosen?'<div class="task-inline-action" data-inline-confirm role="group" aria-label="Bevestig geselecteerd klusje"><span class="task-inline-label">✓ Klaar met dit klusje?</span><div class="task-inline-button-slot"></div></div>':''}</div>`;
   }).join('');
+  // Verplaats de bestaande (beveiligde) voltooi-knop naar de geselecteerde tegel.
+  // Hierdoor blijft de bestaande RPC, foutafhandeling en cooldowncontrole ongewijzigd.
+  const slot=panel.querySelector('.task-inline-button-slot');
+  (slot||el('task-action-parking')).appendChild(el('complete-chore'));
 }
 function renderChores(){
   const old=el('chore-select').value;
