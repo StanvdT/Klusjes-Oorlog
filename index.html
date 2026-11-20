@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.7.1-alpha</title>
+<title>Klusjes-Oorlog | v0.7.2-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -608,6 +608,20 @@ html[data-theme="dark"] .task-inline-action{background:linear-gradient(145deg,#3
 html[data-theme="dark"] .task-inline-label{color:#e0e6ff}
 @keyframes task-action-appear{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 @media(prefers-reduced-motion:reduce){.task-inline-action{animation:none}}
+
+/* v0.7.2: paginas binnen Competities, geen lang doorscrollend dashboard */
+.competition-subnav{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:0 0 21px;padding:7px;background:var(--surface,#f0f3fc);border:1px solid #dfe6fa;border-radius:18px}
+.competition-subtab{position:relative;display:flex;align-items:center;justify-content:center;gap:7px;min-height:48px;padding:10px 7px;border:1px solid transparent;border-radius:12px;background:transparent;color:#58677e;font:inherit;font-size:13px;font-weight:800;cursor:pointer;transition:background .16s,border-color .16s,box-shadow .16s}
+.competition-subtab:hover{background:#fff9}
+.competition-subtab.active{background:#fff;border-color:#ccd7ff;color:#475cda;box-shadow:0 4px 12px #283b7115}
+.hub-invitation-badge{display:inline-flex;align-items:center;justify-content:center;min-width:19px;height:19px;padding:0 5px;border-radius:14px;background:#e94d60;color:white;font-size:11px;font-weight:900;line-height:1}
+html[data-theme="dark"] .competition-subnav{background:#1b2a40;border-color:#3d4d66}
+html[data-theme="dark"] .competition-subtab{color:#c5d0e4}
+html[data-theme="dark"] .competition-subtab:hover{background:#2b3b56}
+html[data-theme="dark"] .competition-subtab.active{background:#354576;color:#fff;border-color:#6578c2}
+#hub-new-game .home-social-grid,#hub-invites .home-social-grid{grid-template-columns:minmax(0,1fr);max-width:820px}
+#hub-invites .pending-invitations-section{max-width:820px}
+@media(max-width:620px){.competition-subnav{gap:3px;padding:5px;border-radius:14px}.competition-subtab{min-height:58px;flex-direction:column;gap:3px;padding:7px 2px;font-size:10px;line-height:1.15;text-align:center}.hub-invitation-badge{position:absolute;right:2px;top:2px;font-size:10px;min-width:17px;height:17px}}
 </style>
 </head>
 <body>
@@ -621,7 +635,7 @@ html[data-theme="dark"] .task-inline-label{color:#e0e6ff}
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.1-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.2-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
@@ -667,6 +681,12 @@ html[data-theme="dark"] .task-inline-label{color:#e0e6ff}
  <section class="home-cta"><div><strong>Start een nieuwe strijd</strong><p>Daag iemand uit of bekijk je uitnodigingen.</p></div><button type="button" id="home-challenge-link" class="btn">Naar competities →</button></section>
 </div><section id="competitions-hub" class="hidden competitions-hub" aria-label="Competities">
   <div class="hub-hero"><div><span class="home-eyebrow">JOUW WEDSTRIJDEN</span><h2 class="title">Competities ⚔</h2><p>Bekijk de tussenstand, daag vrienden uit en open je wedstrijden.</p></div><span class="hub-hero-icon" aria-hidden="true">🏆</span></div>
+  <nav class="competition-subnav" aria-label="Onderdelen van Competities" role="tablist">
+    <button class="competition-subtab active" type="button" data-competition-subpage="matches" role="tab" aria-selected="true">⚔️ <span>Wedstrijden</span></button>
+    <button class="competition-subtab" type="button" data-competition-subpage="new" role="tab" aria-selected="false">➕ <span>Nieuwe match</span></button>
+    <button class="competition-subtab" type="button" data-competition-subpage="invites" role="tab" aria-selected="false">✉️ <span>Uitnodigingen</span><span id="hub-invitation-badge" class="hub-invitation-badge hidden">0</span></button>
+    <button class="competition-subtab" type="button" data-competition-subpage="history" role="tab" aria-selected="false">🕘 <span>Geschiedenis</span></button>
+  </nav>
   <div id="hub-inner"><section id="hub-competition-list" class="section-space home-competition-list"><div class="space hub-section-heading"><h3 class="section-title">Jouw competities</h3><span class="pill">Scores & countdowns</span></div><div class="grid" id="competitions"><div class="empty">Nog geen competities. Daag een vriend uit!</div></div></section>
 <section class="section-space hidden home-match-details" id="selected-area"><div class="space" style="margin-bottom:15px"><div class="details-heading"><button class="btn secondary small" id="back-to-competitions" type="button">← Alle competities</button><h3 class="section-title" id="selected-title" style="margin:0">Competitie</h3></div><span class="pill" id="selected-status">Live score</span></div><div class="duel-hero" id="duel-hero" aria-label="Tussenstand en uitgevoerde klusjes"><div class="duel-hero-loading">Duelgegevens laden…</div></div><div aria-label="Resterende competitietijd" class="countdown-box" id="competition-clock" role="timer"></div><div class="end-banner hidden" id="competition-result"></div><div class="grid match-main-grid"><section class="card"><h3 class="section-title">⚡ Pak je punten</h3><p class="duel-task-hint">Kies een klusje en verdien punten voor jouw team.</p><div class="task-toolbar" aria-label="Filter beschikbare klusjes">
   <div class="task-filters" role="group" aria-label="Klusjes filteren">
@@ -679,22 +699,28 @@ html[data-theme="dark"] .task-inline-label{color:#e0e6ff}
 <div id="task-tiles" class="task-tiles" role="group" aria-label="Kies een klusje"><p class="hint">Klusjes laden…</p></div>
 <select id="chore-select" class="hidden" aria-label="Geselecteerd klusje" tabindex="-1"><option value="">Selecteer een klusje</option></select>
 <div id="task-action-parking" class="hidden"><div class="task-selection" id="task-selection"><div class="task-selection-icon" id="task-selection-icon" aria-hidden="true">✨</div><div class="task-selection-info"><strong id="task-selection-name">Nog geen klusje gekozen</strong><span id="task-selection-detail">Tik op een tegel om te beginnen</span></div></div><button class="btn task-complete-button" id="complete-chore" type="button" disabled>✨ Kies eerst een klusje</button><p aria-live="polite" class="cooldown-note" id="chore-cooldown">Kies een klusje om de beschikbaarheid te bekijken.</p></div><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space duel-feed"><h3 class="section-title">◷ Activiteiten</h3><div class="empty" id="activity">Nog geen activiteiten</div></div></section>
-<section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section>
-<section class="section-space home-social-area" aria-label="Uitdagingen en uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section><section class="card"><h3 class="section-title">Uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div></section>
-<section class="section-space home-history-area" id="history-section"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.1-alpha</span></footer>
+
+<section class="section-space home-social-area" id="hub-new-game" aria-label="Nieuwe match"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section></div></section><section class="section-space home-social-area" id="hub-invites" aria-label="Uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">JE UITNODIGINGEN</span><h3 class="section-title">Uitnodigingen beheren</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Ontvangen uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div><section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section></section>
+<section class="section-space home-history-area" id="hub-history"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.2-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.7.1-alpha';
+const APP_VERSION='v0.7.2-alpha';
 const CHANGELOG=[
+  {version:'v0.7.2-alpha',date:'20 november 2026',changes:[
+    'Binnen Competities vier aparte schermen: Wedstrijden, Nieuwe match, Uitnodigingen en Geschiedenis.',
+    'Uitnodigingen hebben een eigen meldingsteller bovenaan; de melding op Home opent direct dit scherm.',
+    'Wedstrijddetails blijven direct bereikbaar vanaf Home, zonder extra klik of scrollen.',
+    'Verzonden uitnodigingen zijn verplaatst naar de uitnodigingenpagina; alle bestaande functies blijven behouden.'
+  ]},
   {version:'v0.7.1-alpha',date:'20 november 2026',changes:[
     'De bevestiging van een geselecteerd klusje gebruikt nu de volledige breedte van het tegelraster.',
     'Het bevestigingsblok staat direct onder de rij van het gekozen klusje, zonder lege ruimte naast de knop.',
     'De indeling past zich aan voor 2, 3 of 4 tegelkolommen op mobiel en desktop.'
   ]},
-  {version:'v0.7.1-alpha',date:'20 november 2026',changes:[
+  {version:'v0.7.0-alpha',date:'20 november 2026',changes:[
     'Opgelost: de bevestigingsknop bleef leeg en veroorzaakte JavaScript-fouten bij het opnieuw tekenen van klusjestegels.',
     'De knop om een klusje te voltooien verschijnt direct onder de geselecteerde klusjestegel.',
     'Je hoeft niet meer naar de onderkant van de klusjeslijst te scrollen om een klusje te bevestigen.',
@@ -853,6 +879,23 @@ let themePreference='system';
 function themeEffective(preference){return preference==='system'?(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'):preference;}
 function applyTheme(preference){themePreference=['light','dark','system'].includes(preference)?preference:'system';document.documentElement.dataset.theme=themeEffective(themePreference);document.querySelector('meta[name="theme-color"]').content=themePreference==='dark'?'#111926':'#f6f8fc';el('theme-choice').value=themePreference;try{localStorage.setItem(THEME_KEY,themePreference);}catch{}}
 function initTheme(){let saved='system';try{saved=localStorage.getItem(THEME_KEY)||'system';}catch{}applyTheme(saved);el('theme-choice').addEventListener('change',e=>applyTheme(e.target.value));const mq=window.matchMedia('(prefers-color-scheme: dark)');const update=()=>{if(themePreference==='system')applyTheme('system');};if(mq.addEventListener)mq.addEventListener('change',update);else mq.addListener(update);}
+let competitionSubpage='matches';
+function setCompetitionSubpage(page){
+ const allowed=['matches','new','invites','history'];
+ if(!allowed.includes(page))page='matches';
+ competitionSubpage=page;
+ show('hub-competition-list',page==='matches'&&!state.selected);
+ show('selected-area',page==='matches'&&!!state.selected);
+ show('hub-new-game',page==='new');
+ show('hub-invites',page==='invites');
+ show('hub-history',page==='history');
+ document.querySelectorAll('[data-competition-subpage]').forEach(b=>{
+   const active=b.dataset.competitionSubpage===page;
+   b.classList.toggle('active',active);
+   b.setAttribute('aria-selected',String(active));
+   b.tabIndex=active?0:-1;
+ });
+}
 function navigate(view){
  if(view==='achievements'&&!state.user){msg('Log eerst in om je achievements te bekijken.');view='account';}
  if(view==='admin'&&!state.isAdmin)view='account';
@@ -862,7 +905,7 @@ function navigate(view){
  show('app',!!state.user&&(home||hub||admin));
  show('home-content',home);
  show('competitions-hub',hub);
- if(!hub){show('selected-area',false);}else{state.selected=null;show('selected-area',false);show('hub-competition-list',true);}
+ if(!hub){show('selected-area',false);}else{state.selected=null;setCompetitionSubpage('matches');}
  show('admin-panel',admin&&state.isAdmin);
  show('auth',!state.user&&(home||account));
  if(!account)show('settings-panel',false);
@@ -1125,6 +1168,7 @@ function updateInvitationNotifications(){
  badge.classList.toggle('hidden',!count);
  badge.textContent=count>99?'99+':String(count);
  badge.setAttribute('aria-label',count+' openstaande uitnodiging'+(count===1?'':'en'));
+ const innerBadge=el('hub-invitation-badge');innerBadge.classList.toggle('hidden',!count);innerBadge.textContent=count>99?'99+':String(count);
  const section=el('outgoing-invitations-section');
  section.classList.toggle('hidden',!outgoing.length);
  el('outgoing-invitation-count').textContent=outgoing.length+' verzonden';
@@ -1196,7 +1240,7 @@ function renderDuelHero(){
  <div class="duel-tasks-label">KLUSJES UITGEVOERD</div>
  <div class="duel-tasks"><span class="duel-tasks-a"><strong>${tasks1}</strong> door @${safe(p1.name)} <b>${hasTasks?taskPct1+'%':'–'}</b></span><span class="duel-tasks-b"><strong>${tasks2}</strong> door @${safe(p2.name)} <b>${hasTasks?taskPct2+'%':'–'}</b></span></div>`;
 }
-function showCompetitionDetails(){show('hub-competition-list',false);show('selected-area',true);}
+function showCompetitionDetails(){setCompetitionSubpage('matches');show('hub-competition-list',false);show('selected-area',true);}
 async function openCompetitionDetails(id){
  navigate('competitions');
  const c=state.competitions.find(x=>x.id===id&&x.myStatus==='geaccepteerd'&&x.status!=='uitnodiging');
@@ -1598,15 +1642,20 @@ el('challenge-none').addEventListener('click',()=>{setPickerChecks(el('challenge
 el('history').addEventListener('change',e=>{const select=e.target.closest('[data-rematch-profile]');if(select){renderRematchPicker(Number(select.dataset.rematchProfile));return;}if(e.target.matches('input[data-task-picker="rematch"]')){const section=e.target.closest('[id^="rematch-custom-"]');if(section)updateRematchProfile(Number(section.id.replace('rematch-custom-','')));}});
 el('history').addEventListener('click',e=>{const all=e.target.closest('[data-rematch-all]'),none=e.target.closest('[data-rematch-none]');if(!all&&!none)return;const id=Number((all||none).dataset[all?'rematchAll':'rematchNone']);renderRematchPicker(id);setPickerChecks(el('rematch-tasks-'+id),!!all);updateRematchProfile(id);});
 el('invitations').addEventListener('click',async e=>{const b=e.target.closest('[data-invite]');if(!b)return;await withButton(b,async()=>{const {error}=await client.rpc('uitnodiging_beantwoorden',{p_competitie_id:Number(b.dataset.invite),p_accepteren:b.dataset.accept==='true'});if(error)throw error;await refreshAll();msg('Uitnodiging verwerkt.','success');});});
-el('history').addEventListener('click',async e=>{const rematch=e.target.closest('[data-rematch]');if(rematch){await withButton(rematch,async()=>{const c=state.history.find(x=>x.id===Number(rematch.dataset.rematch));if(!c?.opponent)throw Error('Tegenstander niet gevonden.');const duration=Number(el('rematch-duration-'+c.id).value);const choice=el('rematch-profile-'+c.id).value;const ids=choice==='gepersonaliseerd'?selectedTaskIds(el('rematch-tasks-'+c.id)):null;if(choice==='gepersonaliseerd'&&ids.length===0)throw Error('Selecteer minimaal één klusje voor de rematch.');const {error}=await client.rpc('rematch_uitdagen',{p_originele_competitie_id:c.id,p_duur_dagen:duration,p_keuze:choice,p_klusje_ids:ids});if(error)throw error;await refreshAll();msg('Rematch-uitnodiging verstuurd naar @'+c.opponent.name+'!','success');});return;}const open=e.target.closest('[data-open]');if(open){await withButton(open,async()=>{showCompetitionDetails();await selectCompetition(Number(open.dataset.open));el('selected-area').scrollIntoView({behavior:'smooth',block:'start'});});}});
+el('history').addEventListener('click',async e=>{const rematch=e.target.closest('[data-rematch]');if(rematch){await withButton(rematch,async()=>{const c=state.history.find(x=>x.id===Number(rematch.dataset.rematch));if(!c?.opponent)throw Error('Tegenstander niet gevonden.');const duration=Number(el('rematch-duration-'+c.id).value);const choice=el('rematch-profile-'+c.id).value;const ids=choice==='gepersonaliseerd'?selectedTaskIds(el('rematch-tasks-'+c.id)):null;if(choice==='gepersonaliseerd'&&ids.length===0)throw Error('Selecteer minimaal één klusje voor de rematch.');const {error}=await client.rpc('rematch_uitdagen',{p_originele_competitie_id:c.id,p_duur_dagen:duration,p_keuze:choice,p_klusje_ids:ids});if(error)throw error;await refreshAll();msg('Rematch-uitnodiging verstuurd naar @'+c.opponent.name+'!','success');});return;}const open=e.target.closest('[data-open]');if(open){await withButton(open,async()=>{await openCompetitionDetails(Number(open.dataset.open));});}});
 el('home-previews').addEventListener('click',async e=>{const b=e.target.closest('[data-open]');if(!b)return;await withButton(b,()=>openCompetitionDetails(Number(b.dataset.open)));});
 el('home-invitation-alert').addEventListener('click',()=>{
  navigate('competitions');
- el('invitations').scrollIntoView({behavior:'smooth',block:'center'});
+ setCompetitionSubpage('invites');
 });
+document.querySelectorAll('[data-competition-subpage]').forEach(button=>button.addEventListener('click',()=>{
+ state.selected=null;
+ setCompetitionSubpage(button.dataset.competitionSubpage);
+ window.scrollTo({top:0,behavior:'instant'});
+}));
 el('home-all-competitions').addEventListener('click',()=>navigate('competitions'));
-el('home-challenge-link').addEventListener('click',()=>navigate('competitions'));
-el('back-to-competitions').addEventListener('click',()=>{state.selected=null;show('selected-area',false);show('hub-competition-list',true);el('competitions').scrollIntoView({behavior:'smooth',block:'start'});});
+el('home-challenge-link').addEventListener('click',()=>{navigate('competitions');setCompetitionSubpage('new');});
+el('back-to-competitions').addEventListener('click',()=>{state.selected=null;show('selected-area',false);setCompetitionSubpage('matches');window.scrollTo({top:0,behavior:'instant'});});
 el('competitions').addEventListener('click',async e=>{const b=e.target.closest('[data-open]');if(!b)return;await withButton(b,()=>openCompetitionDetails(Number(b.dataset.open)));});
 el('chore-select').addEventListener('change',()=>{renderTaskTiles();updateChoreAvailability();});
 el('task-tiles').addEventListener('click',event=>{
