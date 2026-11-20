@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.7.7-alpha</title>
+<title>Klusjes-Oorlog | v0.7.8-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -660,6 +660,24 @@ html[data-theme="dark"] .leaderboard-period-btn.active{background:#354575;border
 .level-overlay{position:fixed;inset:0;z-index:1200;background:#101a35c9;display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(5px)}.level-reward-card{width:min(100%,430px);max-height:calc(100dvh - 40px);overflow:auto;text-align:center;border:2px solid #e5c16b;border-radius:25px;padding:32px 25px;background:radial-gradient(circle at 50% 0%,#fff2ca 0%,#ffffff 64%);box-shadow:0 35px 80px #0005}.level-sparkle{font-size:23px;letter-spacing:8px}.level-large{font-weight:950;font-size:36px;margin-top:15px;color:#a87d22}.level-icon{font-size:69px;margin:10px 0}.level-reward-card h2{font-size:25px;margin:8px 0;color:#283a61}.level-reward-card p{line-height:1.5}.level-reward-card .btn{margin-top:14px;width:100%}
 html[data-theme="dark"] .xp-progress-card,html[data-theme="dark"] .xp-account-summary{background:linear-gradient(130deg,#28365d,#202d41);border-color:#4a5e96}html[data-theme="dark"] .xp-rank{color:#e6e9ff}html[data-theme="dark"] .xp-sub,html[data-theme="dark"] .xp-progress-label{color:#b8c7e2}html[data-theme="dark"] .xp-bar{background:#43516d}html[data-theme="dark"] .achievement-item.ready{background:#3e3424;border-color:#a57d38}html[data-theme="dark"] .achievement-item.claimed{background:#1c3835;border-color:#39816a}html[data-theme="dark"] .achievement-xp{color:#f3c76b}html[data-theme="dark"] .level-reward-card{background:radial-gradient(circle at 50% 0%,#52472d,#202e45 66%);border-color:#ad8c45}html[data-theme="dark"] .level-reward-card h2{color:#f3f2ff}html[data-theme="dark"] .level-large{color:#f7d57c}
 @media(max-width:530px){.achievement-claim-btn{width:100%}.level-reward-card{padding:25px 18px}}
+
+/* v0.7.8 — Stofmonster avatars */
+.xp-avatar-mini{width:52px;height:64px;object-fit:contain;flex:none;border-radius:7px}
+.avatar-showcase{display:flex;gap:16px;align-items:center;margin:14px 0 18px;padding:15px;border:1px solid #dfe5f6;border-radius:17px;background:linear-gradient(125deg,#f2f5ff,#fafaff)}
+.avatar-showcase img{width:100px;height:116px;object-fit:contain;border-radius:12px;flex:none}
+.avatar-showcase b{font-size:18px}.avatar-showcase p{margin:6px 0;color:#64728a;font-size:13px}
+.avatar-collection{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.avatar-option{border:2px solid #e2e7f3;border-radius:14px;background:#fff;padding:9px 7px;display:flex;align-items:center;flex-direction:column;gap:5px;color:#354463;text-align:center;min-width:0}
+.avatar-option img{width:100%;max-width:140px;aspect-ratio:1/1.22;object-fit:contain}
+.avatar-option b{font-size:12px}.avatar-option span{font-size:10px;color:#72809b}.avatar-option.active{border-color:#586be0;background:#eef1ff;box-shadow:0 4px 17px #596be026}
+.avatar-option.locked{filter:grayscale(.9);opacity:.65;cursor:not-allowed}.avatar-option:not(.locked):hover{border-color:#6677e6}
+.leader-avatar{width:49px;height:57px;object-fit:contain;flex:none;border-radius:7px}.leader-player-name{display:flex;gap:8px;align-items:center}.leader-player-name span{min-width:0}.leader-player-name small{display:block;color:#8c96a9;font-size:10px;margin-top:3px}
+.leaderboard-mobile-head .leader-avatar{width:48px;height:56px}
+.level-reward-avatar{display:block;width:min(220px,70%);height:auto;margin:10px auto;border-radius:14px}
+html[data-theme="dark"] .avatar-showcase{background:linear-gradient(125deg,#263759,#1d2b42);border-color:#465779}
+html[data-theme="dark"] .avatar-option{background:#243349;border-color:#415273;color:#e4edff}
+html[data-theme="dark"] .avatar-option.active{background:#374675;border-color:#9bafff}
+@media(max-width:530px){.avatar-collection{grid-template-columns:repeat(2,minmax(0,1fr))}.avatar-showcase img{width:88px;height:100px}}
 </style>
 </head>
 <body>
@@ -673,13 +691,13 @@ html[data-theme="dark"] .xp-progress-card,html[data-theme="dark"] .xp-account-su
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.7-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.8-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
-  <div class="account-identity"><span class="account-avatar" aria-hidden="true">👤</span><div><strong id="account-username">Log in om je profiel te bekijken</strong><p class="hint" id="account-email"></p></div></div>
+  <div class="account-identity"><span class="account-avatar" aria-hidden="true" id="account-avatar-display">👤</span><div><strong id="account-username">Log in om je profiel te bekijken</strong><p class="hint" id="account-email"></p></div></div>
   <div class="xp-account-summary" id="xp-account-summary" aria-live="polite"><span class="hint">Log in om je XP-voortgang te zien.</span></div>
-  <div class="account-group"><h3 class="section-title">Weergave</h3><div class="field"><label for="theme-choice">Thema</label><select id="theme-choice"><option value="system">Automatisch (apparaat)</option><option value="light">Licht</option><option value="dark">Donker</option></select></div><p class="hint">Deze voorkeur wordt op dit apparaat opgeslagen.</p></div>
+  <div class="account-group"><h3 class="section-title">🎨 Jouw Stofmonster-collectie</h3><p class="hint">Bij elk nieuw level speel je een unieke avatar vrij. Kies zelf welke ontgrendelde avatar je toont.</p><div id="avatar-collection" class="avatar-collection"></div></div><div class="account-group"><h3 class="section-title">Weergave</h3><div class="field"><label for="theme-choice">Thema</label><select id="theme-choice"><option value="system">Automatisch (apparaat)</option><option value="light">Licht</option><option value="dark">Donker</option></select></div><p class="hint">Deze voorkeur wordt op dit apparaat opgeslagen.</p></div>
   <div class="account-group"><h3 class="section-title">Instellingen en informatie</h3><div id="account-settings-controls" class="account-actions"></div><div id="account-settings-slot"></div></div>
   <div class="account-group hidden" id="account-admin-group"><h3 class="section-title">Beheer</h3><p class="hint">Alleen zichtbaar voor administrators.</p><div id="account-admin-controls" class="account-actions"></div></div>
   <div class="account-group" id="account-session-group"><h3 class="section-title">Sessie</h3><div id="account-session-controls" class="account-actions"></div><p class="hint" id="account-signin-hint">Log in op Home om je competities te beheren.</p></div>
@@ -699,7 +717,7 @@ html[data-theme="dark"] .xp-progress-card,html[data-theme="dark"] .xp-account-su
   <div class="achievement-filter-row" role="group" aria-label="Achievements filteren"><button type="button" class="btn small active" data-achievement-filter="alle">Alle</button><button type="button" class="btn secondary small" data-achievement-filter="behaald">Behaald</button><button type="button" class="btn secondary small" data-achievement-filter="open">Nog te behalen</button></div>
   <div id="achievement-results" aria-live="polite"><div class="empty">Je achievements worden geladen zodra je deze pagina opent.</div></div>
 </section>
-<div id="level-reward-overlay" class="level-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="level-reward-title" tabindex="-1"><div class="level-reward-card"><div class="level-sparkle" aria-hidden="true">✨ 🎉 ✨</div><div class="level-large" id="level-reward-number">LEVEL 2</div><div class="level-icon" id="level-reward-icon" aria-hidden="true">🧹</div><h2 id="level-reward-title">Nieuw level!</h2><p id="level-reward-description"></p><p id="level-reward-more" class="hint"></p><button type="button" id="level-reward-close" class="btn">Geweldig! Verder spelen</button></div></div>
+<div id="level-reward-overlay" class="level-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="level-reward-title" tabindex="-1"><div class="level-reward-card"><div class="level-sparkle" aria-hidden="true">✨ 🎉 ✨</div><div class="level-large" id="level-reward-number">LEVEL 2</div><img class="level-reward-avatar" id="level-reward-avatar" src="./avatars/level-2.webp" alt="Vrijgespeelde levelavatar"><div class="level-icon hidden" id="level-reward-icon" aria-hidden="true">🧹</div><h2 id="level-reward-title">Nieuw level!</h2><p id="level-reward-description"></p><p id="level-reward-more" class="hint"></p><button type="button" id="level-reward-close" class="btn">Geweldig! Verder spelen</button></div></div>
 <div id="loading" class="loading">Verbinding maken...</div>
 <section id="auth" class="auth card hidden"><h2 class="title">Welkom terug 👋</h2><p class="subtitle">Speel tegen vrienden en verdien punten.</p><div class="tabs"><button id="tab-login" class="active" type="button">Inloggen</button><button id="tab-register" type="button">Registreren</button></div><form id="auth-form"><div id="username-field" class="field hidden"><label for="username">Gebruikersnaam</label><input id="username" disabled autocomplete="username" minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]{3,20}" placeholder="Bijv. stan123"><span class="hint">3–20 tekens: letters, cijfers of _</span></div><div class="field"><label for="email">E-mailadres</label><input id="email" type="email" autocomplete="email" required placeholder="jij@voorbeeld.nl"></div><div class="field"><label for="password">Wachtwoord</label><input id="password" type="password" minlength="6" autocomplete="current-password" required placeholder="Minimaal 6 tekens"></div><button id="auth-submit" class="btn" type="submit" style="width:100%">Inloggen</button></form><p class="hint" id="auth-hint" style="margin:15px 0 0">Nog geen account? Kies Registreren.</p></section>
 <main id="app" class="hidden"><section id="admin-panel" class="card hidden" style="margin-bottom:24px"><div class="space" style="margin-bottom:18px"><div><h2 class="section-title" style="margin:0 0 4px">⚙ Klusjesbeheer</h2><span class="hint">Wijzigingen gelden voor toekomstige competities. Lopende competities behouden hun vastgelegde punten en wachttijden.</span></div><button id="admin-refresh" class="btn secondary small" type="button">Vernieuwen</button></div><div class="admin-tabs" role="tablist" aria-label="Adminonderdelen"><button type="button" id="admin-tab-chores" class="btn small active" aria-selected="true">Klusjesbeheer</button><button type="button" id="admin-tab-competitions" class="btn secondary small" aria-selected="false">Competitiebeheer</button><button type="button" id="admin-tab-system" class="btn secondary small" aria-selected="false">Systeembeheer</button></div><div id="admin-chores-view"><div class="admin-scroll"><table class="admin-table"><thead><tr><th>Klusje</th><th>Punten</th><th>Wachttijd</th><th>Status</th><th></th></tr></thead><tbody id="admin-list"><tr><td colspan="5">Laden...</td></tr></tbody></table></div><div class="divider"></div><h3 class="section-title" id="admin-form-title">Nieuw klusje</h3><form id="admin-form"><div class="admin-form-grid"><div class="field"><label for="admin-name">Naam</label><input id="admin-name" maxlength="100" required placeholder="Bijv. Ramen wassen"></div><div class="field"><label for="admin-points">Punten</label><input id="admin-points" type="number" min="1" step="1" max="100000" value="10" required></div><div class="field"><label for="admin-cooldown">Wachttijd (uren)</label><input id="admin-cooldown" type="number" min="0" step="1" max="100000" value="24" required></div></div><div class="field"><label for="admin-active">Beschikbaarheid</label><select id="admin-active"><option value="true">Actief — spelers kunnen dit klusje uitvoeren</option><option value="false">Uitgeschakeld — verborgen voor spelers</option></select></div><div class="admin-actions"><button id="admin-save" class="btn" type="submit">Klusje toevoegen</button><button id="admin-cancel" class="btn secondary hidden" type="button">Bewerken annuleren</button></div></form></div><div id="admin-competitions-view" class="hidden"><div class="space" style="flex-wrap:wrap"><div><h3 class="section-title" style="margin:0 0 4px">🏆 Competitiebeheer</h3><p class="hint" style="margin:0">Alle competities. Je kunt actieve competities verlengen, verkorten of direct beëindigen.</p></div><select id="admin-competition-filter" class="admin-filter" aria-label="Filter competities"><option value="alle">Alle competities</option><option value="actief">Actief</option><option value="uitnodiging">Uitnodigingen</option><option value="afgelopen">Afgelopen</option></select></div><div id="admin-competition-summary" class="admin-summary"></div><div id="admin-competition-list"><div class="empty">Kies Competitiebeheer om de competities op te halen.</div></div></div><div id="admin-system-view" class="hidden"><h3 class="section-title">🛡️ Systeembeheer</h3><p class="hint">Voorbereiding op de officiële release. Er worden nu geen gegevens gewijzigd of verwijderd.</p><div class="system-reset-layout"><div class="system-reset-item"><span>Gebruikersaccounts en gebruikersnamen</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Administratorrechten</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Klusjes, punteninstellingen en wachttijden</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Competities en uitnodigingen</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Uitgevoerde klusjes, punten en geschiedenis</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Leaderboardresultaten en behaalde achievements</span><strong class="system-clear">Resetten</strong></div></div><p class="notice" style="margin:18px 0">Bij de officiële release maken we eerst een gecontroleerde back-up en voegen we een extra bevestiging toe. De reset wordt dan een afzonderlijk, beveiligd beheerproces.</p><button class="btn danger" type="button" disabled title="Beschikbaar bij voorbereiding van de officiële release">🔒 Reset alle voortgang — nog niet beschikbaar</button><p class="hint">Let op: dit is uitsluitend een voorbereidend overzicht, er is geen resetfunctie gekoppeld.</p></div></section><div id="home-content"><section class="home-hero" aria-label="Welkom in Klusjes-Oorlog">
@@ -743,13 +761,19 @@ html[data-theme="dark"] .xp-progress-card,html[data-theme="dark"] .xp-account-su
 
 <section class="section-space home-social-area" id="hub-new-game" aria-label="Nieuwe match"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section></div></section><section class="section-space home-social-area" id="hub-invites" aria-label="Uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">JE UITNODIGINGEN</span><h3 class="section-title">Uitnodigingen beheren</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Ontvangen uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div><section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section></section>
 <section class="section-space home-history-area" id="hub-history"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.7-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.8-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.7.7-alpha';
+const APP_VERSION='v0.7.8-alpha';
 const CHANGELOG=[
+  {version:'v0.7.8-alpha',date:'20 november 2026',changes:[
+    'Tien unieke Stofmonsteravatars met officiële Nederlandse levelnamen en een levelnummer bovenaan de border.',
+    'In Account kun je eerder vrijgespeelde avatars bekijken en zelf kiezen. Supabase valideert dat alleen ontgrendelde avatars worden ingesteld.',
+    'Een level-up toont direct de vrijgespeelde afbeelding, zonder onverwachte meldingen tijdens het spelen.',
+    'Ranglijst toont avatars en levels; sorteren op Level is toegevoegd. Extra SQL-migratie vereist.'
+  ]},
   {version:'v0.7.7-alpha',date:'20 november 2026',changes:[
     'XP-balans herzien: kleinere beloningen (10–200 XP) en geleidelijke levelgrenzen tot 6.500 XP.',
     '35 nieuwe achievements voor klusjes, punten, variatie en uitgespeelde competities (totaal circa 50).',
@@ -1030,6 +1054,40 @@ function achievementDate(value){
 const levelNames=['','Klusjes Noob','Stofjager','Schoonmaak Rookie','Poets Professional','Klusjes Kampioen','Klusjes Held','Meester Opruimer','Huishoud Legende','Koninklijke Poetser','Goddelijke Zuiger'];
 const levelEmojis=['','🧹','🪣','🧽','🧤','⚡','🛡️','🏅','💎','👑','👑'];
 const levelThresholds=[0,0,100,250,500,900,1500,2300,3400,4800,6500];
+let selectedAvatarLevel=1;
+function avatarSrc(n){return './avatars/level-'+Math.max(1,Math.min(10,Number(n)||1))+'.webp';}
+function avatarLevel(){return Math.max(1,Math.min(10,Number(rewardState?.level)||1));}
+function renderAvatarCollection(){
+  const holder=el('avatar-collection');if(!holder)return;
+  const max=avatarLevel();
+  holder.innerHTML=levelNames.slice(1).map((name,i)=>{
+    const n=i+1, locked=n>max, active=n===selectedAvatarLevel;
+    return '<button type="button" class="avatar-option'+(locked?' locked':active?' active':'')+'" data-avatar-select="'+n+'" '+(locked?'disabled':'')+' aria-label="Level '+n+', '+safe(name)+(locked?', vergrendeld':active?', in gebruik':', selecteer avatar')+'"><img src="'+avatarSrc(n)+'" alt="" loading="lazy"><b>Level '+n+' · '+safe(name)+'</b><span>'+(locked?'🔒 Vanaf '+levelThresholds[n]+' XP':active?'✓ In gebruik':'Instellen')+'</span></button>';
+  }).join('');
+  const identity=el('account-avatar-display');if(identity){identity.innerHTML=state.user?'<img src="'+avatarSrc(selectedAvatarLevel)+'" alt="" style="width:64px;height:76px;object-fit:contain">':'👤';identity.style.background='transparent';identity.style.width='70px';identity.style.height='80px';}
+}
+async function fetchSelectedAvatar(){
+  if(!state.user)return;
+  const uid=state.user.id;
+  const {data,error}=await client.rpc('mijn_avatar_level');
+  if(error)throw error;
+  if(uid!==state.user?.id)return;
+  selectedAvatarLevel=Math.max(1,Math.min(avatarLevel(),Number(data)||1));
+  renderAvatarCollection();
+}
+el('avatar-collection').addEventListener('click',async event=>{
+  const btn=event.target.closest('[data-avatar-select]');if(!btn||!state.user)return;
+  const n=Number(btn.dataset.avatarSelect);
+  if(!Number.isInteger(n)||n<1||n>avatarLevel())return;
+  await withButton(btn,async()=>{
+    const {data,error}=await client.rpc('avatar_level_kiezen',{p_level:n});
+    if(error)throw error;
+    selectedAvatarLevel=Number(data)||n;
+    renderAvatarCollection();
+    msg('Avatar ingesteld: '+levelNames[n]+'!','success');
+    if(leaderboardShown)refreshLeaderboard();
+  });
+});
 let rewardState=null;
 let rewardRequest=0;
 function setBadgeNotification(count){
@@ -1046,12 +1104,13 @@ function badgeXPMarkup(){
   const next=level===10?null:levelThresholds[level+1];
   const pct=next===null?100:Math.max(0,Math.min(100,(xp-current)/(next-current)*100));
   const message=next===null?'Maximaal level bereikt':(next-xp).toLocaleString('nl-NL')+' XP tot level '+(level+1);
-  return '<div class="xp-card-head"><div><div class="xp-rank">'+levelEmojis[level]+' Level '+level+' · '+safe(levelNames[level])+'</div><div class="xp-sub">'+xp.toLocaleString('nl-NL')+' XP totaal · '+(Number(rewardState.pending)||0)+' beloningen te innen</div></div><strong>⭐ XP</strong></div><div class="xp-bar" role="progressbar" aria-label="XP-voortgang naar volgend level" aria-valuenow="'+Math.floor(pct)+'" aria-valuemin="0" aria-valuemax="100"><div class="xp-bar-fill" style="width:'+pct+'%"></div></div><div class="xp-progress-label">'+safe(message)+'</div>';
+  return '<div class="xp-card-head"><img class="xp-avatar-mini" src="'+avatarSrc(selectedAvatarLevel)+'" alt="Geselecteerde Stofmonster-avatar"><div style="flex:1;min-width:0"><div class="xp-rank">'+levelEmojis[level]+' Level '+level+' · '+safe(levelNames[level])+'</div><div class="xp-sub">'+xp.toLocaleString('nl-NL')+' XP totaal · '+(Number(rewardState.pending)||0)+' beloningen te innen</div></div><strong>⭐ XP</strong></div><div class="xp-bar" role="progressbar" aria-label="XP-voortgang naar volgend level" aria-valuenow="'+Math.floor(pct)+'" aria-valuemin="0" aria-valuemax="100"><div class="xp-bar-fill" style="width:'+pct+'%"></div></div><div class="xp-progress-label">'+safe(message)+'</div>';
 }
 function updateXPUI(){
   setBadgeNotification(Number(rewardState?.pending)||0);
   el('achievement-xp-card').innerHTML=badgeXPMarkup();
   el('xp-account-summary').innerHTML=state.user?badgeXPMarkup():'<span class="hint">Log in om je XP-voortgang te zien.</span>';
+  renderAvatarCollection();
 }
 function renderAchievements(){
   const earned=achievementData.filter(a=>a.behaald_op);
@@ -1107,9 +1166,11 @@ function showLevelReward(result){
   const oldLevel=Number(result.old_level)||1,newLevel=Number(result.new_level)||1;
   el('level-reward-number').textContent='LEVEL '+newLevel;
   el('level-reward-icon').textContent=levelEmojis[newLevel]||'🏆';
+  el('level-reward-avatar').src=avatarSrc(newLevel);
+  el('level-reward-avatar').alt='Nieuw vrijgespeeld: '+levelNames[newLevel];
   el('level-reward-title').textContent=levelNames[newLevel]||'Nieuw level!';
   el('level-reward-description').textContent='Je hebt '+Number(result.awarded_xp||0)+' XP geïnd en bent gestegen van level '+oldLevel+' naar '+newLevel+'!';
-  el('level-reward-more').textContent=newLevel-oldLevel>1?(newLevel-oldLevel)+' levels vrijgespeeld! De bijbehorende unieke avatars worden in de volgende update toegevoegd.':'Je nieuwe rang is ontgrendeld. De bijbehorende unieke avatar volgt in een volgende update.';
+  el('level-reward-more').textContent=newLevel-oldLevel>1?(newLevel-oldLevel)+' avatars ontgrendeld! Kies je favoriet onder Account.':'Je nieuwe avatar is vrijgespeeld! Je kunt deze onder Account instellen.';
   show('level-reward-overlay',true);
   el('level-reward-close').focus();
 }
@@ -1158,7 +1219,7 @@ function setLeaderboardPeriod(period){
   });
   refreshLeaderboard();
 }
-const leaderboardLabels={punten:'Punten',klusjes_voltooid:'Klusjes',competities_gespeeld:'Competities',winpercentage:'Winpercentage'};
+const leaderboardLabels={level:'Level',punten:'Punten',klusjes_voltooid:'Klusjes',competities_gespeeld:'Competities',winpercentage:'Winpercentage'};
 function renderLeaderboardTable(){
   const results=el('leaderboard-results');
   const sort=leaderboardState.sort, direction=leaderboardState.direction;
@@ -1173,6 +1234,7 @@ function renderLeaderboardTable(){
     const av=a[sort]===null?-1:Number(a[sort]??0);
     const bv=b[sort]===null?-1:Number(b[sort]??0);
     const d=direction==='asc'?av-bv:bv-av;
+    if(sort==='level'&&!d)return (Number(b.xp)||0)-(Number(a.xp)||0);
     return d||a.name.localeCompare(b.name,'nl');
   });
   if(!list.length){results.innerHTML='<div class="empty">Nog geen spelers gevonden.</div>';return;}
@@ -1191,7 +1253,7 @@ function renderLeaderboardTable(){
     const position=eligible?(rank===1?'🥇':rank===2?'🥈':rank===3?'🥉':String(rank)):'—';
     const win=p.winpercentage===null?'—':p.winpercentage.toLocaleString('nl-NL',{maximumFractionDigits:1})+'%';
     const winDetail=`${p.gewonnen}W · ${p.verloren}V · ${p.gelijkspel}G`;
-    return `<tr class="${isMe(p)?'leaderboard-me':''}"><td>${position}</td><td class="leaderboard-user">@${safe(p.name)}${isMe(p)?'<span class="leaderboard-you-tag">Jij</span>':''}</td><td class="leaderboard-value">${nlLeaderboardNumber(p.punten)}</td><td class="leaderboard-value">${nlLeaderboardNumber(p.klusjes_voltooid)}</td><td class="leaderboard-value">${nlLeaderboardNumber(p.competities_gespeeld)}</td><td class="leaderboard-value${isWin&&!eligible?' leaderboard-unranked':''}">${safe(win)}<span class="leaderboard-sub">${safe(winDetail)}${isWin&&!eligible?' · niet gerangschikt':''}</span></td></tr>`;
+    return `<tr class="${isMe(p)?'leaderboard-me':''}"><td>${position}</td><td class="leaderboard-user"><div class="leader-player-name"><img class="leader-avatar" src="${avatarSrc(p.avatar_level)}" alt=""><span>@${safe(p.name)}${isMe(p)?'<span class="leaderboard-you-tag">Jij</span>':''}<small>Lv. ${p.level} · ${safe(levelNames[p.level]||levelNames[1])}</small></span></div></td><td class="leaderboard-value">${nlLeaderboardNumber(p.level)}<span class="leaderboard-sub">${nlLeaderboardNumber(p.xp)} XP</span></td><td class="leaderboard-value">${nlLeaderboardNumber(p.punten)}</td><td class="leaderboard-value">${nlLeaderboardNumber(p.klusjes_voltooid)}</td><td class="leaderboard-value">${nlLeaderboardNumber(p.competities_gespeeld)}</td><td class="leaderboard-value${isWin&&!eligible?' leaderboard-unranked':''}">${safe(win)}<span class="leaderboard-sub">${safe(winDetail)}${isWin&&!eligible?' · niet gerangschikt':''}</span></td></tr>`;
   }).join('');
   const mobileRows=list.map((p,i)=>{
     const eligible=!isWin||(p.gewonnen+p.verloren>=5);
@@ -1200,13 +1262,14 @@ function renderLeaderboardTable(){
     const win=p.winpercentage===null?'—':p.winpercentage.toLocaleString('nl-NL',{maximumFractionDigits:1})+'%';
     const winDetail=`${p.gewonnen}W · ${p.verloren}V · ${p.gelijkspel}G`;
     const items=[
+      ['level','Level',String(p.level),nlLeaderboardNumber(p.xp)+' XP'],
       ['punten','Punten',nlLeaderboardNumber(p.punten),''],
       ['klusjes_voltooid','Klusjes',nlLeaderboardNumber(p.klusjes_voltooid),''],
       ['competities_gespeeld','Competities',nlLeaderboardNumber(p.competities_gespeeld),''],
       ['winpercentage','Winpercentage',win,winDetail+(isWin&&!eligible?' · Niet gerangschikt':'')]
     ];
     const stats=items.map(([key,label,value,detail])=>`<button type="button" class="leaderboard-mobile-stat${sort===key?' highlight':''}" data-leaderboard-sort="${key}" aria-pressed="${sort===key}" aria-label="Sorteer op ${label}${sort===key?', momenteel '+(direction==='desc'?'hoog naar laag':'laag naar hoog'): ''}"><span>${label}${sort===key?` <span class="sort-indicator" aria-hidden="true">${direction==='desc'?'↓':'↑'}</span>`:''}</span><strong>${safe(value)}</strong>${detail?`<small>${safe(detail)}</small>`:''}</button>`).join('');
-    return `<article class="leaderboard-mobile-card${isMe(p)?' leaderboard-me':''}"><div class="leaderboard-mobile-head"><span class="leaderboard-mobile-rank">${medal}</span><span class="leaderboard-mobile-name">@${safe(p.name)}${isMe(p)?'<span class="leaderboard-you-tag">Jij</span>':''}</span></div><div class="leaderboard-mobile-stats">${stats}</div></article>`;
+    return `<article class="leaderboard-mobile-card${isMe(p)?' leaderboard-me':''}"><div class="leaderboard-mobile-head"><span class="leaderboard-mobile-rank">${medal}</span><img class="leader-avatar" src="${avatarSrc(p.avatar_level)}" alt=""><span class="leaderboard-mobile-name">@${safe(p.name)}${isMe(p)?'<span class="leaderboard-you-tag">Jij</span>':''}<small style="display:block">Lv. ${p.level} · ${safe(levelNames[p.level]||levelNames[1])}</small></span></div><div class="leaderboard-mobile-stats">${stats}</div></article>`;
   }).join('');
   results.innerHTML='<div class="leaderboard-sum">'+list.length+' speler'+(list.length===1?'':'s')+' · Gesorteerd op '+leaderboardLabels[sort]+' ('+(direction==='desc'?'hoog naar laag':'laag naar hoog')+')</div><div class="leaderboard-table-wrap" role="region" aria-label="Sorteerbare leaderboardtabel" tabindex="0"><table class="leaderboard-table"><thead><tr><th scope="col">#</th><th scope="col">Speler</th>'+headers+'</tr></thead><tbody>'+rows+'</tbody></table></div><div class="leaderboard-mobile-list">'+mobileRows+'</div>';
 }
@@ -1218,9 +1281,10 @@ async function refreshLeaderboard(){
   results.innerHTML='<div class="loading">Ranglijst laden...</div>';
   el('leaderboard-period-info').textContent=period==='maand'?`Periode: ${leaderboardMonthLabel()}`:'Periode: alle beschikbare gegevens';
   try{
-    const [choresResult,competitionsResult]=await Promise.all([
+    const [choresResult,competitionsResult,levelsResult]=await Promise.all([
       client.rpc('leaderboard_klusjes',{p_periode:period}),
-      client.rpc('leaderboard_competities',{p_periode:period})
+      client.rpc('leaderboard_competities',{p_periode:period}),
+      client.rpc('publieke_speler_levels')
     ]);
     if(choresResult.error)throw choresResult.error;
     if(competitionsResult.error)throw competitionsResult.error;
@@ -1236,7 +1300,16 @@ async function refreshLeaderboard(){
       Object.assign(p,{competities_gespeeld:Number(row.competities_gespeeld||0),gewonnen:Number(row.gewonnen||0),verloren:Number(row.verloren||0),gelijkspel:Number(row.gelijkspel||0),winpercentage:row.winpercentage===null?null:Number(row.winpercentage)});
       players.set(name,p);
     }
-    leaderboardState.players=[...players.values()];
+    if(levelsResult.error){console.warn('Levels nog niet beschikbaar (voer v0.7.8 SQL uit):',levelsResult.error);}
+    for(const entry of (levelsResult.data||[])){
+      const name=String(entry.gebruikersnaam||'');if(!name)continue;
+      const p=players.get(name)||{name,punten:0,klusjes_voltooid:0,competities_gespeeld:0,gewonnen:0,verloren:0,gelijkspel:0,winpercentage:null};
+      p.level=Math.max(1,Math.min(10,Number(entry.level)||1));
+      p.xp=Math.max(0,Number(entry.xp)||0);
+      p.avatar_level=Math.max(1,Math.min(p.level,Number(entry.avatar_level)||1));
+      players.set(name,p);
+    }
+    leaderboardState.players=[...players.values()].map(p=>({...p,level:p.level||1,xp:p.xp||0,avatar_level:p.avatar_level||1}));
     renderLeaderboardTable();
   }catch(err){if(request===leaderboardRequest)results.innerHTML='<div class="empty">Ranglijst laden mislukt: '+safe(errorText(err))+'</div>';}
 }
@@ -1252,7 +1325,7 @@ el('leaderboard-results').addEventListener('click',e=>{
   renderLeaderboardTable();
 });
 async function bootstrap(){if(!window.supabase){show('loading',false);msg('De Supabase-bibliotheek kon niet laden. Controleer je internetverbinding.');return;}client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});const {data,error}=await client.auth.getSession();if(error)throw error;await openUser(data.session?.user||null);client.auth.onAuthStateChange((_event,session)=>{const next=session?.user||null;if(next?.id!==state.user?.id){setTimeout(()=>openUser(next).catch(e=>msg(errorText(e))),0);}});}
-async function openUser(user){syncToken++;state.user=user;show('achievements-toggle',!!user);achievementOpen=false;achievementRequest++;achievementData=[];rewardState=null;rewardRequest++;updateXPUI();show('achievements-panel',false);el('achievements-toggle').setAttribute('aria-expanded','false');show('loading',false);show('auth',!user);show('app',!!user);show('logout',!!user);show('logged-name',!!user);el('account-username').textContent=user?'Gebruiker':'Niet ingelogd';el('account-email').textContent=user?.email||'';show('account-session-group',!!user);show('account-signin-hint',!user);if(!user){syncStatus('Automatisch verversen gepauzeerd');adminChoreCache.clear();state.adminCompetitions=[];state.adminTab='chores';el('admin-toggle').textContent='⚙ Admin Mode';state.isAdmin=false;show('admin-toggle',false);show('admin-panel',false);state.selected=null;state.profile=null;state.competitionChores=[];state.scoreboard=[];state.history=[];state.legacyRematches=new Map();navigate('home');return;}await refreshAll();try{await fetchBadgeRewards();}catch(err){console.warn('XP en badges laden nog niet beschikbaar:',err);}navigate('home');syncStatus('Automatisch verversen actief · elke 15 sec');}
+async function openUser(user){syncToken++;state.user=user;show('achievements-toggle',!!user);achievementOpen=false;achievementRequest++;achievementData=[];rewardState=null;rewardRequest++;selectedAvatarLevel=1;updateXPUI();show('achievements-panel',false);el('achievements-toggle').setAttribute('aria-expanded','false');show('loading',false);show('auth',!user);show('app',!!user);show('logout',!!user);show('logged-name',!!user);el('account-username').textContent=user?'Gebruiker':'Niet ingelogd';el('account-email').textContent=user?.email||'';show('account-session-group',!!user);show('account-signin-hint',!user);if(!user){syncStatus('Automatisch verversen gepauzeerd');adminChoreCache.clear();state.adminCompetitions=[];state.adminTab='chores';el('admin-toggle').textContent='⚙ Admin Mode';state.isAdmin=false;show('admin-toggle',false);show('admin-panel',false);state.selected=null;state.profile=null;state.competitionChores=[];state.scoreboard=[];state.history=[];state.legacyRematches=new Map();navigate('home');return;}await refreshAll();try{await fetchBadgeRewards();}catch(err){console.warn('XP en badges laden nog niet beschikbaar:',err);}try{await fetchSelectedAvatar();}catch(err){console.warn('Avatarselectie nog niet beschikbaar (v0.7.8 SQL):',err);renderAvatarCollection();}navigate('home');syncStatus('Automatisch verversen actief · elke 15 sec');}
 async function refreshAll(){if(!state.user)return;const {data:profile,error:pe}=await client.from('profiles').select('id,gebruikersnaam,naam').eq('id',state.user.id).single();if(pe)throw pe;state.profile=profile;const {data:isAdmin,error:adminError}=await client.rpc('is_admin');if(adminError)throw adminError;state.isAdmin=isAdmin===true;show('admin-toggle',state.isAdmin);show('account-admin-group',state.isAdmin);if(!state.isAdmin)show('admin-panel',false);el('account-username').textContent='@'+(profile.gebruikersnaam||profile.naam);el('account-email').textContent=state.user?.email||'';el('logged-name').textContent='@'+(profile.gebruikersnaam||profile.naam);el('welcome').textContent='Hoi, '+(profile.gebruikersnaam||profile.naam)+' 👋';const [{data:members,error:me},{data:chores,error:ce}]=await Promise.all([client.from('competitie_deelnemers').select('competitie_id,gebruiker_id,status,competities(id,naam,status,aangemaakt_door,duur_dagen,start_op,eindigt_op,aangemaakt_op,rematch_van,klusjesprofiel)').eq('gebruiker_id',state.user.id),client.from('klusjes').select('id,naam,punten,wachttijd_uren,standaard').eq('actief',true).order('naam')]);if(me)throw me;if(ce)throw ce;state.chores=chores||[];renderChallengeTaskList();state.competitions=(members||[]).filter(x=>x.competities).map(x=>({id:x.competitie_id,myStatus:x.status,...x.competities})).sort((a,b)=>b.id-a.id);renderInvitations();renderCompetitions();renderChores();try{await loadCompetitionPreviews();}catch(err){console.warn('Scorepreviews tijdelijk niet beschikbaar:',err);}await loadHistory();if(state.selected&&state.competitions.some(c=>c.id===state.selected&&c.myStatus==='geaccepteerd'&&c.status!=='uitnodiging'))await selectCompetition(state.selected);else{state.selected=null;state.competitionChores=[];show('selected-area',false);}}
 function timeRemaining(iso){if(!iso)return 0;return Math.max(0,new Date(iso).getTime()-Date.now());}
 function durationParts(ms){let sec=Math.max(0,Math.ceil(ms/1000));const d=Math.floor(sec/86400);sec%=86400;const h=Math.floor(sec/3600);sec%=3600;const m=Math.floor(sec/60);return [d,h,m,sec%60];}
