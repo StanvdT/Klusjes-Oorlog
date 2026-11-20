@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.6.6-alpha</title>
+<title>Klusjes-Oorlog | v0.6.7-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -72,7 +72,7 @@
 .floating-notice{position:fixed!important;z-index:9999;top:18px;right:18px;left:auto!important;width:min(390px,calc(100vw - 36px));box-shadow:0 12px 36px rgba(29,42,75,.18);border-radius:12px;pointer-events:none;margin:0!important}
 @media(max-width:620px){.system-reset-item{align-items:flex-start;gap:8px}.floating-notice{right:12px;top:12px;width:calc(100vw - 24px)}}
 
-/* v0.6.6-alpha — navigatie, account, responsieve thema's */
+/* v0.6.7-alpha — navigatie, account, responsieve thema's */
 :root{color-scheme:light}
 body{min-height:100vh}
 .wrap{padding-bottom:105px}
@@ -136,7 +136,7 @@ html[data-theme="dark"] .leaderboard-mobile-card,html[data-theme="dark"] .leader
 html[data-theme="dark"] .leaderboard-mobile-stat.active{background:#303e65;border-color:#8492ff}
 
 
-/* v0.6.6-alpha — contrastverbetering donkere modus. Houd lichte modus onveranderd. */
+/* v0.6.7-alpha — contrastverbetering donkere modus. Houd lichte modus onveranderd. */
 html[data-theme="dark"]{
   --dark-bg:#101824;
   --dark-panel:#1d2a3b;
@@ -272,7 +272,7 @@ html[data-theme="dark"] .end-banner{background:#1d493d;color:#dcffec}
 html[data-theme="dark"] :is(button,input,select,textarea,summary,a):focus-visible{outline:3px solid #b5bfff;outline-offset:2px}
 
 
-/* v0.6.6-alpha — Home-dashboard redesign. CSS blijft beperkt tot Home. */
+/* v0.6.7-alpha — Home-dashboard redesign. CSS blijft beperkt tot Home. */
 #home-content{display:grid;gap:0;min-width:0}
 .home-hero{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:30px 32px;margin-bottom:16px;background:linear-gradient(115deg,#ecf0ff 0%,#f5f5ff 55%,#f9fbff 100%);border:1px solid #e1e7fa;border-radius:24px;overflow:hidden}
 .home-hero-copy{position:relative;z-index:1;flex:1;min-width:0}
@@ -349,7 +349,7 @@ html[data-theme="dark"] .home-match-details .countdown-unit{box-shadow:none}
 @media(prefers-reduced-motion:reduce){.home-competition-card{transition:none}.home-competition-card:hover{transform:none}}
 
 
-/* v0.6.6-alpha: aparte competitiehub en wedstrijdpreviews */
+/* v0.6.7-alpha: aparte competitiehub en wedstrijdpreviews */
 .app-nav{gap:5px}
 .nav-item{min-width:0}
 .competitions-hub{animation:hub-in .24s ease both}
@@ -406,7 +406,7 @@ html[data-theme="dark"] .home-cta p,html[data-theme="dark"] .score-ring-center s
 }
 @media(prefers-reduced-motion:reduce){.competitions-hub{animation:none}}
 
-/* v0.6.6-alpha: wedstrijdpreview en detail */
+/* v0.6.7-alpha: wedstrijdpreview en detail */
 .preview-rings{display:flex;align-items:flex-start;gap:13px;flex:none}
 .metric-ring-block{display:grid;justify-items:center;gap:6px;min-width:0}
 .metric-ring-label{font-size:11px;font-weight:800;color:#637592;letter-spacing:.3px}
@@ -495,6 +495,50 @@ html[data-theme="dark"] .pending-invitation-item{background:#25354a;border-color
 html[data-theme="dark"] .leaderboard-table tr.leaderboard-me td{background:#303e65!important;color:#fff;border-color:#8094ff}
 html[data-theme="dark"] .leaderboard-mobile-card.leaderboard-me{background:linear-gradient(120deg,#2c3b61,#222e43);border-color:#90a1ff}
 @media(max-width:600px){.home-invitation-alert{padding:13px;gap:10px}.home-invitation-copy strong{font-size:13px}.competition-notification-badge{right:1px;top:0}}
+
+/* v0.6.7-alpha — rustige ringen en individuele percentages */
+.score-ring-center .ring-symbol{font-size:22px!important;line-height:1;color:#5364c8;letter-spacing:0;white-space:nowrap}
+.score-ring-neutral .ring-symbol{color:#8995ad}
+.preview-percentages{display:none!important}
+.match-preview-score .score-players{gap:10px;min-width:0}
+.match-preview-score .score-players .preview-player-row{display:grid;grid-template-columns:9px minmax(0,1fr) auto;gap:7px;align-items:center;min-width:0}
+.match-preview-score .score-person{overflow-wrap:anywhere;white-space:normal;min-width:0;font-size:12px}
+.preview-player-data{display:grid;justify-items:end;gap:3px;white-space:nowrap}
+.preview-player-data strong{font-size:14px!important}
+.preview-player-data strong small{font-weight:650}
+.preview-player-data em{font-style:normal;color:#455dd7;font-weight:900;margin-left:5px}
+.preview-player-row:nth-child(2) .preview-player-data em{color:#ba6d24}
+.preview-player-data>small{font-size:11px;color:#637592;font-weight:600}
+.preview-player-data>small em{margin-left:4px}
+#selected-area .match-main-grid{grid-template-columns:1fr}
+#selected-area .match-main-grid>.card{width:100%}
+.duel-fighter .duel-share{font-size:13px;font-weight:850;border-radius:10px;padding:6px 8px;background:#ffffffad}
+.duel-fighter .duel-share-a{color:#485ed3}
+.duel-fighter .duel-share-b{color:#a85d1c}
+.duel-tasks-label{text-align:center;margin:18px 0 0;font-size:10px;letter-spacing:1.2px;font-weight:850;color:#6c7e9b}
+.duel-tasks{margin-top:9px}
+.duel-tasks span{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
+.duel-tasks span b{font-size:12px;padding:2px 6px;border-radius:8px;background:#e9edff;color:#465bd0}
+.duel-tasks .duel-tasks-b b{background:#fff0df;color:#9f591f}
+html[data-theme="dark"] .score-ring-center .ring-symbol{color:#a8b4ff}
+html[data-theme="dark"] .preview-player-data em{color:#a7b4ff}
+html[data-theme="dark"] .preview-player-row:nth-child(2) .preview-player-data em{color:#ffc188}
+html[data-theme="dark"] .preview-player-data>small{color:#c2cee0}
+html[data-theme="dark"] .duel-fighter .duel-share{background:#1e2c42}
+html[data-theme="dark"] .duel-fighter .duel-share-a{color:#b3c0ff}
+html[data-theme="dark"] .duel-fighter .duel-share-b{color:#ffd0a6}
+html[data-theme="dark"] .duel-tasks-label{color:#bcc9de}
+html[data-theme="dark"] .duel-tasks .duel-tasks-a b{background:#34436d;color:#c2ceff}
+html[data-theme="dark"] .duel-tasks .duel-tasks-b b{background:#54402d;color:#ffdbb7}
+@media(max-width:590px){
+ .match-preview-score .score-players .preview-player-row{grid-template-columns:8px minmax(0,1fr) auto;gap:5px}
+ .preview-player-data strong{font-size:12px!important}
+ .preview-player-data>small{font-size:10px}
+ .match-preview-score .score-person{font-size:11px}
+ .duel-fighter .duel-share{font-size:11px;padding:5px 4px}
+ .duel-tasks{gap:6px}
+ .duel-tasks span{font-size:10px}
+}
 </style>
 </head>
 <body>
@@ -508,7 +552,7 @@ html[data-theme="dark"] .leaderboard-mobile-card.leaderboard-me{background:linea
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.6-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.7-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
@@ -555,21 +599,22 @@ html[data-theme="dark"] .leaderboard-mobile-card.leaderboard-me{background:linea
 </div><section id="competitions-hub" class="hidden competitions-hub" aria-label="Competities">
   <div class="hub-hero"><div><span class="home-eyebrow">JOUW WEDSTRIJDEN</span><h2 class="title">Competities ⚔</h2><p>Bekijk de tussenstand, daag vrienden uit en open je wedstrijden.</p></div><span class="hub-hero-icon" aria-hidden="true">🏆</span></div>
   <div id="hub-inner"><section id="hub-competition-list" class="section-space home-competition-list"><div class="space hub-section-heading"><h3 class="section-title">Jouw competities</h3><span class="pill">Scores & countdowns</span></div><div class="grid" id="competitions"><div class="empty">Nog geen competities. Daag een vriend uit!</div></div></section>
-<section class="section-space hidden home-match-details" id="selected-area"><div class="space" style="margin-bottom:15px"><div class="details-heading"><button class="btn secondary small" id="back-to-competitions" type="button">← Alle competities</button><h3 class="section-title" id="selected-title" style="margin:0">Competitie</h3></div><span class="pill" id="selected-status">Live score</span></div><div class="duel-hero" id="duel-hero" aria-label="Tussenstand en uitgevoerde klusjes"><div class="duel-hero-loading">Duelgegevens laden…</div></div><div aria-label="Resterende competitietijd" class="countdown-box" id="competition-clock" role="timer"></div><div class="end-banner hidden" id="competition-result"></div><div class="grid match-main-grid"><section class="card"><h3 class="section-title">⚔ Tussenstand</h3><div class="empty" id="scoreboard">Laden...</div><p class="notice">Punten tellen afzonderlijk per competitie.</p></section><section class="card"><h3 class="section-title">⚡ Pak je punten</h3><p class="duel-task-hint">Kies een klusje en verdien punten voor jouw team.</p><div class="choose"><select aria-label="Selecteer een klusje" id="chore-select"><option value="">Selecteer een klusje</option></select><button class="btn" id="complete-chore">Voltooien</button></div><p aria-live="polite" class="cooldown-note" id="chore-cooldown">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space duel-feed"><h3 class="section-title">◷ Activiteiten</h3><div class="empty" id="activity">Nog geen activiteiten</div></div></section>
+<section class="section-space hidden home-match-details" id="selected-area"><div class="space" style="margin-bottom:15px"><div class="details-heading"><button class="btn secondary small" id="back-to-competitions" type="button">← Alle competities</button><h3 class="section-title" id="selected-title" style="margin:0">Competitie</h3></div><span class="pill" id="selected-status">Live score</span></div><div class="duel-hero" id="duel-hero" aria-label="Tussenstand en uitgevoerde klusjes"><div class="duel-hero-loading">Duelgegevens laden…</div></div><div aria-label="Resterende competitietijd" class="countdown-box" id="competition-clock" role="timer"></div><div class="end-banner hidden" id="competition-result"></div><div class="grid match-main-grid"><section class="card"><h3 class="section-title">⚡ Pak je punten</h3><p class="duel-task-hint">Kies een klusje en verdien punten voor jouw team.</p><div class="choose"><select aria-label="Selecteer een klusje" id="chore-select"><option value="">Selecteer een klusje</option></select><button class="btn" id="complete-chore">Voltooien</button></div><p aria-live="polite" class="cooldown-note" id="chore-cooldown">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space duel-feed"><h3 class="section-title">◷ Activiteiten</h3><div class="empty" id="activity">Nog geen activiteiten</div></div></section>
 <section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section>
 <section class="section-space home-social-area" aria-label="Uitdagingen en uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section><section class="card"><h3 class="section-title">Uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div></section>
 <section class="section-space home-history-area" id="history-section"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.6-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.7-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.6.6-alpha';
+const APP_VERSION='v0.6.7-alpha';
 const CHANGELOG=[
-  {version:'v0.6.6-alpha',date:'20 november 2026',changes:[
-    'Duidelijke 100%-verdeling: per speler zijn de eigen percentages zichtbaar; het midden van de ring toont geen misleidend percentage meer.',
-    'Ontvangen uitnodigingen verschijnen bovenaan Home en in een notificatie bij Competities; verzonden uitnodigingen staan niet meer tussen actieve duels.',
-    'Je eigen profiel is duidelijk gemarkeerd op het desktop- en mobiele leaderboard.'
+  {version:'v0.6.7-alpha',date:'20 november 2026',changes:[
+    'Ringdiagrammen tonen alleen de verdeling; de eigen percentages staan naast iedere speler.',
+    'Punten en uitgevoerde klusjes hebben per speler een eigen percentage. Bij 0–0 worden nog geen percentages geclaimd.',
+    'Het dubbele blok Tussenstand is uit het competitiescherm verwijderd; de duelkaart bevat alle score-informatie.',
+    'De duelkaart en wedstrijdacties zijn compacter en beter leesbaar op mobiel en in donkere modus.'
   ]},
   {version:'v0.6.6-alpha',date:'20 november 2026',changes:[
     'Scoreverdeling gecorrigeerd: percentages van beide spelers tellen op tot 100%, zonder tekst die buiten de ring valt.',
@@ -1002,8 +1047,8 @@ function percentagePair(first,second){
 function progressRing(first,second,label){
  const total=first+second;
  const [left,right]=percentagePair(first,second);
- const display=total?`${left}% · ${right}%`:'0 – 0';
- return `<div class="metric-ring-block"><div class="score-ring ${total?'':'score-ring-neutral'}" role="img" aria-label="${safe(label)}: speler 1 ${left} procent, speler 2 ${right} procent" style="--ring-ratio:${left}%;--ring-color-a:${total?'#5667e3':'#aab6cd'};--ring-color-b:${total?'#f4a65b':'#aab6cd'}"><div class="score-ring-center"><strong class="ring-pair">${display}</strong></div></div><span class="metric-ring-label">${safe(label)}</span></div>`;
+ const center=total?'⚔':'–';
+ return `<div class="metric-ring-block"><div class="score-ring ${total?'':'score-ring-neutral'}" role="img" aria-label="${safe(label)}: ${total?`speler 1 ${left} procent, speler 2 ${right} procent`:'nog geen uitvoeringen'}" style="--ring-ratio:${left}%;--ring-color-a:${total?'#5667e3':'#aab6cd'};--ring-color-b:${total?'#f4a65b':'#aab6cd'}"><div class="score-ring-center"><strong class="ring-symbol" aria-hidden="true">${center}</strong></div></div><span class="metric-ring-label">${safe(label)}</span></div>`;
 }
 function competitionPreview(c,where='home'){
  const score=state.previewScores?.get(c.id);
@@ -1018,7 +1063,10 @@ function competitionPreview(c,where='home'){
  const note=c.status==='actief'&&c.eindigt_op?durationText(timeRemaining(c.eindigt_op))+' resterend':(c.duur_dagen||7)+' dagen na acceptatie';
  const matchRings=score?`<div class="preview-rings">${progressRing(p1.points,p2.points,'Punten')}${where==='home'?progressRing(p1.tasks||0,p2.tasks||0,'Klusjes'):''}</div>`:`<div class="preview-rings"><div class="score-ring score-ring-loading"><div class="score-ring-center"><strong>—</strong></div></div></div>`;
  return `<article class="card home-competition-card match-preview-card"><div class="home-comp-header"><span class="home-comp-avatar" aria-hidden="true">⚔</span><span class="home-comp-title"><strong>${safe(c.naam)}</strong><span class="home-comp-subtitle">${c.klusjesprofiel==='gepersonaliseerd'?'Persoonlijke klusjes':'Standaardklusjes'} · ${c.duur_dagen||7} dagen</span></span><span class="pill ${c.status==='actief'?'pill-live':''}">${safe(label)}</span></div>
- <div class="match-preview-score">${matchRings}<div class="score-players"><div><span class="score-marker score-marker-a"></span><span class="score-person">@${safe(p1.name)}</span><strong>${p1.points} <small>pt</small> · ${p1Percent}%</strong></div><div><span class="score-marker score-marker-b"></span><span class="score-person">@${safe(p2.name)}</span><strong>${p2.points} <small>pt</small> · ${p2Percent}%</strong></div><div class="preview-percentages"><span>Blauw: ${p1Percent}% · Oranje: ${p2Percent}%</span>${where==='home'?`<span>${p1.tasks||0} / ${p2.tasks||0} klusjes · ${p1TasksPercent}% / ${p2TasksPercent}%</span>`:''}</div></div></div>
+ <div class="match-preview-score">${matchRings}<div class="score-players">
+ <div class="preview-player-row"><span class="score-marker score-marker-a"></span><span class="score-person">@${safe(p1.name)}</span><span class="preview-player-data"><strong>${p1.points} <small>pt</small> <em>${p1.points+p2.points?p1Percent+'%':'–'}</em></strong>${where==='home'?`<small>${p1.tasks||0} klusjes <em>${(p1.tasks||0)+(p2.tasks||0)?p1TasksPercent+'%':'–'}</em></small>`:''}</span></div>
+ <div class="preview-player-row"><span class="score-marker score-marker-b"></span><span class="score-person">@${safe(p2.name)}</span><span class="preview-player-data"><strong>${p2.points} <small>pt</small> <em>${p1.points+p2.points?p2Percent+'%':'–'}</em></strong>${where==='home'?`<small>${p2.tasks||0} klusjes <em>${(p1.tasks||0)+(p2.tasks||0)?p2TasksPercent+'%':'–'}</em></small>`:''}</span></div>
+ </div></div>
  <div class="home-competition-bottom"><p class="home-comp-time" data-competition-remaining="${c.id}">${safe(note)}</p>${open?`<button type="button" class="btn secondary small home-open-competition" data-open="${c.id}">Bekijk duel →</button>`:''}</div></article>`;
 }
 function renderCompetitions(){
@@ -1037,8 +1085,17 @@ function renderDuelHero(){
  const tasks1=state.records.filter(r=>r.gebruiker_id===p1.id&&!r.geannuleerd_op).length;
  const tasks2=state.records.filter(r=>r.gebruiker_id===p2.id&&!r.geannuleerd_op).length;
  const [pct1,pct2]=percentagePair(p1.points,p2.points);
+ const [taskPct1,taskPct2]=percentagePair(tasks1,tasks2);
+ const hasPoints=p1.points+p2.points>0,hasTasks=tasks1+tasks2>0;
  const c=state.competitions.find(x=>x.id===state.selected);
- node.innerHTML=`<div class="duel-hero-top"><span class="duel-eyebrow">⚔ HET DUEL</span><span class="duel-live">${c&&competitionFinished(c)?'Afgelopen':'● Live competitie'}</span></div><div class="duel-arena"><div class="duel-fighter"><span class="duel-avatar">${safe(p1.name.slice(0,1).toUpperCase())}</span><strong>@${safe(p1.name)}</strong><span class="duel-fighter-score">${p1.points}<small> punten</small></span><span class="duel-share">${pct1}% van de punten</span></div><div class="duel-middle"><span>VS</span>${progressRing(p1.points,p2.points,'Punten')}</div><div class="duel-fighter"><span class="duel-avatar duel-avatar-alt">${safe(p2.name.slice(0,1).toUpperCase())}</span><strong>@${safe(p2.name)}</strong><span class="duel-fighter-score">${p2.points}<small> punten</small></span><span class="duel-share">${pct2}% van de punten</span></div></div><div class="duel-tasks"><span>✓ ${tasks1} klusjes door @${safe(p1.name)}</span><span>✓ ${tasks2} klusjes door @${safe(p2.name)}</span></div>`;
+ node.innerHTML=`<div class="duel-hero-top"><span class="duel-eyebrow">⚔ HET DUEL</span><span class="duel-live">${c&&competitionFinished(c)?'Afgelopen':'● Live competitie'}</span></div>
+ <div class="duel-arena">
+   <div class="duel-fighter"><span class="duel-avatar">${safe(p1.name.slice(0,1).toUpperCase())}</span><strong>@${safe(p1.name)}</strong><span class="duel-fighter-score">${p1.points}<small> punten</small></span><span class="duel-share duel-share-a">${hasPoints?pct1+'%':'–'} van de punten</span></div>
+   <div class="duel-middle"><span>VS</span>${progressRing(p1.points,p2.points,'Punten')}</div>
+   <div class="duel-fighter"><span class="duel-avatar duel-avatar-alt">${safe(p2.name.slice(0,1).toUpperCase())}</span><strong>@${safe(p2.name)}</strong><span class="duel-fighter-score">${p2.points}<small> punten</small></span><span class="duel-share duel-share-b">${hasPoints?pct2+'%':'–'} van de punten</span></div>
+ </div>
+ <div class="duel-tasks-label">KLUSJES UITGEVOERD</div>
+ <div class="duel-tasks"><span class="duel-tasks-a"><strong>${tasks1}</strong> door @${safe(p1.name)} <b>${hasTasks?taskPct1+'%':'–'}</b></span><span class="duel-tasks-b"><strong>${tasks2}</strong> door @${safe(p2.name)} <b>${hasTasks?taskPct2+'%':'–'}</b></span></div>`;
 }
 function showCompetitionDetails(){show('hub-competition-list',false);show('selected-area',true);}
 async function openCompetitionDetails(id){
@@ -1149,7 +1206,7 @@ function updateChoreAvailability(){const c=state.competitions.find(x=>x.id===sta
 function renderSelectedClock(){const c=state.competitions.find(x=>x.id===state.selected);if(!c)return;const finished=competitionFinished(c);el('selected-status').textContent=finished?'Afgelopen':'Live score';el('selected-area').classList.toggle('expired',finished);const clock=el('competition-clock');clock.innerHTML=finished?'<strong>⏱ De competitietijd is verstreken</strong>':c.eindigt_op?clockMarkup(timeRemaining(c.eindigt_op)):'Starttijd niet beschikbaar';const box=el('competition-result');show('competition-result',finished);if(finished){const leaders=state.scoreboard;const best=leaders[0]?.points??0;const winners=leaders.filter(x=>x.points===best);box.textContent=winners.length>1?'🤝 Gelijkspel! Beide spelers hebben '+best+' punten.':winners.length===1?'🏆 Winnaar: @'+winners[0].name+' met '+best+' punten!':'De competitie is afgelopen.';}updateChoreAvailability();}
 function tickCountdowns(){if(!state.user)return;const now=Math.floor(Date.now()/1000);if(now===state.lastTimerSecond)return;state.lastTimerSecond=now;for(const node of document.querySelectorAll('[data-competition-remaining]')){const c=state.competitions.find(x=>x.id===Number(node.dataset.competitionRemaining));if(!c)continue;node.textContent=c.status==='actief'&&c.eindigt_op?(competitionFinished(c)?'Tijd verstreken':durationText(timeRemaining(c.eindigt_op))+' resterend'):(c.duur_dagen||7)+' dagen na acceptatie';}if(state.selected){renderSelectedClock();for(const button of document.querySelectorAll('#activity [data-undo]')){const record=state.records.find(r=>Number(r.id)===Number(button.dataset.undo));if(!record||record.geannuleerd_op||Date.now()-new Date(record.voltooid_op).getTime()>300000)button.remove();}}if(!state.historyLoading&&state.competitions.some(c=>competitionFinished(c)&&c.myStatus==='geaccepteerd'&&c.start_op&&!state.history.some(h=>h.id===c.id))){renderCompetitions();loadHistory().catch(e=>msg(errorText(e)));}}
 async function fetchAllRecords(id){const all=[];for(let start=0;start<100000;start+=1000){const {data,error}=await client.from('voltooide_klusjes').select('id,gebruiker_id,klusje_id,punten_verdiend,voltooid_op,geannuleerd_op,klusjes(naam)').eq('competitie_id',id).order('voltooid_op',{ascending:false}).range(start,start+999);if(error)throw error;all.push(...(data||[]));if(!data||data.length<1000)break;}return all;}
-async function selectCompetition(id){let c=state.competitions.find(x=>x.id===id&&x.myStatus==='geaccepteerd'&&x.status!=='uitnodiging');if(!c)return;state.selected=id;show('selected-area',true);el('selected-title').textContent=c.naam;const [{data:participants,error:pe},records,{data:matched,error:ke}]=await Promise.all([client.from('competitie_deelnemers').select('gebruiker_id,status,profiles(gebruikersnaam,naam)').eq('competitie_id',id),fetchAllRecords(id),client.from('competitie_klusjes').select('klusje_id,punten,wachttijd_uren,klusjes(naam)').eq('competitie_id',id)]);if(pe)throw pe;if(ke)throw ke;state.competitionChores=(matched||[]).map(x=>({id:x.klusje_id,naam:x.klusjes?.naam||'Klusje #'+x.klusje_id,punten:x.punten,wachttijd_uren:x.wachttijd_uren})).sort((a,b)=>a.naam.localeCompare(b.naam,'nl'));renderChores();state.records=records||[];const accepted=(participants||[]).filter(x=>x.status==='geaccepteerd');let scoreboard=accepted.map(p=>({id:p.gebruiker_id,name:p.profiles?.gebruikersnaam||p.profiles?.naam||'Speler',points:records.filter(r=>r.gebruiker_id===p.gebruiker_id&&!r.geannuleerd_op).reduce((sum,r)=>sum+r.punten_verdiend,0)})).sort((a,b)=>b.points-a.points);state.scoreboard=scoreboard;renderDuelHero();const board=el('scoreboard');board.className='';board.innerHTML=scoreboard.map((p,i)=>`<div class="row"><div class="profile"><div class="round">${i===0&&p.points>0?'🏆':safe(p.name.slice(0,1).toUpperCase())}</div><div><strong>@${safe(p.name)}</strong><p>${p.id===state.user.id?'Jij':'Tegenstander'}</p></div></div><span class="points">${p.points} punten</span></div>`).join('')||'<div class="empty">Nog geen deelnemers</div>';const names=new Map(scoreboard.map(p=>[p.id,p.name]));const activity=el('activity');if(!records.length){activity.className='empty';activity.textContent='Nog geen activiteiten';}else{activity.className='';activity.innerHTML=records.slice(0,12).map(r=>{const cancelled=!!r.geannuleerd_op;const canUndo=!cancelled&&r.gebruiker_id===state.user.id&&Date.now()-new Date(r.voltooid_op).getTime()<=300000;return `<div class="row ${cancelled?'cancelled-chore':''}"><div><strong>@${safe(names.get(r.gebruiker_id)||'Speler')}</strong> · ${safe(r.klusjes?.naam||'Klusje')}<p>${safe(new Date(r.voltooid_op).toLocaleString('nl-NL',{dateStyle:'medium',timeStyle:'short'}))}${cancelled?' · Geannuleerd':''}</p></div><div class="actions">${cancelled?'<span class="cancelled-tag">Geannuleerd</span>':'<span class="points">+'+r.punten_verdiend+'</span>'}${canUndo?'<button type="button" class="btn secondary small undo-btn" data-undo="'+r.id+'">Ongedaan maken</button>':''}</div></div>`;}).join('');}renderSelectedClock();}
+async function selectCompetition(id){let c=state.competitions.find(x=>x.id===id&&x.myStatus==='geaccepteerd'&&x.status!=='uitnodiging');if(!c)return;state.selected=id;show('selected-area',true);el('selected-title').textContent=c.naam;const [{data:participants,error:pe},records,{data:matched,error:ke}]=await Promise.all([client.from('competitie_deelnemers').select('gebruiker_id,status,profiles(gebruikersnaam,naam)').eq('competitie_id',id),fetchAllRecords(id),client.from('competitie_klusjes').select('klusje_id,punten,wachttijd_uren,klusjes(naam)').eq('competitie_id',id)]);if(pe)throw pe;if(ke)throw ke;state.competitionChores=(matched||[]).map(x=>({id:x.klusje_id,naam:x.klusjes?.naam||'Klusje #'+x.klusje_id,punten:x.punten,wachttijd_uren:x.wachttijd_uren})).sort((a,b)=>a.naam.localeCompare(b.naam,'nl'));renderChores();state.records=records||[];const accepted=(participants||[]).filter(x=>x.status==='geaccepteerd');let scoreboard=accepted.map(p=>({id:p.gebruiker_id,name:p.profiles?.gebruikersnaam||p.profiles?.naam||'Speler',points:records.filter(r=>r.gebruiker_id===p.gebruiker_id&&!r.geannuleerd_op).reduce((sum,r)=>sum+r.punten_verdiend,0)})).sort((a,b)=>b.points-a.points);state.scoreboard=scoreboard;renderDuelHero();const names=new Map(scoreboard.map(p=>[p.id,p.name]));const activity=el('activity');if(!records.length){activity.className='empty';activity.textContent='Nog geen activiteiten';}else{activity.className='';activity.innerHTML=records.slice(0,12).map(r=>{const cancelled=!!r.geannuleerd_op;const canUndo=!cancelled&&r.gebruiker_id===state.user.id&&Date.now()-new Date(r.voltooid_op).getTime()<=300000;return `<div class="row ${cancelled?'cancelled-chore':''}"><div><strong>@${safe(names.get(r.gebruiker_id)||'Speler')}</strong> · ${safe(r.klusjes?.naam||'Klusje')}<p>${safe(new Date(r.voltooid_op).toLocaleString('nl-NL',{dateStyle:'medium',timeStyle:'short'}))}${cancelled?' · Geannuleerd':''}</p></div><div class="actions">${cancelled?'<span class="cancelled-tag">Geannuleerd</span>':'<span class="points">+'+r.punten_verdiend+'</span>'}${canUndo?'<button type="button" class="btn secondary small undo-btn" data-undo="'+r.id+'">Ongedaan maken</button>':''}</div></div>`;}).join('');}renderSelectedClock();}
 
 
 // Lichtgewicht synchronisatie zonder realtime-replicatie of extra databasebeleid.
