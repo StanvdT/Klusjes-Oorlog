@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.7.3-alpha</title>
+<title>Klusjes-Oorlog | v0.7.4-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -640,6 +640,18 @@ html[data-theme="dark"] .hub-invitation-badge{border-color:#1b2a40}
  .hub-invitation-badge{top:2px;right:4px}
 }
 @media(max-width:380px){.competition-subtab{font-size:9px}.hub-invitation-badge{right:1px}}
+
+/* v0.7.4 — compacte, toegankelijke periodeknoppen in de ranglijst */
+.leaderboard-period-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:6px;margin:0 0 13px;background:#f2f5fd;border:1px solid #dfe6f7;border-radius:16px;max-width:430px}
+.leaderboard-period-btn{min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid transparent;border-radius:12px;padding:12px 13px;color:#586780;background:transparent;font:inherit;font-size:13px;font-weight:800;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s,color .15s}
+.leaderboard-period-btn:hover{background:#e9edff;color:#4258bc}
+.leaderboard-period-btn.active{background:#fff;border-color:#8b9af3;box-shadow:0 3px 12px #4f61b31b;color:#455bd0}
+.leaderboard-period-btn:focus-visible{outline:3px solid #8e9ffb;outline-offset:2px}
+html[data-theme="dark"] .leaderboard-period-tabs{background:#1a293d;border-color:#3a4b67}
+html[data-theme="dark"] .leaderboard-period-btn{color:#becae0}
+html[data-theme="dark"] .leaderboard-period-btn:hover{background:#303f60;color:#f1f3ff}
+html[data-theme="dark"] .leaderboard-period-btn.active{background:#354575;border-color:#8395ff;color:#fff;box-shadow:0 3px 14px #0d172940}
+@media(max-width:530px){.leaderboard-period-tabs{max-width:none;width:100%}.leaderboard-period-btn{padding:12px 5px;font-size:12px}}
 </style>
 </head>
 <body>
@@ -653,7 +665,7 @@ html[data-theme="dark"] .hub-invitation-badge{border-color:#1b2a40}
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.3-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.4-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
@@ -665,8 +677,8 @@ html[data-theme="dark"] .hub-invitation-badge{border-color:#1b2a40}
 </section>
 
 <section id="leaderboard-panel" class="card leaderboard-panel hidden" aria-label="Openbaar leaderboard">
-  <div class="space" style="margin-bottom:15px"><div><h2 class="section-title" style="margin:0 0 4px">🏆 Openbaar leaderboard</h2><p class="hint" style="margin:0">Vergelijk alle spelers. Alleen gebruikersnamen en spelstatistieken worden getoond.</p></div><button id="leaderboard-close" class="btn secondary small" type="button">Sluiten</button></div>
-  <div class="leaderboard-filters"><div class="field"><label for="leaderboard-period">Periode</label><select id="leaderboard-period"><option value="maand">Deze maand</option><option value="overall">Overall</option></select></div></div>
+  <div class="space" style="margin-bottom:15px"><div><h2 class="section-title" style="margin:0 0 4px">🏆 Openbaar leaderboard</h2><p class="hint" style="margin:0">Vergelijk alle spelers. Alleen gebruikersnamen en spelstatistieken worden getoond.</p></div></div>
+  <div class="leaderboard-period-tabs" role="group" aria-label="Periode ranglijst"><button class="leaderboard-period-btn active" type="button" data-leaderboard-period="maand" aria-pressed="true">📅 Deze maand</button><button class="leaderboard-period-btn" type="button" data-leaderboard-period="overall" aria-pressed="false">🏆 Overall</button></div>
   <p id="leaderboard-period-info" class="hint" style="margin:0 0 13px"></p>
   <div id="leaderboard-results" aria-live="polite"><div class="empty">Open het leaderboard om de scores te laden.</div></div><p class="leaderboard-hint">Op desktop: klik op een kolomtitel. Op mobiel: tik op een statistiektegel. Tik nogmaals om de richting te wijzigen. Voor de officiële winpercentage-ranglijst zijn minimaal 5 besliste competities nodig.</p>
   <p class="hint" style="margin:14px 0 0">Maandelijkse klusjes tellen op uitvoerdatum; wedstrijden op einddatum. Winpercentage = winst ÷ (winst + verlies). Voor een officiële winpercentage-rangplaats zijn minimaal 5 besliste wedstrijden nodig.</p>
@@ -720,18 +732,23 @@ html[data-theme="dark"] .hub-invitation-badge{border-color:#1b2a40}
 
 <section class="section-space home-social-area" id="hub-new-game" aria-label="Nieuwe match"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section></div></section><section class="section-space home-social-area" id="hub-invites" aria-label="Uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">JE UITNODIGINGEN</span><h3 class="section-title">Uitnodigingen beheren</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Ontvangen uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div><section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section></section>
 <section class="section-space home-history-area" id="hub-history"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.3-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.4-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.7.3-alpha';
+const APP_VERSION='v0.7.4-alpha';
 const CHANGELOG=[
-  {version:'v0.7.3-alpha',date:'20 november 2026',changes:[
+  {version:'v0.7.4-alpha',date:'20 november 2026',changes:[
+    'Ranglijst: de overbodige knop Sluiten is verwijderd.',
+    'Periode kiezen met twee duidelijke tabknoppen: Deze maand en Overall.',
+    'Bestaande sortering, spelersmarkering en ranglijststatistieken blijven behouden.'
+  ]},
+  {version:'v0.7.4-alpha',date:'20 november 2026',changes:[
     'Notificatiebadge van Uitnodigingen staat nu vrij in de rechterbovenhoek van de navigatieknop.',
     'De vier competitieknoppen blijven overzichtelijk en leesbaar op smallere schermen, ook met meerdere uitnodigingen.'
   ]},
-  {version:'v0.7.3-alpha',date:'20 november 2026',changes:[
+  {version:'v0.7.4-alpha',date:'20 november 2026',changes:[
     'Binnen Competities vier aparte schermen: Wedstrijden, Nieuwe match, Uitnodigingen en Geschiedenis.',
     'Uitnodigingen hebben een eigen meldingsteller bovenaan; de melding op Home opent direct dit scherm.',
     'Wedstrijddetails blijven direct bereikbaar vanaf Home, zonder extra klik of scrollen.',
@@ -1043,6 +1060,18 @@ function toggleLeaderboard(open){
 function nlLeaderboardNumber(value){return Number(value||0).toLocaleString('nl-NL');}
 function leaderboardMonthLabel(){return new Intl.DateTimeFormat('nl-NL',{month:'long',year:'numeric',timeZone:'Europe/Amsterdam'}).format(new Date());}
 const leaderboardState={players:[],sort:'punten',direction:'desc'};
+let leaderboardPeriod='maand';
+function setLeaderboardPeriod(period){
+  if(period!=='maand'&&period!=='overall')return;
+  if(leaderboardPeriod===period)return;
+  leaderboardPeriod=period;
+  document.querySelectorAll('[data-leaderboard-period]').forEach(btn=>{
+    const selected=btn.dataset.leaderboardPeriod===period;
+    btn.classList.toggle('active',selected);
+    btn.setAttribute('aria-pressed',String(selected));
+  });
+  refreshLeaderboard();
+}
 const leaderboardLabels={punten:'Punten',klusjes_voltooid:'Klusjes',competities_gespeeld:'Competities',winpercentage:'Winpercentage'};
 function renderLeaderboardTable(){
   const results=el('leaderboard-results');
@@ -1098,7 +1127,7 @@ function renderLeaderboardTable(){
 async function refreshLeaderboard(){
   if(!leaderboardShown||!client)return;
   const request=++leaderboardRequest;
-  const period=el('leaderboard-period').value;
+  const period=leaderboardPeriod;
   const results=el('leaderboard-results');
   results.innerHTML='<div class="loading">Ranglijst laden...</div>';
   el('leaderboard-period-info').textContent=period==='maand'?`Periode: ${leaderboardMonthLabel()}`:'Periode: alle beschikbare gegevens';
@@ -1126,8 +1155,7 @@ async function refreshLeaderboard(){
   }catch(err){if(request===leaderboardRequest)results.innerHTML='<div class="empty">Ranglijst laden mislukt: '+safe(errorText(err))+'</div>';}
 }
 el('leaderboard-toggle').addEventListener('click',()=>navigate(leaderboardShown?'home':'leaderboard'));
-el('leaderboard-close').addEventListener('click',()=>navigate('home'));
-el('leaderboard-period').addEventListener('change',refreshLeaderboard);
+document.querySelectorAll('[data-leaderboard-period]').forEach(btn=>btn.addEventListener('click',()=>setLeaderboardPeriod(btn.dataset.leaderboardPeriod)));
 el('leaderboard-results').addEventListener('click',e=>{
   const button=e.target.closest('[data-leaderboard-sort]');
   if(!button)return;
