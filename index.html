@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.6.7-alpha</title>
+<title>Klusjes-Oorlog | v0.6.8-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -72,7 +72,7 @@
 .floating-notice{position:fixed!important;z-index:9999;top:18px;right:18px;left:auto!important;width:min(390px,calc(100vw - 36px));box-shadow:0 12px 36px rgba(29,42,75,.18);border-radius:12px;pointer-events:none;margin:0!important}
 @media(max-width:620px){.system-reset-item{align-items:flex-start;gap:8px}.floating-notice{right:12px;top:12px;width:calc(100vw - 24px)}}
 
-/* v0.6.7-alpha — navigatie, account, responsieve thema's */
+/* v0.6.8-alpha — navigatie, account, responsieve thema's */
 :root{color-scheme:light}
 body{min-height:100vh}
 .wrap{padding-bottom:105px}
@@ -136,7 +136,7 @@ html[data-theme="dark"] .leaderboard-mobile-card,html[data-theme="dark"] .leader
 html[data-theme="dark"] .leaderboard-mobile-stat.active{background:#303e65;border-color:#8492ff}
 
 
-/* v0.6.7-alpha — contrastverbetering donkere modus. Houd lichte modus onveranderd. */
+/* v0.6.8-alpha — contrastverbetering donkere modus. Houd lichte modus onveranderd. */
 html[data-theme="dark"]{
   --dark-bg:#101824;
   --dark-panel:#1d2a3b;
@@ -272,7 +272,7 @@ html[data-theme="dark"] .end-banner{background:#1d493d;color:#dcffec}
 html[data-theme="dark"] :is(button,input,select,textarea,summary,a):focus-visible{outline:3px solid #b5bfff;outline-offset:2px}
 
 
-/* v0.6.7-alpha — Home-dashboard redesign. CSS blijft beperkt tot Home. */
+/* v0.6.8-alpha — Home-dashboard redesign. CSS blijft beperkt tot Home. */
 #home-content{display:grid;gap:0;min-width:0}
 .home-hero{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:30px 32px;margin-bottom:16px;background:linear-gradient(115deg,#ecf0ff 0%,#f5f5ff 55%,#f9fbff 100%);border:1px solid #e1e7fa;border-radius:24px;overflow:hidden}
 .home-hero-copy{position:relative;z-index:1;flex:1;min-width:0}
@@ -349,7 +349,7 @@ html[data-theme="dark"] .home-match-details .countdown-unit{box-shadow:none}
 @media(prefers-reduced-motion:reduce){.home-competition-card{transition:none}.home-competition-card:hover{transform:none}}
 
 
-/* v0.6.7-alpha: aparte competitiehub en wedstrijdpreviews */
+/* v0.6.8-alpha: aparte competitiehub en wedstrijdpreviews */
 .app-nav{gap:5px}
 .nav-item{min-width:0}
 .competitions-hub{animation:hub-in .24s ease both}
@@ -406,7 +406,7 @@ html[data-theme="dark"] .home-cta p,html[data-theme="dark"] .score-ring-center s
 }
 @media(prefers-reduced-motion:reduce){.competitions-hub{animation:none}}
 
-/* v0.6.7-alpha: wedstrijdpreview en detail */
+/* v0.6.8-alpha: wedstrijdpreview en detail */
 .preview-rings{display:flex;align-items:flex-start;gap:13px;flex:none}
 .metric-ring-block{display:grid;justify-items:center;gap:6px;min-width:0}
 .metric-ring-label{font-size:11px;font-weight:800;color:#637592;letter-spacing:.3px}
@@ -496,7 +496,7 @@ html[data-theme="dark"] .leaderboard-table tr.leaderboard-me td{background:#303e
 html[data-theme="dark"] .leaderboard-mobile-card.leaderboard-me{background:linear-gradient(120deg,#2c3b61,#222e43);border-color:#90a1ff}
 @media(max-width:600px){.home-invitation-alert{padding:13px;gap:10px}.home-invitation-copy strong{font-size:13px}.competition-notification-badge{right:1px;top:0}}
 
-/* v0.6.7-alpha — rustige ringen en individuele percentages */
+/* v0.6.8-alpha — rustige ringen en individuele percentages */
 .score-ring-center .ring-symbol{font-size:22px!important;line-height:1;color:#5364c8;letter-spacing:0;white-space:nowrap}
 .score-ring-neutral .ring-symbol{color:#8995ad}
 .preview-percentages{display:none!important}
@@ -539,6 +539,61 @@ html[data-theme="dark"] .duel-tasks .duel-tasks-b b{background:#54402d;color:#ff
  .duel-tasks{gap:6px}
  .duel-tasks span{font-size:10px}
 }
+
+/* v0.6.8-alpha — speelse, toegankelijke klusjestegels */
+.task-toolbar{display:grid;gap:12px;margin:20px 0 16px}
+.task-filters{display:flex;align-items:center;gap:8px;overflow-x:auto;padding:2px 1px 5px;scrollbar-width:thin}
+.task-filter{white-space:nowrap;border:1px solid #dbe2f1;border-radius:999px;background:#f6f8fe;color:#5d6b85;font-size:12px;font-weight:800;padding:10px 13px;transition:background .2s,border-color .2s,transform .2s}
+.task-filter.active{background:#e9edff;color:#4154bb;border-color:#a9b6f3;box-shadow:0 3px 10px #5367cb14}
+.task-filter:active{transform:scale(.96)}
+.task-filter span{font-variant-numeric:tabular-nums;opacity:.75;margin-left:3px}
+.task-search-field{display:flex;align-items:center;gap:9px;background:#f8faff;border:1px solid #e0e7f4;border-radius:13px;padding:0 12px;color:#7d8ba5}
+.task-search-field span{font-size:22px}
+.task-search-field input{width:100%;border:0;background:transparent;min-height:43px;outline:none;color:#28364e;box-shadow:none!important}
+.task-search-field:focus-within{border-color:#7688ed;box-shadow:0 0 0 3px #7384e523}
+.task-tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-bottom:14px}
+.task-tile{position:relative;display:flex;flex-direction:column;gap:10px;align-items:flex-start;min-width:0;min-height:172px;text-align:left;border:1.5px solid #e1e6f1;border-radius:19px;padding:15px;background:linear-gradient(150deg,#fff,#f9faff);color:#26334b;box-shadow:0 6px 18px #26385e08;transition:transform .17s ease,border-color .17s ease,box-shadow .17s ease,background .17s ease;overflow:hidden}
+.task-tile:not(:disabled):hover{transform:translateY(-3px);border-color:#94a3ee;box-shadow:0 10px 24px #4d61bc23}
+.task-tile:not(:disabled):active{transform:scale(.975)}
+.task-tile.selected{background:linear-gradient(145deg,#edf1ff,#fff);border:2px solid #6576df;box-shadow:0 0 0 3px #6e7feb24,0 10px 26px #6372d625}
+.task-tile:focus-visible,.task-filter:focus-visible{outline:3px solid #8b9bfb;outline-offset:2px}
+.task-tile:disabled{cursor:not-allowed;background:#f3f5f9;border-color:#e3e6ed;opacity:.82}
+.task-tile-icon{display:grid;place-items:center;width:56px;height:56px;border-radius:17px;background:linear-gradient(145deg,#edf1ff,#e4e9ff);font-size:30px;line-height:1;box-shadow:inset 0 1px 2px #ffffff9e}
+.task-tile:disabled .task-tile-icon{filter:grayscale(.6);opacity:.8;background:#e6eaf0}
+.task-tile-name{font-weight:800;font-size:14px;line-height:1.32;overflow-wrap:anywhere;min-height:34px}
+.task-tile-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:5px;width:100%;margin-top:auto}
+.task-tile-points{font-size:13px;font-weight:900;color:#4357c1;background:#e9edff;padding:6px 9px;border-radius:9px;white-space:nowrap}
+.task-tile-status{font-size:11px;font-weight:750;color:#39825e}
+.task-tile:disabled .task-tile-status{color:#946b33}
+.task-tile-selectedmark{position:absolute;right:12px;top:11px;background:#586ce0;color:#fff;border-radius:50%;width:23px;height:23px;display:grid;place-items:center;font-weight:900;font-size:14px}
+.task-tile-lock{position:absolute;right:11px;top:11px;font-size:14px}
+.task-tile-empty{grid-column:1/-1;background:#f6f8fc;border:1px dashed #cfd7e8;border-radius:15px;text-align:center;padding:25px;color:#62718e}
+.task-selection{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#f0f3fe;border:1px solid #e0e6fa;border-radius:15px;margin-top:8px}
+.task-selection-icon{display:grid;place-items:center;width:41px;height:41px;flex:none;background:#fff;border-radius:12px;font-size:22px}
+.task-selection-info{display:grid;gap:3px;min-width:0}.task-selection-info strong{font-size:14px;overflow-wrap:anywhere}.task-selection-info span{font-size:12px;color:#687691;line-height:1.35}
+.task-complete-button{width:100%;min-height:51px;margin-top:12px;border-radius:14px;font-size:15px;font-weight:800}
+.task-complete-button:not(:disabled){box-shadow:0 6px 19px #586adb35}
+#competitions-hub .home-match-details #chore-select{display:none!important}
+html[data-theme="dark"] .task-filter{background:#202d41;border-color:#455671;color:#c5d3e8}
+html[data-theme="dark"] .task-filter.active{background:#344675;border-color:#788cf0;color:#f1f4ff}
+html[data-theme="dark"] .task-search-field{background:#1c2a3e;border-color:#44546c;color:#cbd5e5}
+html[data-theme="dark"] .task-search-field input{color:#f0f4ff}
+html[data-theme="dark"] .task-tile{background:linear-gradient(155deg,#24354b,#1e2b3f);border-color:#3e4e65;color:#f0f4ff;box-shadow:0 6px 20px #090f1d20}
+html[data-theme="dark"] .task-tile.selected{background:linear-gradient(145deg,#303f69,#202e4b);border-color:#98a9ff;box-shadow:0 0 0 3px #7c8ff933}
+html[data-theme="dark"] .task-tile:disabled{background:#1b2838;border-color:#36445a;opacity:.77}
+html[data-theme="dark"] .task-tile-icon{background:linear-gradient(145deg,#3f4e7b,#354360)}
+html[data-theme="dark"] .task-tile-points{background:#394a77;color:#e0e7ff}
+html[data-theme="dark"] .task-tile-status{color:#91e0b7}
+html[data-theme="dark"] .task-tile:disabled .task-tile-status{color:#e9bb85}
+html[data-theme="dark"] .task-selection{background:#263654;border-color:#3d4f78}
+html[data-theme="dark"] .task-selection-icon{background:#1c2a40}
+html[data-theme="dark"] .task-selection-info span{color:#b9c8df}
+html[data-theme="dark"] .task-tile-empty{background:#1d2b3f;border-color:#465a77;color:#c6d3e6}
+@media(min-width:760px){.task-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.task-toolbar{grid-template-columns:minmax(0,1fr) 205px;align-items:center}}
+@media(min-width:1130px){.task-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:390px){.task-tile{padding:12px;min-height:166px}.task-tile-icon{width:49px;height:49px;font-size:26px}.task-tile-name{font-size:13px}}
+@media(prefers-reduced-motion:reduce){.task-tile,.task-filter{transition:none}}
+
 </style>
 </head>
 <body>
@@ -552,7 +607,7 @@ html[data-theme="dark"] .duel-tasks .duel-tasks-b b{background:#54402d;color:#ff
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.7-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.6.8-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
@@ -599,17 +654,34 @@ html[data-theme="dark"] .duel-tasks .duel-tasks-b b{background:#54402d;color:#ff
 </div><section id="competitions-hub" class="hidden competitions-hub" aria-label="Competities">
   <div class="hub-hero"><div><span class="home-eyebrow">JOUW WEDSTRIJDEN</span><h2 class="title">Competities ⚔</h2><p>Bekijk de tussenstand, daag vrienden uit en open je wedstrijden.</p></div><span class="hub-hero-icon" aria-hidden="true">🏆</span></div>
   <div id="hub-inner"><section id="hub-competition-list" class="section-space home-competition-list"><div class="space hub-section-heading"><h3 class="section-title">Jouw competities</h3><span class="pill">Scores & countdowns</span></div><div class="grid" id="competitions"><div class="empty">Nog geen competities. Daag een vriend uit!</div></div></section>
-<section class="section-space hidden home-match-details" id="selected-area"><div class="space" style="margin-bottom:15px"><div class="details-heading"><button class="btn secondary small" id="back-to-competitions" type="button">← Alle competities</button><h3 class="section-title" id="selected-title" style="margin:0">Competitie</h3></div><span class="pill" id="selected-status">Live score</span></div><div class="duel-hero" id="duel-hero" aria-label="Tussenstand en uitgevoerde klusjes"><div class="duel-hero-loading">Duelgegevens laden…</div></div><div aria-label="Resterende competitietijd" class="countdown-box" id="competition-clock" role="timer"></div><div class="end-banner hidden" id="competition-result"></div><div class="grid match-main-grid"><section class="card"><h3 class="section-title">⚡ Pak je punten</h3><p class="duel-task-hint">Kies een klusje en verdien punten voor jouw team.</p><div class="choose"><select aria-label="Selecteer een klusje" id="chore-select"><option value="">Selecteer een klusje</option></select><button class="btn" id="complete-chore">Voltooien</button></div><p aria-live="polite" class="cooldown-note" id="chore-cooldown">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space duel-feed"><h3 class="section-title">◷ Activiteiten</h3><div class="empty" id="activity">Nog geen activiteiten</div></div></section>
+<section class="section-space hidden home-match-details" id="selected-area"><div class="space" style="margin-bottom:15px"><div class="details-heading"><button class="btn secondary small" id="back-to-competitions" type="button">← Alle competities</button><h3 class="section-title" id="selected-title" style="margin:0">Competitie</h3></div><span class="pill" id="selected-status">Live score</span></div><div class="duel-hero" id="duel-hero" aria-label="Tussenstand en uitgevoerde klusjes"><div class="duel-hero-loading">Duelgegevens laden…</div></div><div aria-label="Resterende competitietijd" class="countdown-box" id="competition-clock" role="timer"></div><div class="end-banner hidden" id="competition-result"></div><div class="grid match-main-grid"><section class="card"><h3 class="section-title">⚡ Pak je punten</h3><p class="duel-task-hint">Kies een klusje en verdien punten voor jouw team.</p><div class="task-toolbar" aria-label="Filter beschikbare klusjes">
+  <div class="task-filters" role="group" aria-label="Klusjes filteren">
+    <button type="button" class="task-filter active" data-task-filter="all" aria-pressed="true">Alles <span id="task-count-all"></span></button>
+    <button type="button" class="task-filter" data-task-filter="ready" aria-pressed="false">⚡ Beschikbaar <span id="task-count-ready"></span></button>
+    <button type="button" class="task-filter" data-task-filter="waiting" aria-pressed="false">🔒 Wachttijd <span id="task-count-waiting"></span></button>
+  </div>
+  <div class="task-search-field"><span aria-hidden="true">⌕</span><input id="task-search" type="search" placeholder="Zoek een klusje…" aria-label="Zoek een klusje" autocomplete="off"></div>
+</div>
+<div id="task-tiles" class="task-tiles" role="group" aria-label="Kies een klusje"><p class="hint">Klusjes laden…</p></div>
+<select id="chore-select" class="hidden" aria-label="Geselecteerd klusje" tabindex="-1"><option value="">Selecteer een klusje</option></select>
+<div class="task-selection" id="task-selection"><div class="task-selection-icon" id="task-selection-icon" aria-hidden="true">✨</div><div class="task-selection-info"><strong id="task-selection-name">Nog geen klusje gekozen</strong><span id="task-selection-detail">Tik op een tegel om te beginnen</span></div></div>
+<button class="btn task-complete-button" id="complete-chore" type="button" disabled>✨ Kies eerst een klusje</button><p aria-live="polite" class="cooldown-note" id="chore-cooldown">Kies een klusje om de beschikbaarheid te bekijken.</p><p class="hint">De wachttijd geldt per speler, per klusje, per competitie.</p></section></div><div class="card section-space duel-feed"><h3 class="section-title">◷ Activiteiten</h3><div class="empty" id="activity">Nog geen activiteiten</div></div></section>
 <section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section>
 <section class="section-space home-social-area" aria-label="Uitdagingen en uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section><section class="card"><h3 class="section-title">Uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div></section>
 <section class="section-space home-history-area" id="history-section"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.7-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.6.8-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.6.7-alpha';
+const APP_VERSION='v0.6.8-alpha';
 const CHANGELOG=[
+  {version:'v0.6.8-alpha',date:'20 november 2026',changes:[
+    'Nieuwe klikbare klusjestegels met icoontjes, puntenbadges en een geselecteerde staat.',
+    'Geblokkeerde klusjes tonen hun resterende wachttijd op de tegel.',
+    'Filters voor beschikbaar en wachttijd, plus zoeken op klusjesnaam.',
+    'Duidelijke voltooi-knop; volledig bruikbaar op mobiel en in donkere modus.'
+  ]},
   {version:'v0.6.7-alpha',date:'20 november 2026',changes:[
     'Ringdiagrammen tonen alleen de verdeling; de eigen percentages staan naast iedere speler.',
     'Punten en uitgevoerde klusjes hebben per speler een eigen percentage. Bij 0–0 worden nog geen percentages geclaimd.',
@@ -1200,13 +1272,70 @@ el('history').addEventListener('toggle',event=>{
   if(details.open)expandedHistoryOpponents.add(key);
   else expandedHistoryOpponents.delete(key);
 },true);
-function renderChores(){const old=el('chore-select').value;el('chore-select').innerHTML='<option value="">Selecteer een klusje</option>'+state.competitionChores.map(c=>`<option value="${c.id}">${safe(c.naam)} (+${c.punten} punten)</option>`).join('');if(state.competitionChores.some(c=>String(c.id)===old))el('chore-select').value=old;updateChoreAvailability();}
+let taskFilter='all';
+function taskIcon(name){
+  const n=String(name||'').toLocaleLowerCase('nl-NL');
+  const icons=[[/stofzuig|stofzuiger/,'🧹'],[/dweil|vloer/,'🪣'],[/vaatwasser|afwas|vaat/,'🍽️'],[/badkamer|douche|badkuip/,'🛁'],[/toilet|wc/,'🚽'],[/was opvouwen|kleding vouw/,'👕'],[/was ophangen|wasmachine|wassen|wasgoed/,'🧺'],[/bed|lakens|beddengoed/,'🛏️'],[/kook|eten maken|maaltijd/,'👩‍🍳'],[/boodschap|winkel/,'🛒'],[/prullenbak|vuilnis|afval|container/,'🗑️'],[/kattenbak|kat/,'🐈'],[/hond|uitlaten/,'🐕'],[/ramen|glas/,'🪟'],[/tuin|onkruid|gras/,'🌿'],[/auto|wassen/,'🚗'],[/stof af|afstoffen/,'🪶'],[/keuken|aanrecht/,'🧽'],[/plant|water geven/,'🪴'],[/strijk/,'🧥'],[/opruim|sorteer/,'📦']];
+  return icons.find(([pattern])=>pattern.test(n))?.[1]||'✨';
+}
+function taskCooldownMs(task){
+  if(!state.user)return 0;
+  const last=state.records.filter(r=>!r.geannuleerd_op&&r.gebruiker_id===state.user.id&&Number(r.klusje_id)===Number(task.id)).reduce((max,r)=>Math.max(max,new Date(r.voltooid_op).getTime()),0);
+  return last?Math.max(0,last+Number(task.wachttijd_uren)*3600000-Date.now()):0;
+}
+function renderTaskTiles(){
+  const panel=el('task-tiles');if(!panel)return;
+  const c=state.competitions.find(x=>x.id===state.selected);
+  const ended=!c||c.status!=='actief'||competitionFinished(c);
+  const query=el('task-search').value.trim().toLocaleLowerCase('nl-NL');
+  const tasks=state.competitionChores.filter(t=>t.naam.toLocaleLowerCase('nl-NL').includes(query));
+  const ready=tasks.filter(t=>!taskCooldownMs(t));const waiting=tasks.filter(t=>taskCooldownMs(t));
+  el('task-count-all').textContent=tasks.length;el('task-count-ready').textContent=ready.length;el('task-count-waiting').textContent=waiting.length;
+  document.querySelectorAll('[data-task-filter]').forEach(b=>{const on=b.dataset.taskFilter===taskFilter;b.classList.toggle('active',on);b.setAttribute('aria-pressed',String(on));});
+  const list=taskFilter==='ready'?ready:taskFilter==='waiting'?waiting:tasks;
+  if(!list.length){panel.innerHTML='<div class="task-tile-empty">'+(query?'Geen klusjes gevonden.':taskFilter==='waiting'?'Geen klusjes in wachttijd.':taskFilter==='ready'?'Geen beschikbare klusjes.':'Nog geen klusjes in deze competitie.')+'</div>';return;}
+  const selected=el('chore-select').value;
+  panel.innerHTML=list.map(t=>{
+    const ms=taskCooldownMs(t),blocked=ended||ms>0,chosen=String(t.id)===selected&&!blocked;
+    const status=ended?'Competitie voorbij':ms?'🔒 '+durationText(ms):'✓ Beschikbaar';
+    return `<button type="button" class="task-tile ${chosen?'selected':''}" data-chore-id="${Number(t.id)}" aria-pressed="${chosen}" ${blocked?'disabled':''} aria-label="${safe(t.naam)}, ${Number(t.punten)} punten, ${safe(status)}"><span class="task-tile-icon" aria-hidden="true">${taskIcon(t.naam)}</span><span class="task-tile-name">${safe(t.naam)}</span><span class="task-tile-bottom"><span class="task-tile-points">+${Number(t.punten)} pt</span><span class="task-tile-status" data-task-cooldown="${Number(t.id)}">${safe(status)}</span></span>${chosen?'<span class="task-tile-selectedmark" aria-hidden="true">✓</span>':blocked?'<span class="task-tile-lock" aria-hidden="true">🔒</span>':''}</button>`;
+  }).join('');
+}
+function renderChores(){
+  const old=el('chore-select').value;
+  el('chore-select').innerHTML='<option value="">Selecteer een klusje</option>'+state.competitionChores.map(c=>`<option value="${c.id}">${safe(c.naam)} (+${c.punten} punten)</option>`).join('');
+  if(state.competitionChores.some(c=>String(c.id)===old))el('chore-select').value=old;
+  renderTaskTiles();updateChoreAvailability();
+}
 function getChoreAvailability(){const c=state.competitions.find(x=>x.id===state.selected);if(!c||competitionFinished(c)||c.status!=='actief')return {enabled:false,text:'Deze competitie is afgelopen.'};const selected=state.competitionChores.find(x=>String(x.id)===el('chore-select').value);if(!selected)return {enabled:false,text:'Kies een klusje om de beschikbaarheid te bekijken.'};const last=state.records.filter(r=>!r.geannuleerd_op&&r.gebruiker_id===state.user.id&&Number(r.klusje_id)===Number(selected.id)).reduce((mx,r)=>Math.max(mx,new Date(r.voltooid_op).getTime()),0);const ms=Math.max(0,last+selected.wachttijd_uren*3600000-Date.now());return ms>0?{enabled:false,text:'Nog '+durationText(ms)+' wachttijd.',waiting:true}:{enabled:true,text:'Beschikbaar · '+selected.punten+' punten · wachttijd '+cooldownLabel(selected.wachttijd_uren)};}
-function updateChoreAvailability(){const c=state.competitions.find(x=>x.id===state.selected);if(!c)return;const status=getChoreAvailability();const button=el('complete-chore');button.disabled=!status.enabled;button.textContent=competitionFinished(c)?'Competitie afgelopen':status.waiting?'Nog in wachttijd':'Voltooien';el('chore-select').disabled=competitionFinished(c);el('chore-cooldown').textContent=status.text;el('chore-cooldown').classList.toggle('waiting',!!status.waiting);}
+function updateChoreAvailability(){
+  const c=state.competitions.find(x=>x.id===state.selected);if(!c)return;
+  const selected=state.competitionChores.find(x=>String(x.id)===el('chore-select').value);
+  const status=getChoreAvailability();const button=el('complete-chore');
+  button.disabled=!status.enabled;
+  button.textContent=competitionFinished(c)?'Competitie afgelopen':status.waiting?'🔒 Nog in wachttijd':selected?'✓ Voltooi '+selected.naam+' (+'+selected.punten+' pt)':'✨ Kies eerst een klusje';
+  el('chore-select').disabled=competitionFinished(c);
+  el('chore-cooldown').textContent=status.text;el('chore-cooldown').classList.toggle('waiting',!!status.waiting);
+  el('task-selection-icon').textContent=selected?taskIcon(selected.naam):'✨';
+  el('task-selection-name').textContent=selected?selected.naam:'Nog geen klusje gekozen';
+  el('task-selection-detail').textContent=selected?(status.waiting?status.text:status.enabled?'+'+selected.punten+' punten · '+cooldownLabel(selected.wachttijd_uren)+' wachttijd':status.text):'Tik op een tegel om te beginnen';
+}
+function updateTaskTileTimers(){
+  let needsRender=false;
+  for(const badge of document.querySelectorAll('#task-tiles [data-task-cooldown]')){
+    const task=state.competitionChores.find(t=>Number(t.id)===Number(badge.dataset.taskCooldown));if(!task)continue;
+    const ms=taskCooldownMs(task),tile=badge.closest('button');
+    const c=state.competitions.find(x=>x.id===state.selected);
+    const ended=!c||c.status!=='actief'||competitionFinished(c);
+    if((!ended&&tile.disabled&&ms===0)||(ended&&!tile.disabled)){needsRender=true;break;}
+    badge.textContent=ended?'Competitie voorbij':ms?'🔒 '+durationText(ms):'✓ Beschikbaar';
+  }
+  if(needsRender)renderTaskTiles();
+}
 function renderSelectedClock(){const c=state.competitions.find(x=>x.id===state.selected);if(!c)return;const finished=competitionFinished(c);el('selected-status').textContent=finished?'Afgelopen':'Live score';el('selected-area').classList.toggle('expired',finished);const clock=el('competition-clock');clock.innerHTML=finished?'<strong>⏱ De competitietijd is verstreken</strong>':c.eindigt_op?clockMarkup(timeRemaining(c.eindigt_op)):'Starttijd niet beschikbaar';const box=el('competition-result');show('competition-result',finished);if(finished){const leaders=state.scoreboard;const best=leaders[0]?.points??0;const winners=leaders.filter(x=>x.points===best);box.textContent=winners.length>1?'🤝 Gelijkspel! Beide spelers hebben '+best+' punten.':winners.length===1?'🏆 Winnaar: @'+winners[0].name+' met '+best+' punten!':'De competitie is afgelopen.';}updateChoreAvailability();}
-function tickCountdowns(){if(!state.user)return;const now=Math.floor(Date.now()/1000);if(now===state.lastTimerSecond)return;state.lastTimerSecond=now;for(const node of document.querySelectorAll('[data-competition-remaining]')){const c=state.competitions.find(x=>x.id===Number(node.dataset.competitionRemaining));if(!c)continue;node.textContent=c.status==='actief'&&c.eindigt_op?(competitionFinished(c)?'Tijd verstreken':durationText(timeRemaining(c.eindigt_op))+' resterend'):(c.duur_dagen||7)+' dagen na acceptatie';}if(state.selected){renderSelectedClock();for(const button of document.querySelectorAll('#activity [data-undo]')){const record=state.records.find(r=>Number(r.id)===Number(button.dataset.undo));if(!record||record.geannuleerd_op||Date.now()-new Date(record.voltooid_op).getTime()>300000)button.remove();}}if(!state.historyLoading&&state.competitions.some(c=>competitionFinished(c)&&c.myStatus==='geaccepteerd'&&c.start_op&&!state.history.some(h=>h.id===c.id))){renderCompetitions();loadHistory().catch(e=>msg(errorText(e)));}}
+function tickCountdowns(){if(!state.user)return;const now=Math.floor(Date.now()/1000);if(now===state.lastTimerSecond)return;state.lastTimerSecond=now;for(const node of document.querySelectorAll('[data-competition-remaining]')){const c=state.competitions.find(x=>x.id===Number(node.dataset.competitionRemaining));if(!c)continue;node.textContent=c.status==='actief'&&c.eindigt_op?(competitionFinished(c)?'Tijd verstreken':durationText(timeRemaining(c.eindigt_op))+' resterend'):(c.duur_dagen||7)+' dagen na acceptatie';}if(state.selected){renderSelectedClock();updateTaskTileTimers();for(const button of document.querySelectorAll('#activity [data-undo]')){const record=state.records.find(r=>Number(r.id)===Number(button.dataset.undo));if(!record||record.geannuleerd_op||Date.now()-new Date(record.voltooid_op).getTime()>300000)button.remove();}}if(!state.historyLoading&&state.competitions.some(c=>competitionFinished(c)&&c.myStatus==='geaccepteerd'&&c.start_op&&!state.history.some(h=>h.id===c.id))){renderCompetitions();loadHistory().catch(e=>msg(errorText(e)));}}
 async function fetchAllRecords(id){const all=[];for(let start=0;start<100000;start+=1000){const {data,error}=await client.from('voltooide_klusjes').select('id,gebruiker_id,klusje_id,punten_verdiend,voltooid_op,geannuleerd_op,klusjes(naam)').eq('competitie_id',id).order('voltooid_op',{ascending:false}).range(start,start+999);if(error)throw error;all.push(...(data||[]));if(!data||data.length<1000)break;}return all;}
-async function selectCompetition(id){let c=state.competitions.find(x=>x.id===id&&x.myStatus==='geaccepteerd'&&x.status!=='uitnodiging');if(!c)return;state.selected=id;show('selected-area',true);el('selected-title').textContent=c.naam;const [{data:participants,error:pe},records,{data:matched,error:ke}]=await Promise.all([client.from('competitie_deelnemers').select('gebruiker_id,status,profiles(gebruikersnaam,naam)').eq('competitie_id',id),fetchAllRecords(id),client.from('competitie_klusjes').select('klusje_id,punten,wachttijd_uren,klusjes(naam)').eq('competitie_id',id)]);if(pe)throw pe;if(ke)throw ke;state.competitionChores=(matched||[]).map(x=>({id:x.klusje_id,naam:x.klusjes?.naam||'Klusje #'+x.klusje_id,punten:x.punten,wachttijd_uren:x.wachttijd_uren})).sort((a,b)=>a.naam.localeCompare(b.naam,'nl'));renderChores();state.records=records||[];const accepted=(participants||[]).filter(x=>x.status==='geaccepteerd');let scoreboard=accepted.map(p=>({id:p.gebruiker_id,name:p.profiles?.gebruikersnaam||p.profiles?.naam||'Speler',points:records.filter(r=>r.gebruiker_id===p.gebruiker_id&&!r.geannuleerd_op).reduce((sum,r)=>sum+r.punten_verdiend,0)})).sort((a,b)=>b.points-a.points);state.scoreboard=scoreboard;renderDuelHero();const names=new Map(scoreboard.map(p=>[p.id,p.name]));const activity=el('activity');if(!records.length){activity.className='empty';activity.textContent='Nog geen activiteiten';}else{activity.className='';activity.innerHTML=records.slice(0,12).map(r=>{const cancelled=!!r.geannuleerd_op;const canUndo=!cancelled&&r.gebruiker_id===state.user.id&&Date.now()-new Date(r.voltooid_op).getTime()<=300000;return `<div class="row ${cancelled?'cancelled-chore':''}"><div><strong>@${safe(names.get(r.gebruiker_id)||'Speler')}</strong> · ${safe(r.klusjes?.naam||'Klusje')}<p>${safe(new Date(r.voltooid_op).toLocaleString('nl-NL',{dateStyle:'medium',timeStyle:'short'}))}${cancelled?' · Geannuleerd':''}</p></div><div class="actions">${cancelled?'<span class="cancelled-tag">Geannuleerd</span>':'<span class="points">+'+r.punten_verdiend+'</span>'}${canUndo?'<button type="button" class="btn secondary small undo-btn" data-undo="'+r.id+'">Ongedaan maken</button>':''}</div></div>`;}).join('');}renderSelectedClock();}
+async function selectCompetition(id){let c=state.competitions.find(x=>x.id===id&&x.myStatus==='geaccepteerd'&&x.status!=='uitnodiging');if(!c)return;if(state.selected!==id){taskFilter='all';el('task-search').value='';el('chore-select').value='';}state.selected=id;show('selected-area',true);el('selected-title').textContent=c.naam;const [{data:participants,error:pe},records,{data:matched,error:ke}]=await Promise.all([client.from('competitie_deelnemers').select('gebruiker_id,status,profiles(gebruikersnaam,naam)').eq('competitie_id',id),fetchAllRecords(id),client.from('competitie_klusjes').select('klusje_id,punten,wachttijd_uren,klusjes(naam)').eq('competitie_id',id)]);if(pe)throw pe;if(ke)throw ke;state.competitionChores=(matched||[]).map(x=>({id:x.klusje_id,naam:x.klusjes?.naam||'Klusje #'+x.klusje_id,punten:x.punten,wachttijd_uren:x.wachttijd_uren})).sort((a,b)=>a.naam.localeCompare(b.naam,'nl'));renderChores();state.records=records||[];renderTaskTiles();updateChoreAvailability();const accepted=(participants||[]).filter(x=>x.status==='geaccepteerd');let scoreboard=accepted.map(p=>({id:p.gebruiker_id,name:p.profiles?.gebruikersnaam||p.profiles?.naam||'Speler',points:records.filter(r=>r.gebruiker_id===p.gebruiker_id&&!r.geannuleerd_op).reduce((sum,r)=>sum+r.punten_verdiend,0)})).sort((a,b)=>b.points-a.points);state.scoreboard=scoreboard;renderDuelHero();const names=new Map(scoreboard.map(p=>[p.id,p.name]));const activity=el('activity');if(!records.length){activity.className='empty';activity.textContent='Nog geen activiteiten';}else{activity.className='';activity.innerHTML=records.slice(0,12).map(r=>{const cancelled=!!r.geannuleerd_op;const canUndo=!cancelled&&r.gebruiker_id===state.user.id&&Date.now()-new Date(r.voltooid_op).getTime()<=300000;return `<div class="row ${cancelled?'cancelled-chore':''}"><div><strong>@${safe(names.get(r.gebruiker_id)||'Speler')}</strong> · ${safe(r.klusjes?.naam||'Klusje')}<p>${safe(new Date(r.voltooid_op).toLocaleString('nl-NL',{dateStyle:'medium',timeStyle:'short'}))}${cancelled?' · Geannuleerd':''}</p></div><div class="actions">${cancelled?'<span class="cancelled-tag">Geannuleerd</span>':'<span class="points">+'+r.punten_verdiend+'</span>'}${canUndo?'<button type="button" class="btn secondary small undo-btn" data-undo="'+r.id+'">Ongedaan maken</button>':''}</div></div>`;}).join('');}renderSelectedClock();}
 
 
 // Lichtgewicht synchronisatie zonder realtime-replicatie of extra databasebeleid.
@@ -1437,7 +1566,15 @@ el('home-all-competitions').addEventListener('click',()=>navigate('competitions'
 el('home-challenge-link').addEventListener('click',()=>navigate('competitions'));
 el('back-to-competitions').addEventListener('click',()=>{state.selected=null;show('selected-area',false);show('hub-competition-list',true);el('competitions').scrollIntoView({behavior:'smooth',block:'start'});});
 el('competitions').addEventListener('click',async e=>{const b=e.target.closest('[data-open]');if(!b)return;await withButton(b,()=>openCompetitionDetails(Number(b.dataset.open)));});
-el('chore-select').addEventListener('change',updateChoreAvailability);
+el('chore-select').addEventListener('change',()=>{renderTaskTiles();updateChoreAvailability();});
+el('task-tiles').addEventListener('click',event=>{
+  const tile=event.target.closest('[data-chore-id]');if(!tile||tile.disabled)return;
+  const select=el('chore-select');const id=String(tile.dataset.choreId);
+  select.value=select.value===id?'':id;
+  renderTaskTiles();updateChoreAvailability();
+});
+document.querySelectorAll('[data-task-filter]').forEach(button=>button.addEventListener('click',()=>{taskFilter=button.dataset.taskFilter;renderTaskTiles();}));
+el('task-search').addEventListener('input',renderTaskTiles);
 setInterval(tickCountdowns,1000);
 el('complete-chore').addEventListener('click',async()=>{await withButton(el('complete-chore'),async()=>{if(!state.selected)throw Error('Selecteer eerst een competitie.');if(!getChoreAvailability().enabled)throw Error(getChoreAvailability().text);const id=Number(el('chore-select').value);if(!id)throw Error('Selecteer eerst een klusje.');const {error}=await client.rpc('klusje_voltooien',{p_competitie_id:state.selected,p_klusje_id:id});if(error)throw error;await selectCompetition(state.selected);msg('Klusje voltooid! Je punten zijn toegevoegd.','success');});});
 bootstrap().catch(e=>{show('loading',false);msg(errorText(e));});
