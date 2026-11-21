@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.7.16-alpha</title>
+<title>Klusjes-Oorlog | v0.7.17-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -750,7 +750,7 @@ html[data-theme="dark"] .settings-tabs .btn[aria-selected="false"]{background:#2
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs" role="tablist" aria-label="Instellingen"><button id="settings-changelog-tab" class="btn small" type="button" role="tab" aria-selected="true" aria-controls="settings-changelog-view">📝 Changelog</button><button id="settings-howto-tab" class="btn secondary small" type="button" role="tab" aria-selected="false" aria-controls="settings-howto-view">🎮 How to play</button></div><div id="settings-changelog-view" role="tabpanel" aria-labelledby="settings-changelog-tab"><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.16-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul><button id="changelog-more" class="btn secondary small settings-expand" type="button" aria-expanded="false" aria-controls="changelog-list">Alle eerdere versies bekijken</button></div><div id="settings-howto-view" class="hidden" role="tabpanel" aria-labelledby="settings-howto-tab"><div class="howto-intro"><strong>⚔️ Welkom bij Klusjes-Oorlog!</strong><p>Maak van de dagelijkse klusjes een vriendelijke competitie. Kies je opdrachten, verdien punten en ontgrendel badges en Stofmonster-avatars.</p></div><div class="howto-steps">
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs" role="tablist" aria-label="Instellingen"><button id="settings-changelog-tab" class="btn small" type="button" role="tab" aria-selected="true" aria-controls="settings-changelog-view">📝 Changelog</button><button id="settings-howto-tab" class="btn secondary small" type="button" role="tab" aria-selected="false" aria-controls="settings-howto-view">🎮 How to play</button></div><div id="settings-changelog-view" role="tabpanel" aria-labelledby="settings-changelog-tab"><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.17-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul><button id="changelog-more" class="btn secondary small settings-expand" type="button" aria-expanded="false" aria-controls="changelog-list">Alle eerdere versies bekijken</button></div><div id="settings-howto-view" class="hidden" role="tabpanel" aria-labelledby="settings-howto-tab"><div class="howto-intro"><strong>⚔️ Welkom bij Klusjes-Oorlog!</strong><p>Maak van de dagelijkse klusjes een vriendelijke competitie. Kies je opdrachten, verdien punten en ontgrendel badges en Stofmonster-avatars.</p></div><div class="howto-steps">
 <details open><summary>1. 🏁 Start een wedstrijd</summary><p>Ga naar <strong>Competities → Nieuwe match</strong>. Zoek de gebruikersnaam van je tegenstander, kies een looptijd van 1, 3, 7, 14 of 30 dagen en verstuur de uitnodiging. De wedstrijd start wanneer je tegenstander accepteert.</p></details>
 <details><summary>2. 🧹 Kies jullie klusjes</summary><p>Met <strong>Standaard</strong> speel je met de algemene klusjes. Bij <strong>Gepersonaliseerd</strong> kies je zelf taken uit de uitgebreide catalogus; zoeken en filteren kan per categorie. Beide spelers krijgen dezelfde geselecteerde klusjes en basispunten.</p></details>
 <details><summary>3. ⚡ Verdien punten</summary><p>Open de wedstrijd en ga naar <strong>Pak je punten</strong>. Tik op een beschikbare klusjestegel en bevestig daaronder de voltooiing. De punten tellen direct mee voor jouw score. De speler met de meeste punten aan het einde wint; bij een gelijke stand is het gelijkspel.</p></details>
@@ -793,7 +793,24 @@ html[data-theme="dark"] .settings-tabs .btn[aria-selected="false"]{background:#2
 <option value="1">Dagelijks</option><option value="3">Iedere 3 dagen</option><option value="7">Wekelijks</option>
 <option value="14">Iedere 2 weken</option><option value="30">Maandelijks (30 dagen)</option>
 <option value="90">Iedere 3 maanden (90 dagen)</option><option value="182">Iedere 6 maanden (182 dagen)</option>
-<option value="365">Jaarlijks (365 dagen)</option></select><span class="hint">Wordt gedeeld met beide spelers, ook in een nieuwe competitie. Wachttijd blijft afzonderlijk gelden.</span></div><div class="field"><label for="admin-active">Beschikbaarheid</label><select id="admin-active"><option value="true">Actief — spelers kunnen dit klusje uitvoeren</option><option value="false">Uitgeschakeld — verborgen voor spelers</option></select></div><div class="admin-actions"><button id="admin-save" class="btn" type="submit">Klusje toevoegen</button><button id="admin-cancel" class="btn secondary hidden" type="button">Bewerken annuleren</button></div></form></div><div id="admin-competitions-view" class="hidden"><div class="space" style="flex-wrap:wrap"><div><h3 class="section-title" style="margin:0 0 4px">🏆 Competitiebeheer</h3><p class="hint" style="margin:0">Alle competities. Je kunt actieve competities verlengen, verkorten of direct beëindigen.</p></div><select id="admin-competition-filter" class="admin-filter" aria-label="Filter competities"><option value="alle">Alle competities</option><option value="actief">Actief</option><option value="uitnodiging">Uitnodigingen</option><option value="afgelopen">Afgelopen</option></select></div><div id="admin-competition-summary" class="admin-summary"></div><div id="admin-competition-list"><div class="empty">Kies Competitiebeheer om de competities op te halen.</div></div></div><div id="admin-system-view" class="hidden"><h3 class="section-title">🛡️ Systeembeheer</h3><p class="hint">Voorbereiding op de officiële release. Er worden nu geen gegevens gewijzigd of verwijderd.</p><div class="system-reset-layout"><div class="system-reset-item"><span>Gebruikersaccounts en gebruikersnamen</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Administratorrechten</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Klusjes, punteninstellingen en wachttijden</span><strong class="system-keep">Behouden</strong></div><div class="system-reset-item"><span>Competities en uitnodigingen</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Uitgevoerde klusjes, punten en geschiedenis</span><strong class="system-clear">Resetten</strong></div><div class="system-reset-item"><span>Leaderboardresultaten en behaalde achievements</span><strong class="system-clear">Resetten</strong></div></div><p class="notice" style="margin:18px 0">Bij de officiële release maken we eerst een gecontroleerde back-up en voegen we een extra bevestiging toe. De reset wordt dan een afzonderlijk, beveiligd beheerproces.</p><button class="btn danger" type="button" disabled title="Beschikbaar bij voorbereiding van de officiële release">🔒 Reset alle voortgang — nog niet beschikbaar</button><p class="hint">Let op: dit is uitsluitend een voorbereidend overzicht, er is geen resetfunctie gekoppeld.</p></div></section><div id="home-content"><section class="home-hero" aria-label="Welkom in Klusjes-Oorlog">
+<option value="365">Jaarlijks (365 dagen)</option></select><span class="hint">Wordt gedeeld met beide spelers, ook in een nieuwe competitie. Wachttijd blijft afzonderlijk gelden.</span></div><div class="field"><label for="admin-active">Beschikbaarheid</label><select id="admin-active"><option value="true">Actief — spelers kunnen dit klusje uitvoeren</option><option value="false">Uitgeschakeld — verborgen voor spelers</option></select></div><div class="admin-actions"><button id="admin-save" class="btn" type="submit">Klusje toevoegen</button><button id="admin-cancel" class="btn secondary hidden" type="button">Bewerken annuleren</button></div></form></div><div id="admin-competitions-view" class="hidden"><div class="space" style="flex-wrap:wrap"><div><h3 class="section-title" style="margin:0 0 4px">🏆 Competitiebeheer</h3><p class="hint" style="margin:0">Alle competities. Je kunt actieve competities verlengen, verkorten of direct beëindigen.</p></div><select id="admin-competition-filter" class="admin-filter" aria-label="Filter competities"><option value="alle">Alle competities</option><option value="actief">Actief</option><option value="uitnodiging">Uitnodigingen</option><option value="afgelopen">Afgelopen</option></select></div><div id="admin-competition-summary" class="admin-summary"></div><div id="admin-competition-list"><div class="empty">Kies Competitiebeheer om de competities op te halen.</div></div></div><div id="admin-system-view" class="hidden">
+<h3 class="section-title">🛡️ Systeembeheer</h3>
+<p class="hint">Reset alle spelvoortgang in dit project. Accounts, beheerdersrechten en catalogi blijven behouden.</p>
+<p class="hint">Dit omvat competities, uitnodigingen, deelnemers, activiteiten, scores, badges, XP, avatars en onderhoudscycli.</p>
+<button id="system-reset" class="btn danger" type="button" disabled>Voortgang resetten</button>
+<div class="divider"></div>
+<div class="field"><label for="system-snapshots">Privéback-ups</label><select id="system-snapshots"><option value="">Kies een back-up</option></select></div>
+<button id="system-restore" class="btn danger" type="button" disabled>Gekozen back-up terugzetten</button>
+<p class="hint" id="system-status" role="status"></p>
+<p id="system-result" role="status"></p>
+<dialog id="system-dialog" aria-labelledby="system-dialog-title" style="width:min(92vw,480px);border:0;border-radius:16px;padding:24px">
+<form id="system-form">
+<h3 class="section-title" id="system-dialog-title"></h3>
+<p id="system-impact"></p><p id="system-source" class="hint"></p>
+<div class="field"><label for="system-confirm">Typ <strong id="system-token"></strong> om te bevestigen</label><input id="system-confirm" autocomplete="off" spellcheck="false" autofocus required></div>
+<div class="actions"><button id="system-cancel" class="btn secondary" type="button">Annuleren</button><button id="system-submit" class="btn danger" type="submit" disabled>Bevestigen</button></div>
+</form>
+</dialog></div></section><div id="home-content"><section class="home-hero" aria-label="Welkom in Klusjes-Oorlog">
   <div class="home-hero-copy"><span class="home-eyebrow">JOUW HUIS · JOUW SPEL</span>
   <h2 class="title" id="welcome">Jouw dashboard</h2>
   <p class="subtitle">Strijd met vrienden om de meeste punten.</p>
@@ -834,20 +851,24 @@ html[data-theme="dark"] .settings-tabs .btn[aria-selected="false"]{background:#2
 
 <section class="section-space home-social-area" id="hub-new-game" aria-label="Nieuwe match"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div class="picker-filters"><input id="challenge-task-search" type="search" placeholder="Zoek een klusje…" aria-label="Zoek klusjes"><select id="challenge-task-category" aria-label="Filter op categorie"></select></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section></div></section><section class="section-space home-social-area" id="hub-invites" aria-label="Uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">JE UITNODIGINGEN</span><h3 class="section-title">Uitnodigingen beheren</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Ontvangen uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div><section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section></section>
 <section class="section-space home-history-area" id="hub-history"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.16-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.17-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.7.16-alpha';
+const APP_VERSION='v0.7.17-alpha';
 const CHANGELOG=[
+  {version:'v0.7.17-alpha',date:'21 november 2026',changes:[
+    'Beheerders kunnen spelvoortgang resetten en privéback-ups terugzetten na databasecontrole.',
+    'Voor reset en herstel wordt in dezelfde transactie een back-up gemaakt.'
+  ]},
   {version:'v0.7.16-alpha',date:'21 november 2026',changes:[
     'De Stofmonster-collectie onder Account is standaard ingeklapt, zodat je sneller bij Instellingen en Beheer komt.',
     'De changelog toont eerst drie versies; oudere versies zijn met één knop uit te klappen.',
     'Nieuw How to play-tabblad onder Instellingen met uitleg over wedstrijden, klusjes, frequenties, bonuspunten, badges en XP.',
     'Alle wijzigingen zijn uitsluitend visueel; geen Supabase SQL-update nodig.'
   ]},
-  {version:'v0.7.16-alpha',date:'21 november 2026',changes:[
+  {version:'v0.7.15-alpha',date:'21 november 2026',changes:[
     'Nooit uitgevoerde periodieke klusjes wachten eerst hun volledige onderhoudsfrequentie af; daarna komen ze pas in Tijd om aan te pakken.',
     'Na een eerdere uitvoering blijft de gedeelde laatste uitvoerdatum leidend, ook in nieuwe wedstrijden met dezelfde tegenstander.',
     'Nieuwe gedeelde startregistratie per spelerspaar en klusje, zonder XP, historische punten of bestaande uitvoeringen te wijzigen.',
@@ -1900,9 +1921,110 @@ function renderAdminCompetitions(){
 function resetAdminForm(){state.editingChore=null;el('admin-form').reset();el('admin-points').value='10';el('admin-cooldown').value='24';el('admin-frequency').value='';el('admin-category').value='Overig';el('admin-active').value='true';el('admin-form-title').textContent='Nieuw klusje';el('admin-save').textContent='Klusje toevoegen';show('admin-cancel',false);}
 function editAdminChore(id){const c=state.adminChores.find(x=>x.id===id);if(!c)return;state.editingChore=id;el('admin-name').value=c.naam;el('admin-points').value=c.punten;el('admin-cooldown').value=c.wachttijd_uren;el('admin-frequency').value=String(c.frequentie_dagen??'');el('admin-category').value=c.categorie||'Overig';el('admin-active').value=String(c.actief);el('admin-form-title').textContent='Klusje bewerken';el('admin-save').textContent='Wijzigingen opslaan';show('admin-cancel',true);el('admin-form').scrollIntoView({behavior:'smooth',block:'center'});}
 
-el('admin-toggle').addEventListener('click',async()=>withButton(el('admin-toggle'),async()=>{if(!state.isAdmin)return;if(currentView==='admin'){navigate('account');return;}navigate('admin');setAdminTab(state.adminTab);if(state.adminTab==='competitions')await loadAdminCompetitions();else if(state.adminTab==='chores')await loadAdminChores();}));
-el('admin-refresh').addEventListener('click',()=>withButton(el('admin-refresh'),()=>state.adminTab==='competitions'?loadAdminCompetitions():state.adminTab==='chores'?loadAdminChores():Promise.resolve()));
-for(const [tab,id] of [['chores','admin-tab-chores'],['competitions','admin-tab-competitions'],['system','admin-tab-system']])el(id).addEventListener('click',async()=>withButton(el(id),async()=>{setAdminTab(tab);if(tab==='competitions')await loadAdminCompetitions();else if(tab==='chores')await loadAdminChores();}));
+el('admin-toggle').addEventListener('click',async()=>withButton(el('admin-toggle'),async()=>{if(!state.isAdmin)return;if(currentView==='admin'){navigate('account');return;}navigate('admin');setAdminTab(state.adminTab);if(state.adminTab==='competitions')await loadAdminCompetitions();else if(state.adminTab==='chores')await loadAdminChores();else await loadSystemStatus();}));
+let systemStatus=null;
+let systemRequest=0;
+let systemAction=null;
+let systemBusy=false;
+const systemDialog=el('system-dialog');
+
+async function loadSystemStatus(){
+  if(systemBusy || !state.isAdmin)return;
+  const request=++systemRequest;
+  const userId=state.user?.id;
+  systemStatus=null;
+  const reset=el('system-reset');
+  const restore=el('system-restore');
+  const options=el('system-snapshots');
+  reset.disabled=true;
+  restore.disabled=true;
+  options.replaceChildren(new Option('Kies een back-up',''));
+  const status=el('system-status');
+  status.textContent='Back-ups laden…';
+  const {data,error}=await client.rpc('admin_systeem_status');
+  if(request!==systemRequest || userId!==state.user?.id || !state.isAdmin || state.adminTab!=='system')return;
+  if(error){
+    status.textContent='Systeembeheer is niet beschikbaar. Controleer de SQL-installatie en je beheerrechten.';
+    return;
+  }
+  systemStatus=data;
+  for(const snapshot of data.snapshots){
+    const date=new Date(snapshot.gemaakt_op).toLocaleString('nl-NL',{dateStyle:'short',timeStyle:'medium'});
+    const reason=snapshot.reden==='reset'?'Vóór reset':'Vóór herstel';
+    const competitions=snapshot.aantallen.competities;
+    options.add(new Option(reason+' · '+date+' · '+competitions+' competities · '+snapshot.id.slice(0,8),snapshot.id));
+  }
+  reset.disabled=!data.actief;
+  status.textContent=data.actief
+    ? (data.snapshots.length?'Back-ups beschikbaar.':'Er zijn nog geen back-ups.')
+    : 'Reset en herstel zijn uitgeschakeld. De databasescope moet eerst worden goedgekeurd.';
+}
+
+el('system-snapshots').addEventListener('change',()=>{
+  el('system-restore').disabled=!systemStatus?.actief || !el('system-snapshots').value;
+});
+
+function confirmSystemAction(action){
+  if(!state.isAdmin || !systemStatus?.actief)return;
+  const snapshot=action==='herstel'?el('system-snapshots').value:null;
+  if(action==='herstel'&&!snapshot)return;
+  const token=action==='reset'?'RESET':'HERSTEL';
+  systemAction={p_actie:action,p_revisie:systemStatus.revisie,p_snapshot:snapshot};
+  el('system-dialog-title').textContent=action==='reset'?'Alle spelvoortgang resetten?':'Back-up terugzetten?';
+  el('system-impact').textContent=action==='reset'
+    ? 'Dit wist de voortgang van alle spelers in dit project. Er wordt eerst een privéback-up gemaakt.'
+    : 'Dit vervangt de huidige voortgang van alle spelers. Er wordt eerst een privéback-up van de huidige stand gemaakt.';
+  el('system-source').textContent=snapshot?el('system-snapshots').selectedOptions[0].textContent:'';
+  el('system-token').textContent=token;
+  el('system-confirm').value='';
+  el('system-submit').disabled=true;
+  systemDialog.showModal();
+}
+
+el('system-reset').addEventListener('click',()=>confirmSystemAction('reset'));
+el('system-restore').addEventListener('click',()=>confirmSystemAction('herstel'));
+el('system-confirm').addEventListener('input',()=>{
+  el('system-submit').disabled=el('system-confirm').value!==el('system-token').textContent;
+});
+el('system-cancel').addEventListener('click',()=>systemDialog.close());
+systemDialog.addEventListener('close',()=>{systemAction=null;});
+el('system-form').addEventListener('submit',async event=>{
+  event.preventDefault();
+  const confirmation=el('system-confirm').value;
+  if(systemBusy || !state.isAdmin || !systemAction || confirmation!==el('system-token').textContent)return;
+  const params={...systemAction,p_bevestiging:confirmation};
+  const userId=state.user?.id;
+  systemDialog.close();
+  systemBusy=true;
+  systemRequest++;
+  systemStatus=null;
+  el('system-reset').disabled=true;
+  el('system-restore').disabled=true;
+  el('admin-refresh').disabled=true;
+  el('system-result').textContent='Bezig met back-up en '+(params.p_actie==='reset'?'reset…':'herstel…');
+  try{
+    const {data,error}=await client.rpc('admin_systeem_wijzigen',params);
+    if(error)throw error;
+    if(userId!==state.user?.id)return;
+    el('system-result').textContent=(params.p_actie==='reset'?'Reset voltooid.':'Herstel voltooid.')+' Back-up: '+data;
+    state.selected=null;
+    state.adminCompetitions=[];
+    adminChoreCache.clear();
+    const refresh=await Promise.allSettled([refreshAll(),fetchBadgeRewards(),fetchSelectedAvatar()]);
+    if(refresh.some(result=>result.status==='rejected')){
+      el('system-result').textContent+=' Ververs de pagina om de nieuwe stand te laden.';
+    }
+  }catch(error){
+    if(userId===state.user?.id)el('system-result').textContent='Geen voltooiing bevestigd. Controleer de back-uplijst vóór een nieuwe poging. '+errorText(error);
+  }finally{
+    systemBusy=false;
+    el('admin-refresh').disabled=false;
+    if(state.isAdmin&&state.adminTab==='system')await loadSystemStatus();
+  }
+});
+
+el('admin-refresh').addEventListener('click',()=>withButton(el('admin-refresh'),()=>state.adminTab==='competitions'?loadAdminCompetitions():state.adminTab==='chores'?loadAdminChores():loadSystemStatus()));
+for(const [tab,id] of [['chores','admin-tab-chores'],['competitions','admin-tab-competitions'],['system','admin-tab-system']])el(id).addEventListener('click',async()=>withButton(el(id),async()=>{setAdminTab(tab);if(tab==='competitions')await loadAdminCompetitions();else if(tab==='chores')await loadAdminChores();else await loadSystemStatus();}));
 el('admin-competition-filter').addEventListener('change',renderAdminCompetitions);
 
 // Laad vastgelegde klusjes uitsluitend wanneer de admin de dropdown opent.
