@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.7.15-alpha</title>
+<title>Klusjes-Oorlog | v0.7.16-alpha</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -706,6 +706,37 @@ html[data-theme="dark"] .priority-chore small,html[data-theme="dark"] .periodic-
 .picker-group-heading{padding:8px 5px 4px;font-size:11px;font-weight:900;letter-spacing:.05em;color:var(--muted,#7c8aa6);text-transform:uppercase}
 .task-picker label{min-width:0;flex-wrap:wrap}.task-picker .task-name{min-width:130px}.task-picker .task-points{white-space:nowrap}
 @media(max-width:420px){.picker-filters{grid-template-columns:1fr}.task-picker .task-points{font-size:11px}}
+
+/* v0.7.16: compact account collection and settings help */
+.avatar-collection-details{border:1px solid #e3e9f2;border-radius:15px;padding:0!important;overflow:hidden}
+.avatar-collection-details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;padding:17px 18px;list-style:none}
+.avatar-collection-details>summary::-webkit-details-marker{display:none}
+.avatar-collection-details>summary:focus-visible{outline:3px solid #a6b6ff;outline-offset:-3px}
+.collection-summary-title{font-size:16px;font-weight:800}
+.collection-summary-note{font-size:12px;color:#7d8ba4;text-align:right}
+.collection-chevron{font-size:20px;display:inline-block;transition:transform .16s;margin-left:5px}
+.avatar-collection-details[open] .collection-chevron{transform:rotate(180deg)}
+.avatar-collection-details[open]>summary{border-bottom:1px solid #e3e9f2}
+.collection-inner{padding:5px 16px 17px}
+.settings-tabs{flex-wrap:wrap}
+.settings-tabs .btn[aria-selected="true"]{background:#5667d9;color:#fff}
+.settings-tabs .btn[aria-selected="false"]{background:#f0f2fb;color:#445171}
+.settings-expand{margin:10px 0 0;width:100%;max-width:360px}
+.settings-changelog>li{padding:12px 0}
+.settings-changelog>li>ul{padding-left:19px;margin:7px 0 0;font-size:13px;line-height:1.55}
+.settings-changelog>li>ul>li{padding:3px 0;border:0!important}
+.howto-intro{background:#eef2ff;padding:17px;border-radius:13px;margin:16px 0}
+.howto-intro p{font-size:13px;line-height:1.6;margin:7px 0 0}
+.howto-steps{display:grid;gap:9px;margin:14px 0}
+.howto-steps details{border:1px solid #e1e7f2;border-radius:12px;overflow:hidden}
+.howto-steps summary{padding:13px 14px;font-weight:750;cursor:pointer;font-size:14px}
+.howto-steps details[open] summary{border-bottom:1px solid #e1e7f2}
+.howto-steps details p{font-size:13px;line-height:1.7;padding:0 14px;margin:12px 0}
+html[data-theme="dark"] .avatar-collection-details,html[data-theme="dark"] .howto-steps details{border-color:#35455b}
+html[data-theme="dark"] .avatar-collection-details[open]>summary,html[data-theme="dark"] .howto-steps details[open] summary{border-color:#35455b}
+html[data-theme="dark"] .howto-intro{background:#293752}
+html[data-theme="dark"] .settings-tabs .btn[aria-selected="false"]{background:#29374d;color:#d0d9f1}
+@media(max-width:530px){.avatar-collection-details>summary{padding:15px 12px}.collection-summary-title{font-size:14px}.collection-summary-note{font-size:11px}.collection-inner{padding:5px 10px 13px}}
 </style>
 </head>
 <body>
@@ -719,13 +750,22 @@ html[data-theme="dark"] .priority-chore small,html[data-theme="dark"] .periodic-
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs"><button id="settings-changelog-tab" class="btn small" type="button" aria-current="page">Changelog</button></div><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.11-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul></section><div id="alert" class="message" role="alert"></div>
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs" role="tablist" aria-label="Instellingen"><button id="settings-changelog-tab" class="btn small" type="button" role="tab" aria-selected="true" aria-controls="settings-changelog-view">📝 Changelog</button><button id="settings-howto-tab" class="btn secondary small" type="button" role="tab" aria-selected="false" aria-controls="settings-howto-view">🎮 How to play</button></div><div id="settings-changelog-view" role="tabpanel" aria-labelledby="settings-changelog-tab"><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.16-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul><button id="changelog-more" class="btn secondary small settings-expand" type="button" aria-expanded="false" aria-controls="changelog-list">Alle eerdere versies bekijken</button></div><div id="settings-howto-view" class="hidden" role="tabpanel" aria-labelledby="settings-howto-tab"><div class="howto-intro"><strong>⚔️ Welkom bij Klusjes-Oorlog!</strong><p>Maak van de dagelijkse klusjes een vriendelijke competitie. Kies je opdrachten, verdien punten en ontgrendel badges en Stofmonster-avatars.</p></div><div class="howto-steps">
+<details open><summary>1. 🏁 Start een wedstrijd</summary><p>Ga naar <strong>Competities → Nieuwe match</strong>. Zoek de gebruikersnaam van je tegenstander, kies een looptijd van 1, 3, 7, 14 of 30 dagen en verstuur de uitnodiging. De wedstrijd start wanneer je tegenstander accepteert.</p></details>
+<details><summary>2. 🧹 Kies jullie klusjes</summary><p>Met <strong>Standaard</strong> speel je met de algemene klusjes. Bij <strong>Gepersonaliseerd</strong> kies je zelf taken uit de uitgebreide catalogus; zoeken en filteren kan per categorie. Beide spelers krijgen dezelfde geselecteerde klusjes en basispunten.</p></details>
+<details><summary>3. ⚡ Verdien punten</summary><p>Open de wedstrijd en ga naar <strong>Pak je punten</strong>. Tik op een beschikbare klusjestegel en bevestig daaronder de voltooiing. De punten tellen direct mee voor jouw score. De speler met de meeste punten aan het einde wint; bij een gelijke stand is het gelijkspel.</p></details>
+<details><summary>4. 🔒 Wachttijd versus 📅 Gepland</summary><p><strong>Wachttijd</strong> is persoonlijk: na een uitvoering kun jij hetzelfde klusje tijdelijk niet opnieuw claimen binnen die competitie. <strong>Gepland</strong> gaat over onderhoud: een klusje is pas opnieuw nodig na de ingestelde frequentie. Die onderhoudsteller is gedeeld tussen dezelfde twee spelers, ook in een nieuwe match.</p><p>Een periodiek klusje zonder eerdere uitvoering wacht eerst zijn eerste frequentieperiode af. Niet-periodieke klusjes volgen alleen de ingestelde wachttijd.</p></details>
+<details><summary>5. 🔥 Prioriteit en bonuspunten</summary><p>Wanneer een periodiek klusje opnieuw aan de beurt is, verschijnt het bij <strong>Tijd om aan te pakken!</strong>. Blijft het daarna liggen, dan kan de beloning oplopen van ×1 naar maximaal <strong>×2</strong>. Beide spelers zien dezelfde onderhoudsstatus en bonus. De persoonlijke wachttijd kan het uitvoeren nog tijdelijk blokkeren.</p></details>
+<details><summary>6. ↩️ Foutje gemaakt?</summary><p>Je kunt een eigen geregistreerd klusje binnen <strong>5 minuten</strong> ongedaan maken via Activiteiten. Beheerders kunnen registraties ook later annuleren. Geannuleerde klusjes leveren geen punten op.</p></details>
+<details><summary>7. 🏅 Badges, XP en avatars</summary><p>Ga naar <strong>Badges</strong> om je achievements te bekijken. Behaalde badges geven niet automatisch XP: je moet de beloning zelf <strong>innen</strong>. Met voldoende XP stijg je in level en ontgrendel je een nieuwe Stofmonster-avatar. Via <strong>Account → Jouw Stofmonster-collectie</strong> kies je welke vrijgespeelde avatar je gebruikt.</p></details>
+<details><summary>8. 🏆 Ranglijst en rematches</summary><p>Bij <strong>Ranglijst</strong> vergelijk je spelers op onder meer punten, klusjes, competities en level, over de hele periode of per maand. In <strong>Competities → Geschiedenis</strong> bekijk je resultaten en kun je een rematch starten.</p></details>
+</div><p class="hint">Tip: open de onderdelen hierboven één voor één. De regels in een specifieke competitie, zoals de duur en geselecteerde klusjes, zijn bij het uitnodigen ingesteld.</p></div></section><div id="alert" class="message" role="alert"></div>
 
 <section id="account-panel" class="card account-panel hidden" aria-label="Mijn account">
   <div class="account-heading"><h2 class="title">Mijn account</h2><p class="subtitle">Je profiel, instellingen en beheer op één plek.</p></div>
   <div class="account-identity"><span class="account-avatar" aria-hidden="true" id="account-avatar-display">👤</span><div><strong id="account-username">Log in om je profiel te bekijken</strong><p class="hint" id="account-email"></p></div></div>
   <div class="xp-account-summary" id="xp-account-summary" aria-live="polite"><span class="hint">Log in om je XP-voortgang te zien.</span></div>
-  <div class="account-group"><h3 class="section-title">🎨 Jouw Stofmonster-collectie</h3><p class="hint">Bij elk nieuw level speel je een unieke avatar vrij. Kies zelf welke ontgrendelde avatar je toont.</p><div id="avatar-collection" class="avatar-collection"></div></div><div class="account-group"><h3 class="section-title">Weergave</h3><div class="field"><label for="theme-choice">Thema</label><select id="theme-choice"><option value="system">Automatisch (apparaat)</option><option value="light">Licht</option><option value="dark">Donker</option></select></div><p class="hint">Deze voorkeur wordt op dit apparaat opgeslagen.</p></div>
+  <details class="account-group avatar-collection-details" id="avatar-collection-details"><summary><span class="collection-summary-title">🎨 Jouw Stofmonster-collectie</span><span class="collection-summary-note">Bekijk en kies je avatars <span aria-hidden="true" class="collection-chevron">⌄</span></span></summary><div class="collection-inner"><p class="hint">Bij elk nieuw level speel je een unieke avatar vrij. Kies zelf welke ontgrendelde avatar je toont.</p><div id="avatar-collection" class="avatar-collection"></div></div></details><div class="account-group"><h3 class="section-title">Weergave</h3><div class="field"><label for="theme-choice">Thema</label><select id="theme-choice"><option value="system">Automatisch (apparaat)</option><option value="light">Licht</option><option value="dark">Donker</option></select></div><p class="hint">Deze voorkeur wordt op dit apparaat opgeslagen.</p></div>
   <div class="account-group"><h3 class="section-title">Instellingen en informatie</h3><div id="account-settings-controls" class="account-actions"></div><div id="account-settings-slot"></div></div>
   <div class="account-group hidden" id="account-admin-group"><h3 class="section-title">Beheer</h3><p class="hint">Alleen zichtbaar voor administrators.</p><div id="account-admin-controls" class="account-actions"></div></div>
   <div class="account-group" id="account-session-group"><h3 class="section-title">Sessie</h3><div id="account-session-controls" class="account-actions"></div><p class="hint" id="account-signin-hint">Log in op Home om je competities te beheren.</p></div>
@@ -794,14 +834,20 @@ html[data-theme="dark"] .priority-chore small,html[data-theme="dark"] .periodic-
 
 <section class="section-space home-social-area" id="hub-new-game" aria-label="Nieuwe match"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div class="picker-filters"><input id="challenge-task-search" type="search" placeholder="Zoek een klusje…" aria-label="Zoek klusjes"><select id="challenge-task-category" aria-label="Filter op categorie"></select></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section></div></section><section class="section-space home-social-area" id="hub-invites" aria-label="Uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">JE UITNODIGINGEN</span><h3 class="section-title">Uitnodigingen beheren</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Ontvangen uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div><section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section></section>
 <section class="section-space home-history-area" id="hub-history"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.15-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.16-alpha</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.7.15-alpha';
+const APP_VERSION='v0.7.16-alpha';
 const CHANGELOG=[
-  {version:'v0.7.15-alpha',date:'21 november 2026',changes:[
+  {version:'v0.7.16-alpha',date:'21 november 2026',changes:[
+    'De Stofmonster-collectie onder Account is standaard ingeklapt, zodat je sneller bij Instellingen en Beheer komt.',
+    'De changelog toont eerst drie versies; oudere versies zijn met één knop uit te klappen.',
+    'Nieuw How to play-tabblad onder Instellingen met uitleg over wedstrijden, klusjes, frequenties, bonuspunten, badges en XP.',
+    'Alle wijzigingen zijn uitsluitend visueel; geen Supabase SQL-update nodig.'
+  ]},
+  {version:'v0.7.16-alpha',date:'21 november 2026',changes:[
     'Nooit uitgevoerde periodieke klusjes wachten eerst hun volledige onderhoudsfrequentie af; daarna komen ze pas in Tijd om aan te pakken.',
     'Na een eerdere uitvoering blijft de gedeelde laatste uitvoerdatum leidend, ook in nieuwe wedstrijden met dezelfde tegenstander.',
     'Nieuwe gedeelde startregistratie per spelerspaar en klusje, zonder XP, historische punten of bestaande uitvoeringen te wijzigen.',
@@ -1084,7 +1130,25 @@ function initSettings(){
  el('footer-version').textContent=APP_VERSION;
  el('settings-version').textContent=APP_VERSION;
  document.title='Klusjes-Oorlog | '+APP_VERSION;
- el('changelog-list').innerHTML=CHANGELOG.map(item=>`<li><strong>${safe(item.version)}</strong> <span class="hint">· ${safe(item.date)}</span><ul>${item.changes.map(x=>`<li>${safe(x)}</li>`).join('')}</ul></li>`).join('');
+ let changelogExpanded=false;
+ const drawChangelog=()=>{
+   const shown=changelogExpanded?CHANGELOG:CHANGELOG.slice(0,3);
+   el('changelog-list').innerHTML=shown.map(item=>`<li><strong>${safe(item.version)}</strong> <span class="hint">· ${safe(item.date)}</span><ul>${item.changes.map(x=>`<li>${safe(x)}</li>`).join('')}</ul></li>`).join('');
+   const more=el('changelog-more');show('changelog-more',CHANGELOG.length>3);
+   more.textContent=changelogExpanded?'Minder versies tonen':'Alle eerdere versies bekijken ('+(CHANGELOG.length-3)+')';
+   more.setAttribute('aria-expanded',String(changelogExpanded));
+ };
+ drawChangelog();
+ el('changelog-more').addEventListener('click',()=>{changelogExpanded=!changelogExpanded;drawChangelog();});
+ const setSettingsTab=tab=>{
+   const help=tab==='howto';show('settings-changelog-view',!help);show('settings-howto-view',help);
+   el('settings-changelog-tab').setAttribute('aria-selected',String(!help));
+   el('settings-howto-tab').setAttribute('aria-selected',String(help));
+   el('settings-changelog-tab').classList.toggle('secondary',help);
+   el('settings-howto-tab').classList.toggle('secondary',!help);
+ };
+ el('settings-changelog-tab').addEventListener('click',()=>setSettingsTab('changelog'));
+ el('settings-howto-tab').addEventListener('click',()=>setSettingsTab('howto'));
  el('account-settings-slot').appendChild(el('settings-panel'));
  el('account-settings-controls').appendChild(el('settings-toggle'));
  el('account-admin-controls').appendChild(el('admin-toggle'));
