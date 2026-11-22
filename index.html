@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6f8fc">
-<title>Klusjes-Oorlog | v0.7.18-alpha</title>
+<title>Klusjes-Oorlog | v0.8.0-beta</title>
 <link rel="icon" type="image/svg+xml" href="./favicon.svg">
 <link rel="apple-touch-icon" href="./icon-192.png">
 <link rel="manifest" href="./manifest.webmanifest">
@@ -750,7 +750,7 @@ html[data-theme="dark"] .settings-tabs .btn[aria-selected="false"]{background:#2
 <button type="button" data-nav="account" class="nav-item"><span class="nav-symbol">♙</span><span>Account</span></button>
 </nav>
 
-<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs" role="tablist" aria-label="Instellingen"><button id="settings-changelog-tab" class="btn small" type="button" role="tab" aria-selected="true" aria-controls="settings-changelog-view">📝 Changelog</button><button id="settings-howto-tab" class="btn secondary small" type="button" role="tab" aria-selected="false" aria-controls="settings-howto-view">🎮 How to play</button></div><div id="settings-changelog-view" role="tabpanel" aria-labelledby="settings-changelog-tab"><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.7.18-alpha</strong> · Alpha-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul><button id="changelog-more" class="btn secondary small settings-expand" type="button" aria-expanded="false" aria-controls="changelog-list">Alle eerdere versies bekijken</button></div><div id="settings-howto-view" class="hidden" role="tabpanel" aria-labelledby="settings-howto-tab"><div class="howto-intro"><strong>⚔️ Welkom bij Klusjes-Oorlog!</strong><p>Maak van de dagelijkse klusjes een vriendelijke competitie. Kies je opdrachten, verdien punten en ontgrendel badges en Stofmonster-avatars.</p></div><div class="howto-steps">
+<section id="settings-panel" class="card settings-panel hidden" aria-label="Instellingen"><div class="settings-head"><h2 class="section-title" style="margin:0">Instellingen</h2><button class="btn secondary small" id="settings-close" type="button">Sluiten</button></div><div class="settings-tabs" role="tablist" aria-label="Instellingen"><button id="settings-changelog-tab" class="btn small" type="button" role="tab" aria-selected="true" aria-controls="settings-changelog-view">📝 Changelog</button><button id="settings-howto-tab" class="btn secondary small" type="button" role="tab" aria-selected="false" aria-controls="settings-howto-view">🎮 How to play</button></div><div id="settings-changelog-view" role="tabpanel" aria-labelledby="settings-changelog-tab"><p class="hint" style="margin-top:14px">Huidige versie: <strong class="version-text" id="settings-version">v0.8.0-beta</strong> · Beta-testversie</p><h3 class="section-title" style="margin:18px 0 6px">Wat is er nieuw?</h3><ul class="settings-changelog" id="changelog-list"></ul><button id="changelog-more" class="btn secondary small settings-expand" type="button" aria-expanded="false" aria-controls="changelog-list">Alle eerdere versies bekijken</button></div><div id="settings-howto-view" class="hidden" role="tabpanel" aria-labelledby="settings-howto-tab"><div class="howto-intro"><strong>⚔️ Welkom bij Klusjes-Oorlog!</strong><p>Maak van de dagelijkse klusjes een vriendelijke competitie. Kies je opdrachten, verdien punten en ontgrendel badges en Stofmonster-avatars.</p></div><div class="howto-steps">
 <details open><summary>1. 🏁 Start een wedstrijd</summary><p>Ga naar <strong>Competities → Nieuwe match</strong>. Zoek de gebruikersnaam van je tegenstander, kies een looptijd van 1, 3, 7, 14 of 30 dagen en verstuur de uitnodiging. De wedstrijd start wanneer je tegenstander accepteert.</p></details>
 <details><summary>2. 🧹 Kies jullie klusjes</summary><p>Met <strong>Standaard</strong> speel je met de algemene klusjes. Bij <strong>Gepersonaliseerd</strong> kies je zelf taken uit de uitgebreide catalogus; zoeken en filteren kan per categorie. Beide spelers krijgen dezelfde geselecteerde klusjes en basispunten.</p></details>
 <details><summary>3. ⚡ Verdien punten</summary><p>Open de wedstrijd en ga naar <strong>Pak je punten</strong>. Tik op een beschikbare klusjestegel en bevestig daaronder de voltooiing. De punten tellen direct mee voor jouw score. De speler met de meeste punten aan het einde wint; bij een gelijke stand is het gelijkspel.</p></details>
@@ -851,20 +851,25 @@ html[data-theme="dark"] .settings-tabs .btn[aria-selected="false"]{background:#2
 
 <section class="section-space home-social-area" id="hub-new-game" aria-label="Nieuwe match"><div class="home-section-heading"><div><span class="home-eyebrow">SAMEN SPELEN</span><h3 class="section-title">Start een nieuwe strijd</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Vriend uitdagen</h3><form id="challenge-form"><div class="field"><label for="challenge-name">Gebruikersnaam van je vriend</label><input aria-autocomplete="list" aria-controls="challenge-suggestions" aria-expanded="false" aria-haspopup="listbox" autocomplete="off" id="challenge-name" maxlength="20" placeholder="Zoek een speler..." required="" role="combobox"/><div aria-label="Beschikbare spelers" class="player-suggestions hidden" id="challenge-suggestions" role="listbox"></div><span class="hint" id="challenge-search-help">Klik op het veld om beschikbare spelers te bekijken.</span></div><div class="field"><label for="challenge-duration">Duur van de competitie</label><select id="challenge-duration"><option value="1">1 dag</option><option value="3">3 dagen</option><option selected="" value="7">7 dagen</option><option value="14">14 dagen</option><option value="30">30 dagen</option></select></div><div class="field"><label for="challenge-profile">Klusjesprofiel</label><select id="challenge-profile"><option value="standaard">Standaard — algemene klusjes</option><option value="gepersonaliseerd">Gepersonaliseerd — zelf kiezen</option></select></div><div class="hidden" id="challenge-custom"><div class="selection-tools"><button class="btn secondary small" id="challenge-all" type="button">Alles selecteren</button><button class="btn secondary small" id="challenge-none" type="button">Alles wissen</button><span class="hint" id="challenge-count">0 geselecteerd</span></div><div class="picker-filters"><input id="challenge-task-search" type="search" placeholder="Zoek een klusje…" aria-label="Zoek klusjes"><select id="challenge-task-category" aria-label="Filter op categorie"></select></div><div aria-label="Klusjes voor nieuwe competitie" class="task-picker" id="challenge-task-list"></div></div><p class="profile-summary" id="challenge-profile-summary">De algemene standaardklusjes worden gebruikt.</p><button class="btn" type="submit">Uitnodiging versturen</button></form><p class="hint">Je vriend moet eerst een account aanmaken en je uitdaging accepteren.</p></section></div></section><section class="section-space home-social-area" id="hub-invites" aria-label="Uitnodigingen"><div class="home-section-heading"><div><span class="home-eyebrow">JE UITNODIGINGEN</span><h3 class="section-title">Uitnodigingen beheren</h3></div></div><div class="grid home-social-grid"><section class="card"><h3 class="section-title">Ontvangen uitnodigingen</h3><div class="empty" id="invitations">Nog geen uitnodigingen</div></section></div><section class="section-space pending-invitations-section hidden" id="outgoing-invitations-section" aria-label="Verzonden uitnodigingen"><div class="space hub-section-heading"><h3 class="section-title">⏳ Wacht op reactie</h3><span class="pill" id="outgoing-invitation-count">0 verzonden</span></div><div id="outgoing-invitations" class="pending-invitation-list"></div></section></section>
 <section class="section-space home-history-area" id="hub-history"><div class="space" style="margin-bottom:15px"><h3 class="section-title" style="margin:0">Competitiegeschiedenis</h3><span class="pill">Eindstanden</span></div><div class="grid" id="history"><div class="empty">Nog geen afgelopen competities.</div></div></section></div>
-</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.7.18-alpha</span></footer>
+</section></main><footer class="footer">Klusjes-Oorlog · Samen wordt opruimen een spel · <span class="version-text" id="footer-version">v0.8.0-beta</span></footer>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
 'use strict';
-const APP_VERSION='v0.7.18-alpha';
+const APP_VERSION='v0.8.0-beta';
 const CHANGELOG=[
+  {version:'v0.8.0-beta',date:'22 november 2026',changes:[
+    'Start van de betatest met een grotere groep spelers.',
+    'De functies uit v0.7.18-alpha blijven behouden; in deze versie zijn geen spelregels of databasegegevens gewijzigd.',
+    'Feedback en gevonden fouten gebruiken we voor de volgende beta-updates.'
+  ]},
   {version:'v0.7.18-alpha',date:'22 november 2026',changes:[
     'Vergrendelde Stofmonster-avatars hebben een mysterieuze blur, slotje en een duidelijke levelaanduiding.',
     'Na het einde van een competitie is een klusje ongedaan maken niet meer mogelijk, ook niet via de server.',
     'Nieuw Users-tabblad voor beheerders: accounts tijdelijk uitschakelen en weer activeren.',
     'Inactieve accounts verdwijnen uit spelers zoeken en kunnen geen nieuwe uitdagingen ontvangen of accepteren. SQL-migratie vereist.'
   ]},
-  {version:'v0.7.18-alpha',date:'21 november 2026',changes:[
+  {version:'v0.7.17-alpha',date:'21 november 2026',changes:[
     'Beheerders kunnen spelvoortgang resetten en privéback-ups terugzetten na databasecontrole.',
     'Voor reset en herstel wordt in dezelfde transactie een back-up gemaakt.'
   ]},
@@ -2228,7 +2233,7 @@ async function checkAppVersion(){
     if(!response.ok) return;
     const remote=await response.json();
     const newest=typeof remote.version==='string'?remote.version.trim():'';
-    if(!/^v\d+\.\d+\.\d+-alpha$/.test(newest) || newest===APP_VERSION) return;
+    if(!/^v\d+\.\d+\.\d+-(?:alpha|beta)$/.test(newest) || newest===APP_VERSION) return;
     // Maximaal één automatische poging per doelversie per 2 minuten,
     // om herlaadlussen bij vertraagde GitHub Pages deployments te voorkomen.
     const key='klusjes-oorlog-update-attempt';
